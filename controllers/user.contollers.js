@@ -249,3 +249,34 @@ export const userLogoutController = async (req,res)=>{
         })
     }
 }
+
+export const deleteUserController = async (req,res)=>{
+    try {
+        const checkUser= await userModel.findById(req.user._id);
+        if(!checkUser){
+            return res.status(401).send({
+                success:false,
+                message:"User Not Found"
+            })
+        }
+        const deleteUser = await checkUser.deleteOne();
+        if(!deleteUser){
+            return res.status(401).send({
+                success:false,
+                message:"Delete User Successfully"
+            })
+        }
+        res.status(200).send({
+            success:true,
+            message:"user Deleted Successfully",
+            deleteUser
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(401).send({
+            success:false,
+            message:"Error in Delete User API",
+            error
+        })
+    }
+}
