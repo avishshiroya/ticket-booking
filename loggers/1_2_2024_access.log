@@ -89,3 +89,11 @@
 [01/Mar/2024:10:39:51 +0000] GET /api/v1/route/search/to 200 126.761 ms - 328
 [01/Mar/2024:10:41:46 +0000] PUT /api/v1/route/65e19d6251c8255ad1327a2a 200 304.434 ms - 325
 [01/Mar/2024:10:41:58 +0000] GET /api/v1/route/search/category 200 203.252 ms - 330
+[01/Mar/2024:12:19:30 +0000] POST /api/v1/theater/ 200 105.751 ms - 212
+[01/Mar/2024:12:27:54 +0000] GET /api/v1/theater/ 401 39.037 ms - 118
+[01/Mar/2024:12:28:11 +0000] GET /api/v1/theater/ 200 58.292 ms - 215
+[01/Mar/2024:12:28:12 +0000] GET /api/v1/theater/ 200 49.028 ms - 215
+[01/Mar/2024:12:28:13 +0000] GET /api/v1/theater/ 200 50.633 ms - 215
+[01/Mar/2024:12:40:13 +0000] GET /api/v1/theater/name 401 50.584 ms - 62
+[01/Mar/2024:12:40:53 +0000] GET /api/v1/theater/name 401 64.579 ms - 47
+[01/Mar/2024:12:41:07 +0000] GET /api/v1/theater/name 200 57.945 ms - 234
