@@ -43,7 +43,9 @@ const userSchema = new Schema({
 },{timestamps:true})
 
 userSchema.methods.generateToken = function(){
-    return JWT.sign({_id:this._id},process.env.JWT_PASS);
+    return JWT.sign({_id:this._id},process.env.JWT_PASS,{
+        expiresIn:'7d'
+    });
 }
 
 const userModel = mongoose.model('Users',userSchema)

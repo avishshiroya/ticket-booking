@@ -11,6 +11,14 @@ const categorySchema = new Schema({
         type:String,
         required:true,
         enum:["traveling","entertainment"]
+    },
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Admin"
+    },
+    updatedBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Admin"
     }
 })
 

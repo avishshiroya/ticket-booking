@@ -1,0 +1,16 @@
+[01/Mar/2024:04:14:59 +0000] POST /api/v1/admin/register 401 3.339 ms - 60
+[01/Mar/2024:04:15:13 +0000] POST /api/v1/admin/register 401 12.097 ms - 57
+[01/Mar/2024:04:16:16 +0000] POST /api/v1/admin/register 200 124.115 ms - 56
+[01/Mar/2024:04:19:10 +0000] POST /api/v1/admin/login 401 5.489 ms - 59
+[01/Mar/2024:04:19:19 +0000] POST /api/v1/admin/login 401 1.048 ms - 42
+[01/Mar/2024:04:19:27 +0000] POST /api/v1/admin/login 401 31.283 ms - 54
+[01/Mar/2024:04:20:44 +0000] POST /api/v1/admin/login 401 37.466 ms - 54
+[01/Mar/2024:04:21:53 +0000] POST /api/v1/admin/login 200 33.282 ms - 222
+[01/Mar/2024:04:22:45 +0000] POST /api/v1/category/add 200 61.376 ms - 170
+[01/Mar/2024:04:23:09 +0000] POST /api/v1/category/add 200 50.531 ms - 174
+[01/Mar/2024:04:23:22 +0000] POST /api/v1/category/add 200 50.297 ms - 168
+[01/Mar/2024:04:24:08 +0000] POST /api/v1/category/add 401 0.311 ms - 64
+[01/Mar/2024:04:24:18 +0000] POST /api/v1/admin/login 200 22.888 ms - 222
+[01/Mar/2024:04:24:25 +0000] GET /api/v1/category/get-all 200 23.329 ms - 402
+[01/Mar/2024:04:35:50 +0000] GET /api/v1/admin/ 401 34.503 ms - 60
+[01/Mar/2024:04:36:10 +0000] GET /api/v1/admin/ 200 54.712 ms - 276
