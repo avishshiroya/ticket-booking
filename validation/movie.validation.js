@@ -25,10 +25,17 @@ export const movieAddValidation = joi.object({
     casts: joi.array().items(joi.string()).messages({
         "any.required": "Movie casts required",
         "string.empty": "Movie casts cannot be empty"
+    }),
+    category:joi.string().required().trim().messages({
+        "any.required": "category required",
+        "string.empty": "Category cannot be empty"
     })
 })
 
 export const movieAUpdateValidation = joi.object({
+    category:joi.string().trim().messages({
+        "string.empty": "Category cannot be empty"
+    }),
     title: joi.string().trim().messages({
         "string.empty": "Movie Title cannot be empty"
     }),

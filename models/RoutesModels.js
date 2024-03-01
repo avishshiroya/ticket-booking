@@ -1,36 +1,19 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const moviesSchema = new Schema({
+const routesSchema = new Schema({
     categoryId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Category"
     },
-    title: {
-        type: String,
-        required: true,
-
-    },
-    genre:{
-        type:String,
-        required:true,
-    },
-    releaseYear:{
+    from:{
         type:String,
         required:true
     },
-    IMDB_rating:{
-        type:Number,
-        required:true
-    },
-    duration:{
+    to:{
         type:String,
         required:true
     },
-    casts:[{
-        type:String,
-        required:true
-    }],
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Admin"
@@ -41,5 +24,6 @@ const moviesSchema = new Schema({
     }
 },{timestamps:true})
 
-const movieModel = mongoose.model("Movie",moviesSchema)
-export default movieModel
+const routesModel = mongoose.model("Route",routesSchema)
+export default routesModel
+
