@@ -121,111 +121,142 @@ export const updateRoutesController = async (req, res) => {
     }
 }
 
-export const searchRoutesByCategoryController = async(req,res)=>{
+export const searchRoutesByCategoryController = async (req, res) => {
     try {
-        const {category} = req.body
-        const categoryValidation = checkCategoryForSearchRoutesValidation.validate(req.body,{
-            abortEarly:false
+        const { category } = req.body
+        const categoryValidation = checkCategoryForSearchRoutesValidation.validate(req.body, {
+            abortEarly: false
         })
-        if(categoryValidation.error){
+        if (categoryValidation.error) {
             return res.status(401).send({
-                success:false,
-                message:categoryValidation.error.message
+                success: false,
+                message: categoryValidation.error.message
             })
         }
         console.log(category)
-        const checkCategory = await categoryModel.findOne({name:category})
-        if(!checkCategory){
+        const checkCategory = await categoryModel.findOne({ name: category })
+        if (!checkCategory) {
             return res.status(401).send({
-                success:false,
-                message:"category Not Found"
+                success: false,
+                message: "category Not Found"
             })
         }
         console.log(checkCategory)
-        const routes = await routesModel.find({categoryId:checkCategory._id});
+        const routes = await routesModel.find({ categoryId: checkCategory._id });
         console.log(routes)
-        if(!routes[0]){
-                return res.status(401).send({
-                    success:false,
-                    message:"Routes Not Found"
-                })
+        if (!routes[0]) {
+            return res.status(401).send({
+                success: false,
+                message: "Routes Not Found"
+            })
         }
         res.status(200).send({
-            success:true,
-            message:"Routes on category "+category,
+            success: true,
+            message: "Routes on category " + category,
             routes
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success:false,
-            message:"Error In Find Routes with Category API"
+            success: false,
+            message: "Error In Find Routes with Category API"
         })
     }
 }
 
-export const searchRoutesByFromController = async (req,res)=>{
-try {
-    const {from} = req.body
-    const checkFrom= checkFromForSearchRoutesValidation.validate(req.body,{
-        abortEarly:false
-    })
-    if(checkFrom.error){
-        return res.status(401).send({
-            success:false,
-            message:checkFrom.error.message
-        })
-    }
-    const routes = await routesModel.find({from});
-    console.log(routes)
-    if(!routes[0]){
-            return res.status(401).send({
-                success:false,
-                message:"Routes Not Found"
-            })
-    }
-    res.status(200).send({
-        success:true,
-        message:"Routes on From  "+from,
-        routes
-    })
-} catch (error) {
-    return res.status(401).send({
-        success:false,
-        message:"Error in searchRoutesByFromController API"
-    })
-}
-}
-
-export const searchRoutesByToController = async (req,res)=>{
+export const searchRoutesByFromController = async (req, res) => {
     try {
-        const {to} = req.body
-        const checkTo= checkToForSearchRoutesValidation.validate(req.body,{
-            abortEarly:false
+        const { from } = req.body
+        const checkFrom = checkFromForSearchRoutesValidation.validate(req.body, {
+            abortEarly: false
         })
-        if(checkTo.error){
+        if (checkFrom.error) {
             return res.status(401).send({
-                success:false,
-                message:checkTo.error.message
+                success: false,
+                message: checkFrom.error.message
             })
         }
-        const routes = await routesModel.find({to});
+        const routes = await routesModel.find({ from });
         console.log(routes)
-        if(!routes[0]){
-                return res.status(401).send({
-                    success:false,
-                    message:"Routes Not Found"
-                })
+        if (!routes[0]) {
+            return res.status(401).send({
+                success: false,
+                message: "Routes Not Found"
+            })
         }
         res.status(200).send({
-            success:true,
-            message:"Routes on to  "+to,
+            success: true,
+            message: "Routes on From  " + from,
             routes
         })
     } catch (error) {
         return res.status(401).send({
-            success:false,
-            message:"Error in searchRoutesByToController API"
+            success: false,
+            message: "Error in searchRoutesByFromController API"
         })
     }
+}
+
+export const searchRoutesByToController = async (req, res) => {
+    try {
+        const { to } = req.body
+        const checkTo = checkToForSearchRoutesValidation.validate(req.body, {
+            abortEarly: false
+        })
+        if (checkTo.error) {
+            return res.status(401).send({
+                success: false,
+                message: checkTo.error.message
+            })
+        }
+        const routes = await routesModel.find({ to });
+        console.log(routes)
+        if (!routes[0]) {
+            return res.status(401).send({
+                success: false,
+                message: "Routes Not Found"
+            })
+        }
+        res.status(200).send({
+            success: true,
+            message: "Routes on to  " + to,
+            routes
+        })
+    } catch (error) {
+        return res.status(401).send({
+            success: false,
+            message: "Error in searchRoutesByToController API"
+        })
     }
+}
+
+export const deleteRoutesController = async (req, res) => {
+    try {
+        const {id}=req.params;
+        const checkRoutes = await routesModel.findById(id);
+        if(!checkRoutes){
+            return res.status(401).send({
+                success:false,
+                message:"routes not found"
+            })
+        }
+        const deleteRoutes = await checkRoutes.deleteOne();
+        if(!deleteRoutes){
+            return res.status(401).send({
+                success:false,
+                message:"Csnnot User Delete"
+            })
+        }
+        res.status(200).send({
+            success:true,
+            message:"Routes Deleted",
+            deleteRoutes
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(401).send({
+            success:false,
+            message:"Error in delete routes API"
+        })
+    }
+}
