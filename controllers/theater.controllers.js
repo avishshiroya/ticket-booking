@@ -1,5 +1,6 @@
+import theaterScreenModel from "../models/theaterScreen.js";
 import theaterModel from "../models/theatersModel.js";
-import { addTheaterValidation, getTheaterByNameValidation } from "../validation/theater.validation.js";
+import { addTheaterValidation, getTheaterByNameValidation, updateTheaterValidation } from "../validation/theater.validation.js";
 
 export const addTheaterController = async (req, res) => {
     try {
@@ -66,7 +67,7 @@ export const getTheaterByNameController = async (req, res) => {
                 message: isNameVAlidate.error.message
             })
         }
-        const getTheater = await theaterModel.find({ name });
+        const getTheater = await theaterModel.find({ name: { $regex: new RegExp(name, 'i') } });
         if (!getTheater[0]) {
             return res.status(401).send({
                 success: false,
@@ -83,6 +84,84 @@ export const getTheaterByNameController = async (req, res) => {
         return res.status(401).send({
             success: true,
             message: "Error in the Get Theaters By Name API",
+            error
+        })
+    }
+}
+export const updateTheaterController = async(req,res)=>{
+    try {
+        const {name,location,totalScreens,capacity} = req.body
+        const checkDetails = updateTheaterValidation.validate(req.body, {
+            abortEarly: false
+        })
+        if(checkDetails.error){
+            return res.status(401).send({
+                success:true,
+                message:checkDetails.error.message
+            })
+        }
+        const checkTheater = await theaterModel.findById(req.params.id);
+        if(!checkTheater){
+            return res.status(401).send({
+                success:false,
+                message:"Theater Not Found"
+            })
+        }
+        if(name)checkTheater.name = name;
+        if(location)checkTheater.location = location;
+        if(totalScreens)checkTheater.totalScreens = totalScreens;
+        if(capacity)checkTheater.capacity = capacity;
+
+        //save theater
+        await checkTheater.save();
+
+        res.status(200).send({
+            success:true,
+            message:"Update the theater",
+            checkTheater
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(401).send({
+            success:false,
+            message:"Error in Update Theater API"
+        })
+    }
+}
+export const deleteTheaterController = async(req,res)=>{
+    try {
+        const checkTheater = await theaterModel.findById(req.params.id);
+        if(!checkTheater){
+            return res.status(401).send({
+                success:false,
+                message:"Theater Not Found"
+            })
+        }
+        const checkScreen = await theaterScreenModel.find({theaterId:req.params.id});
+        if(checkScreen[0]){
+            return res.status(200).send({
+                success:false,
+                message:"Please Delete First Theater screens"
+            })
+        }
+        //delete the theater
+        const deleteTheater = await checkTheater.deleteOne();
+        if(!deleteTheater){
+            return res.status(401).send({
+                success:false,
+                message:"Theater cannot delete"
+            })
+        }
+        res.status(200).send({
+            success:true,
+            message:"Theater delete",
+            checkTheater
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(401).send({
+            success:false,
+            message:"Error in Delete Theater Controller",
             error
         })
     }

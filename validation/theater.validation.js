@@ -18,6 +18,20 @@ export const addTheaterValidation = joi.object({
         "string.min":"Total Screens 1 required"
     })
 })
+export const updateTheaterValidation = joi.object({
+    name:joi.string().trim().messages({
+        "string.empty":"name cannot be empty"
+    }),
+    location:joi.string().trim().messages({
+        "string.empty":"location cannot be empty"
+    }),
+    capacity:joi.number().messages({
+        "string.empty":"capacity cannot be empty"
+    }),
+    totalScreens:joi.number().min(1).messages({
+        "string.min":"Total Screens 1 required"
+    })
+})
 
 export const getTheaterByNameValidation = joi.object({
     name:joi.string().required().trim().messages({

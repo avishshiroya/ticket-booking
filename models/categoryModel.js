@@ -20,7 +20,7 @@ const categorySchema = new Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"Admin"
     }
-})
+},{timestamps:true})
 
 const categoryModel = mongoose.model("Category",categorySchema)
 export default categoryModel
