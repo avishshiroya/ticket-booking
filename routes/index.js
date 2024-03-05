@@ -9,6 +9,8 @@ import theaterRoutes from "./theaterRoutes.js"
 import theaterScreenRoutes from './theaterScreenRoutes.js'
 import movieSlotRoutes from "./movieSlotRoutes.js"
 import movieSeatRoutes from "./movieSeatRoutes.js"
+import movieBookingRoutes from "./movieBookingRoutes.js";
+import paymentRoutes from "./paymentRoutes.js"
 
 router.use('/user',userRoutes)
 router.use('/admin',adminRoutes)
@@ -19,6 +21,8 @@ router.use('/theater',theaterRoutes)
 router.use('/theaterScreen',theaterScreenRoutes)
 router.use('/movieSlot',movieSlotRoutes)
 router.use('/movieSeat',movieSeatRoutes)
+router.use('/movieSeatBooking',movieBookingRoutes)
+router.use('/payment',paymentRoutes)
 
 
 export default router

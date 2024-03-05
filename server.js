@@ -4,8 +4,15 @@ import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 import dotenv from "dotenv"
 import fs from "fs"
-
+import paypal from "paypal-rest-sdk"
+import path from "path"
 dotenv.config();
+
+paypal.configure({
+    mode:process.env.PAYPAL_MODE,
+    client_id:process.env.PAYPAL_CLIENT_ID,
+    client_secret:process.env.PAYPAL_CLIENT_SECRET
+})
 const app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -14,6 +21,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser())
 app.use(morgan("dev"))
 
+// app.use('/', express.static(path.join('public'))); 
 
 //connectDB
 import connectDb from "./config/db.js"
@@ -32,10 +40,12 @@ import Routes from "./routes/index.js"
 app.use("/api/v1", Routes)
 
 app.get("/", async (req, res) => {
-    res.status(200).send({
-        success: true,
-        message: "First Routes 214 214"
-    })
+    // res.status(200).send({
+    //     success: true,
+    //     message: "First Routes 214 214"
+    // })
+    res.redirect('./public/index.html'); 
+
 })
 
 const PORT = process.env.PORT || 4040
