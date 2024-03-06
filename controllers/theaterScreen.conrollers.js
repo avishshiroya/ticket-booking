@@ -2,153 +2,155 @@ import theaterScreenModel from "../models/theaterScreen.js"
 import theaterModel from "../models/theatersModel.js"
 import { theaterScreenAddValidation, theaterScreenOnTheaterValidation, theaterScreenUpdateValidation } from "../validation/theaterScreen.validation.js"
 
-export const addTheaterScreenControlller = async(req,res)=>{
+export const addTheaterScreenControlller = async (req, res) => {
     try {
-        const {theaterId,screenType}= req.body
-        const checkValidation = theaterScreenAddValidation.validate(req.body,{
-            abortEarly:false
+        const { theaterId, screenType } = req.body
+        const checkValidation = theaterScreenAddValidation.validate(req.body, {
+            abortEarly: false
         })
-        if(checkValidation.error){
+        if (checkValidation.error) {
             return res.status(401).send({
-                success:false,
-                message:checkValidation.error.message
+                "status": "error",
+                message: checkValidation.error.message
             })
         }
         const checkTheater = await theaterModel.findById(theaterId);
-        if(!checkTheater){
+        if (!checkTheater) {
             return res.status(401).send({
-                success:false,
-                message:"Theater Not Found"
+                "status": "error",
+                message: "Theater Not Found"
             })
         }
-        const checkTheaterTotalScreen = await theaterScreenModel.find({theaterId:checkTheater._id});
-        if(checkTheater.totalScreens == checkTheaterTotalScreen.length){
+        const checkTheaterTotalScreen = await theaterScreenModel.find({ theaterId: checkTheater._id });
+        if (checkTheater.totalScreens == checkTheaterTotalScreen.length) {
             return res.status(401).send({
-                success:false,
-                message:"You already added all screens to thaters total screens"
+                "status": "error",
+                message: "You already added all screens to thaters total screens"
             })
         }
         const theaterScreen = new theaterScreenModel({
-            theaterId,screenType
+            theaterId, screenType
         })
         //save theaterScreen
         await theaterScreen.save();
 
-        res.status(200).send({
-            success:true,
-            message:"Theater Screen Save",
+        res.status(500).send({
+            "status": "success",
+            message: "Theater Screen Save",
             theaterScreen
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success:false,
-            message:"Error In Add Theater Screen",
+            "status": "error",
+            message: "Error In Add Theater Screen",
             error
         })
     }
 }
 
-export const getTheaterScreenController = async (req,res)=>{
+export const getTheaterScreenController = async (req, res) => {
     try {
         const getAllTheaterScreen = await theaterScreenModel.find({});
-        if(!getAllTheaterScreen[0]){
+        if (!getAllTheaterScreen[0]) {
             return res.status(200).send({
-                success:false,
-                message:"Please Enter Screen"
+                "status": "error",
+                message: "Please Enter Screen"
             })
         }
         res.status(200).send({
-            success:true,
-            message:"get all theaters ",
+            "status": "success",
+            message: "get all theaters ",
             getAllTheaterScreen
         })
     } catch (error) {
         console.log(error);
-        return res.status(401).send({
-            success:false,
-            message:"Error in Get All Theater Screen"
+        return res.status(500).send({
+            "status": "error",
+            message: "Error in Get All Theater Screen"
         })
     }
 }
 
-export const updateTheaterScreenController = async(req,res)=>{
+export const updateTheaterScreenController = async (req, res) => {
     try {
-        const {screenType} = req.body
-        const checkDetails = theaterScreenUpdateValidation.validate(req.body,{
-            abortEarly:false
+        const { screenType } = req.body
+        const checkDetails = theaterScreenUpdateValidation.validate(req.body, {
+            abortEarly: false
         })
-        if(checkDetails.error){
+        if (checkDetails.error) {
             return res.status(401).send({
-                success:false,
-                message:checkDetails.error.message
+                "status": "error",
+                message: checkDetails.error.message
             })
         }
         const theaterScreen = await theaterScreenModel.findById(req.params.id);
-        if(!theaterScreen){
+        if (!theaterScreen) {
             return res.status(401).send({
-                success:false,
-                message:"Theater Screen Not Found"
+                "status": "error",
+                message: "Theater Screen Not Found"
             })
         }
-        if(screenType) theaterScreen.screenType = screenType;
+        if (screenType) theaterScreen.screenType = screenType;
         //update the theater screen
         await theaterScreen.save();
         res.status(200).send({
-            success:true,
-            message:"theaterScreen Update Successfully",
+            "status": "success",
+            message: "theaterScreen Update Successfully",
             theaterScreen
         })
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
-            success:false,
-            message:"Error in Update theaterScreen Controller"
+        return res.status(500).send({
+            "status": "error",
+            message: "Error in Update theaterScreen Controller"
         })
     }
 }
 
-export const theaterScreenOnTheaterController =  async(req,res)=>{
+export const theaterScreenOnTheaterController = async (req, res) => {
     try {
-        const {theaterName} = req.body
-        const checkDetails = theaterScreenOnTheaterValidation.validate(req.body,{
-            abortEarly:false
+        const { theaterName } = req.body
+        const checkDetails = theaterScreenOnTheaterValidation.validate(req.body, {
+            abortEarly: false
         })
-        if(checkDetails.error){
+        if (checkDetails.error) {
             return res.status(401).send({
-                success:false,
-                message:checkDetails.error.message
+                "status": "error",
+                message: checkDetails.error.message
             })
         }
         const getTheater = await theaterModel.find({ name: { $regex: new RegExp(theaterName, 'i') } });
-        if(!getTheater[0]){
+        if (!getTheater[0]) {
             return res.status(401).send({
-                success:false,
-                message:"Theater Not Found",
+                "status": "error",
+                message: "Theater Not Found",
+                data: null
             })
         }
         var theaters = [];
-        getTheater.map((data,index)=>{
+        getTheater.map((data, index) => {
             theaters.push(data._id)
         })
-        const theaterScreen = await theaterScreenModel.find({theaterId:{$in:theaters}}).populate("theaterId");
-        if(!theaterScreen){
+        const theaterScreen = await theaterScreenModel.find({ theaterId: { $in: theaters } }).populate("theaterId");
+        if (!theaterScreen) {
             return res.status(401).send({
-                success:false,
-                message:"Theater Screen Not Found"
+                "status": "error",
+                message: "Theater Screen Not Found",
+                data: null
             })
         }
         res.status(200).send({
-            success:true,
-            message:"Theater Screen",
-            theaterScreen
+            "status": "success",
+            message: "Theater Screen",
+            data: theaterScreen
         })
 
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
-            success:false,
-            message:"Errot in get theater screen on the theater controller"
+        return res.status(500).send({
+            "status": "error",
+            message: "Errot in get theater screen on the theater controller"
         })
     }
 }

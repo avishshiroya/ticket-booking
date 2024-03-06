@@ -6,7 +6,7 @@ export const movieAddController = async (req, res) => {
     try {
         if (!req.admin._id) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Admin unauthorized"
             })
         }
@@ -14,7 +14,7 @@ export const movieAddController = async (req, res) => {
         const checkCategory = await categoryModel.findOne({ name: category });
         if (!checkCategory) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Category Not Found"
             })
         }
@@ -23,7 +23,7 @@ export const movieAddController = async (req, res) => {
         })
         if (validateMovie.error) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: validateMovie.error.message
             })
         }
@@ -32,14 +32,14 @@ export const movieAddController = async (req, res) => {
         })
         await movie.save();
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "Movie created",
             movie
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error in Movie Add API",
             error
         })
@@ -50,7 +50,7 @@ export const movieUpdateController = async (req, res) => {
     try {
         if (!req.admin._id) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Admin Unauthorized"
             })
         }
@@ -59,14 +59,14 @@ export const movieUpdateController = async (req, res) => {
         })
         if (checkValidation.error) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: checkValidation.error.message
             })
         }
         const checkMovie = await movieModel.findById(req.params.id)
         if (!checkMovie) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Movie Not Availbale"
             })
         }
@@ -74,7 +74,7 @@ export const movieUpdateController = async (req, res) => {
             const checkCategory = await categoryModel.findOne({ name: category })
             if (!checkCategory) {
                 return res.status(401).send({
-                    success: false,
+                    "status": "error",
                     message: "Category Not Availbale"
                 })
             }
@@ -91,14 +91,14 @@ export const movieUpdateController = async (req, res) => {
         //update movie
         const updateMovie = await checkMovie.save();
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "Movie Updated successfully",
             updateMovie
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error in Movie update API",
             error
         })
@@ -110,19 +110,19 @@ export const movieGetController = async (req, res) => {
         const movies = await movieModel.find({});
         if (!movies[0]) {
             return res.status(200).send({
-                success: true,
+                "status": "success",
                 message: "Please Add Movies"
             })
         }
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "Get All Movies",
             movies
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error in Get movies API"
         })
     }
@@ -134,19 +134,19 @@ export const movieGetGenreController = async (req, res) => {
         const movies = await movieModel.find({ genre: { $regex: new RegExp(type, 'i') } });
         if (!movies[0]) {
             return res.status(200).send({
-                success: false,
+                "status": "error",
                 message: "Not have Movies On Genre " + type,
             })
         }
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "Movies On Genre " + type,
             movies
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error In Get Movie ON Genre API"
         })
     }
@@ -159,19 +159,19 @@ export const movieGetCastController = async (req, res) => {
         const movies = await movieModel.find({ casts: { $regex: new RegExp(name, 'i') } });
         if (!movies[0]) {
             return res.status(200).send({
-                success: false,
+                "status": "error",
                 message: "Not have Movies On Casts " + name,
             })
         }
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "Movies On Casts " + name,
             movies
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error In Get Movie ON Casts API"
         })
     }
@@ -183,26 +183,26 @@ export const deleteMovieController = async (req, res) => {
         const checkMovie = await movieModel.findById(id);
         if (!checkMovie) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Movie Not Found"
             })
         }
         const deleteMovie = await checkMovie.deleteOne();
         if (!deleteMovie) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Cannot Delete Movies"
             })
         }
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "Movie Delete Successfully",
             deleteMovie
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error In Movie Delete API"
         })
     }

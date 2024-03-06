@@ -5,27 +5,38 @@ import movieBookingModel from "../models/movieBooking.js"
 export const paymentSuccess = async (req, res) => {
     try {
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "payment Successfull"
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error In Payment success API"
         })
     }
 }
 export const paymentCancel = async (req, res) => {
     try {
+        const { id } = req.params
+        const checkBooking = await movieBookingModel.findById(id);
+        if (!checkBooking) {
+            return res.status(404).send({
+                status: "Error",
+                message: "Movie Booking Not Found",
+                data: null
+            })
+        }
+        if (checkBooking.isPaid) checkBooking.isPaid = "cancel";
+        await checkBooking.save();
         res.status(200).send({
-            success: true,
-            message: "payment Cancel"
+            status: "Error",
+            message: "Booking Cancel"
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error In Payment cancel API"
         })
     }
@@ -58,7 +69,7 @@ export const createPaymentController = async (req, res) => {
                     // "shipping_preference": "SET_PROVIDED_ADDRESS",
                     "user_action": "PAY_NOW",
                     "return_url": `http://localhost:4040/api/v1/payment/checkOut/${req.body.movieBookingId}`,
-                    "cancel_url": "http://localhost:4040/api/v1/payment/success"
+                    "cancel_url": `http://localhost:4040/api/v1/payment/cancel/${req.body.movieBookingId}`
                 }
             }
         }
@@ -81,7 +92,7 @@ export const createPaymentController = async (req, res) => {
         })
 
 
-    console.log(data)
+    // console.log(data)
 
     const response = await axios.post("https://api-m.sandbox.paypal.com/v2/checkout/orders", order, {
         headers: {
@@ -92,7 +103,8 @@ export const createPaymentController = async (req, res) => {
     })
     console.log(response.data)
 
-    return res.cookie("token", response.data.id).send(response.data)
+
+    return res.cookie("token", response.data.id).redirect(response.data.links[1].href)
 }
 
 export const paymentCheckOut = async (req, res) => {
@@ -100,35 +112,36 @@ export const paymentCheckOut = async (req, res) => {
     try {
         const clientId = process.env.PAYPAL_CLIENT_ID
         const clientSecret = process.env.PAYPAL_SECRET_KEY
-       const { token } = req.query
+        const { token } = req.query
         const response = await axios.post(`https://api-m.sandbox.paypal.com/v2/checkout/orders/${token}/capture`, {}, {
-           
-        auth: {
-            username: clientId,
-            password: clientSecret
-        }
+
+            auth: {
+                username: clientId,
+                password: clientSecret
+            }
 
         })
-        console.log(response.data.id)
-        if(!response.data.id){
+        // console.log(response);
+        // console.log(response.data.id)
+        if (!response.data.id) {
             return res.status(401).send({
-                success:false,
-                message:"Paymnet Not Successfull"
+                "status": "error",
+                message: "Paymnet Not Successfull"
             })
         }
-        const  updateOrder = await movieBookingModel.findByIdAndUpdate({_id:req.params.id},{isPaid:true,paymentId:response.data.id})
+        const updateOrder = await movieBookingModel.findByIdAndUpdate({ _id: req.params.id }, { isPaid: "success", paymentId: response.data.id })
 
         res.status(200).send({
-            success:true,
-            message:"Movie Ticket Book",
+            "status": "success",
+            message: "Movie Ticket Book",
             updateOrder
         })
         return true
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success:false,
-            message:"Error In Captutre payment API"
+            "status": "error",
+            message: "Error In Captutre payment API"
         })
     }
 }

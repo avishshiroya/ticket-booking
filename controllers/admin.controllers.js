@@ -9,7 +9,7 @@ export const registerAdminController = async (req, res) => {
         })
         if (checkAdminDetails.error) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: checkAdminDetails.error.message
             })
         }
@@ -18,13 +18,13 @@ export const registerAdminController = async (req, res) => {
         })
         await admin.save();
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "Admin register successfully"
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error in Admin register API"
         })
     }
@@ -38,21 +38,21 @@ export const loginAdminController = async (req, res) => {
         })
         if (checkAdminDetails.error) {
             return res.status(401).send({
-                success: true,
+                "status": "success",
                 message: checkAdminDetails.error.message
             })
         }
         const checkAdminEmail = await adminModel.findOne({ email });
         if (!checkAdminEmail) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Admin Not Found! Check Email"
             })
         }
         const comparePassword = checkAdminEmail.comparePassword(password);
         if (!comparePassword) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Check Your Password"
             })
         }
@@ -63,45 +63,45 @@ export const loginAdminController = async (req, res) => {
             HttpOnly: process.env.NODE_ENV == "development" ? true : false,
             sameSite: process.env.NODE_ENV == "development" ? true : false
         }).send({
-            success:true,
-            message:"User Login",
+            "status": "success",
+            message: "User Login",
             token
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error in login Admin API"
         })
     }
 }
 
-export const getAdminDetails = async(req,res)=>{
+export const getAdminDetails = async (req, res) => {
     try {
         const admin = req.admin
-        if(!admin){
+        if (!admin) {
             return res.status(401).send({
-                success:false,
-                message:"Not Find Admin"
+                "status": "error",
+                message: "Not Find Admin"
             })
         }
         const checkAdmin = await adminModel.findById(admin._id)
-        if(!checkAdmin){
+        if (!checkAdmin) {
             return res.status(401).send({
-                success:false,
-                message:"Admin Not Found"
+                "status": "error",
+                message: "Admin Not Found"
             })
         }
         res.status(200).send({
-            success:true,
-            message:"Admin Details",
+            "status": "success",
+            message: "Admin Details",
             checkAdmin
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success:false,
-            message:"Error In Admin Details Get API"
+            "status": "error",
+            message: "Error In Admin Details Get API"
         })
     }
 }

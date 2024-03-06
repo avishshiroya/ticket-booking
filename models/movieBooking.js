@@ -7,6 +7,9 @@ const movieBookingSchema = new Schema({
         ref:'Users',
         required:true,
     },
+    promoCode:{
+        type:String,
+    },
     movieSeatsId:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'MovieSeat',
@@ -16,10 +19,15 @@ const movieBookingSchema = new Schema({
         type:Number,
         required:true
     },
+    discountAmount:{
+        type:Number
+    }
+    ,
     isPaid:{
-        type:Boolean,
+        type:String,
         required:true,
-        default:false
+        enum:["pending","success","cancel"],
+        default:"pending"
     },
     paymentId:{
         type:String,

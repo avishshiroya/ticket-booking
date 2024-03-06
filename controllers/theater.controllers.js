@@ -10,7 +10,7 @@ export const addTheaterController = async (req, res) => {
         })
         if (checkDetails.error) {
             return res.status(401).send({
-                success: false,
+                "status":"error",
                 message: checkDetails.error.message
             })
         }
@@ -19,14 +19,14 @@ export const addTheaterController = async (req, res) => {
         })
         await theater.save();
         res.status(200).send({
-            success: true,
+            "status":"success",
             message: "Theater Created ",
             theater
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success: false,
+            "status":"error",
             message: "Error In Add Theater Controller API",
             error
         })
@@ -37,19 +37,19 @@ export const getAllTheaterController = async (req, res) => {
         const theaters = await theaterModel.find({});
         if (!theaters[0]) {
             return res.status(200).send({
-                success: true,
+                "status":"success",
                 message: "Please Add Theaters"
             })
         }
         res.status(200).send({
-            success: true,
+            "status":"success",
             message: "Get All Theaters",
             theaters
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success: true,
+            "status":"success",
             message: "Error in the Get Theaters API",
             error
         })
@@ -63,105 +63,105 @@ export const getTheaterByNameController = async (req, res) => {
         })
         if (isNameVAlidate.error) {
             return res.status(401).send({
-                success: false,
+                "status":"error",
                 message: isNameVAlidate.error.message
             })
         }
         const getTheater = await theaterModel.find({ name: { $regex: new RegExp(name, 'i') } });
         if (!getTheater[0]) {
             return res.status(401).send({
-                success: false,
+                "status":"error",
                 message: "Theater Not Found"
             })
         }
         res.status(200).send({
-            success: true,
+            "status":"success",
             message: "Get All Theaters Of " + name,
             getTheater
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success: true,
+            "status":"success",
             message: "Error in the Get Theaters By Name API",
             error
         })
     }
 }
-export const updateTheaterController = async(req,res)=>{
+export const updateTheaterController = async (req, res) => {
     try {
-        const {name,location,totalScreens,capacity} = req.body
+        const { name, location, totalScreens, capacity } = req.body
         const checkDetails = updateTheaterValidation.validate(req.body, {
             abortEarly: false
         })
-        if(checkDetails.error){
+        if (checkDetails.error) {
             return res.status(401).send({
-                success:true,
-                message:checkDetails.error.message
+                "status":"success",
+                message: checkDetails.error.message
             })
         }
         const checkTheater = await theaterModel.findById(req.params.id);
-        if(!checkTheater){
+        if (!checkTheater) {
             return res.status(401).send({
-                success:false,
-                message:"Theater Not Found"
+                "status":"error",
+                message: "Theater Not Found"
             })
         }
-        if(name)checkTheater.name = name;
-        if(location)checkTheater.location = location;
-        if(totalScreens)checkTheater.totalScreens = totalScreens;
-        if(capacity)checkTheater.capacity = capacity;
+        if (name) checkTheater.name = name;
+        if (location) checkTheater.location = location;
+        if (totalScreens) checkTheater.totalScreens = totalScreens;
+        if (capacity) checkTheater.capacity = capacity;
 
         //save theater
         await checkTheater.save();
 
         res.status(200).send({
-            success:true,
-            message:"Update the theater",
+            "status":"success",
+            message: "Update the theater",
             checkTheater
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success:false,
-            message:"Error in Update Theater API"
+            "status":"error",
+            message: "Error in Update Theater API"
         })
     }
 }
-export const deleteTheaterController = async(req,res)=>{
+export const deleteTheaterController = async (req, res) => {
     try {
         const checkTheater = await theaterModel.findById(req.params.id);
-        if(!checkTheater){
+        if (!checkTheater) {
             return res.status(401).send({
-                success:false,
-                message:"Theater Not Found"
+                "status":"error",
+                message: "Theater Not Found"
             })
         }
-        const checkScreen = await theaterScreenModel.find({theaterId:req.params.id});
-        if(checkScreen[0]){
+        const checkScreen = await theaterScreenModel.find({ theaterId: req.params.id });
+        if (checkScreen[0]) {
             return res.status(200).send({
-                success:false,
-                message:"Please Delete First Theater screens"
+                "status":"error",
+                message: "Please Delete First Theater screens"
             })
         }
         //delete the theater
         const deleteTheater = await checkTheater.deleteOne();
-        if(!deleteTheater){
+        if (!deleteTheater) {
             return res.status(401).send({
-                success:false,
-                message:"Theater cannot delete"
+                "status":"error",
+                message: "Theater cannot delete"
             })
         }
         res.status(200).send({
-            success:true,
-            message:"Theater delete",
+            "status":"success",
+            message: "Theater delete",
             checkTheater
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success:false,
-            message:"Error in Delete Theater Controller",
+            "status":"error",
+            message: "Error in Delete Theater Controller",
             error
         })
     }

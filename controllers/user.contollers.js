@@ -14,15 +14,15 @@ export const registerUserController = async (req, res) => {
             abortEarly: false
         })
         if (checkUserDetail.error) {
-            return res.status(401).send({
-                success: false,
+            return res.status(401).json({
+                "status": "error",
                 message: checkUserDetail.error.message
             })
         }
         const checkUserEmailAndMobile = await userModel.findOne({ $or: [{ email, mobile }] });
         if (checkUserEmailAndMobile) {
-            return res.status(401).send({
-                success: false,
+            return res.status(401).json({
+                "status": "error",
                 message: "Email and Mobile Number Must Be Unique"
             })
         }
@@ -30,47 +30,46 @@ export const registerUserController = async (req, res) => {
             name, email, mobile, DOB, address, pincode, city, state, country
         })
         await user.save();
-        res.status(200).send({
-            success: true,
+        res.status(200).json({
+            "status": "success",
             message: "User Register SuccessFully"
         })
     } catch (error) {
         console.log(error);
-        return res.status(401).send({
-            success: false,
+        return res.status(500).json({
+            "status": "error",
             message: "Error In User Registration API"
         })
     }
 }
 
-
 //send mail to login
 export const sendMailTOLoginController = async (req, res) => {
     try {
-        const { data } = req.body
-        if (!data) { return res.status(401).send({ success: false, message: "Please Provide Mobile Number OR Email" }) }
+        const { user } = req.body
+        if (!user) { return res.status(401).json({ "status": "error", message: "Please Provide Mobile Number OR Email" }) }
         var mobile, email;
-        if (data) {
-            if (data.length == 10) {
-                mobile = data;
+        if (user) {
+            if (user.length == 10) {
+                mobile = user;
             } else {
-                email = data;
+                email = user;
             }
         }
         const checkData = userToSendOTP.validate({ email, mobile }, {
             abortEarly: false
         })
         if (checkData.error) {
-            return res.status(401).send({
-                success: false,
+            return res.status(401).json({
+                "status": "error",
                 message: checkData.error.message
             })
         }
         const checkUser = await userModel.findOne({ $or: [{ email }, { mobile }] });
         console.log(checkUser)
         if (!checkUser) {
-            return res.status(401).send({
-                success: false,
+            return res.status(401).json({
+                "status": "error",
                 message: "User Not Found"
             })
         }
@@ -79,14 +78,9 @@ export const sendMailTOLoginController = async (req, res) => {
         if (email) {
             const sendMail = await sendMailOtp(checkUser.email, otpGenerator, req, res)
             const sendOtp = await addOTP(checkUser._id, otpGenerator)
-            return res.status(200).cookie("user", checkUser._id, {
-                expires:new Date( Date.now() + 3 * 60 * 1000),
-                secure: process.env.NODE_ENV == "development" ? true : false,
-                HttpOnly: process.env.NODE_ENV == "development" ? true : false,
-                sameSite: process.env.NODE_ENV == "development" ? true : false
-            }).send({
-                success: true,
-                message: "send otp", otpGenerator, sendMail, sendOtp
+            return res.status(200).json({
+                "status": "success",
+                message: "OTP SEND TO " + email
             })
 
         }
@@ -94,20 +88,15 @@ export const sendMailTOLoginController = async (req, res) => {
             console.log(checkUser.mobile, otpGenerator)
             const sendMsg = await sendMSG(checkUser.mobile, otpGenerator)
             const sendOtp = await addOTP(checkUser._id, otpGenerator)
-            return res.status(200).cookie("user", checkUser._id, {
-                expires:new Date( Date.now() + 3 * 60 * 1000),
-                secure: process.env.NODE_ENV == "development" ? true : false,
-                HttpOnly: process.env.NODE_ENV == "development" ? true : false,
-                sameSite: process.env.NODE_ENV == "development" ? true : false
-            }).send({
-                success: true,
-                message: "OTP send", otpGenerator, sendMsg, sendOtp
+            return res.status(200).json({
+                "status": "success",
+                message: "OTP SEND TO" + mobile
             })
         }
     } catch (error) {
         console.log(error);
-        return res.status(401).send({
-            success: false,
+        return res.status(500).json({
+            "status": "error",
             message: "Error In User OTP send API"
         })
     }
@@ -115,37 +104,68 @@ export const sendMailTOLoginController = async (req, res) => {
 
 export const userLoginController = async (req, res) => {
     try {
-        const { otp } = req.body
-        const { user } = req.cookies
+        const { otp, user } = req.body
+        if (!user) { return res.status(401).json({ "status": "error", message: "Please Provide Mobile Number OR Email" }) }
+        var mobile, email;
+        if (user) {
+            if (user.length == 10) {
+                mobile = user;
+            } else {
+                email = user;
+            }
+        }
+        const checkData = userToSendOTP.validate({ email, mobile }, {
+            abortEarly: false
+        })
+        // const { user } = req.cookies
         console.log(user)
-        const checkUser = await userModel.findById(user);
+        const checkUser = await userModel.findOne({ $or: [{ email }, { mobile }] });
         if (!checkUser) {
-            return res.status(401).send({
-                success: false,
+            return res.status(401).json({
+                "status": "error",
                 message: "User Invalid"
             })
         }
-        const checkOtpDetails = await otpModel.findOne({ user, otp });
+        const checkExpires = new Date(Date.now())
+        console.log(checkExpires)
+        const checkOtpDetails = await otpModel.findOne({ user: checkUser, otp, status: "pending" });
+
+
+        console.log(checkOtpDetails);
         if (!checkOtpDetails) {
-            return res.status(401).send({
-                success: true,
+            return res.status(401).json({
+                "status": "error",
                 message: "OTP Invalid"
             })
         }
+        if (checkExpires > checkOtpDetails.expireAfter) {
+            {
+                if (checkOtpDetails.expireAfter) checkOtpDetails.status = "expired"
+                await checkOtpDetails.save();
+                return res.status(401).json({
+                    "status": "error",
+                    message: "OTP Invalid"
+                })
+            }
+
+        }
+        if (checkOtpDetails.status == "pending") checkOtpDetails.status = "approve"
+        checkOtpDetails.save();
+        // console.log(updateOTPStatus)
         const token = checkUser.generateToken();
-        res.status(200).cookie("auth", "bearer " + token, {
-            expires: new Date( Date.now() + 7 * 24 * 60 * 60 * 1000), 
+        res.status(200).cookie("auth", "Bearer " + token, {
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             secure: process.env.NODE_ENV == "development" ? true : false,
             HttpOnly: process.env.NODE_ENV == "development" ? true : false,
             sameSite: process.env.NODE_ENV == "development" ? true : false
-        }).send({
+        }).json({
             status: true,
             message: "Login SuccessFully",
-            token
         })
     } catch (error) {
-        return res.status(401).send({
-            success: false,
+        console.log(error)
+        return res.status(500).json({
+            "status": "error",
             message: "Error In User Login API"
         })
     }
@@ -157,20 +177,20 @@ export const getDetailUserController = async (req, res) => {
         const user = req.user
         console.log(user);
         if (!user) {
-            return res.status(401).send({
-                success: false,
+            return res.status(401).json({
+                "status": "error",
                 message: "Please Login again"
             })
         }
-        res.status(200).send({
-            success: true,
+        res.status(200).json({
+            "status": "success",
             message: "User Details",
             data: user
         })
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
-            success: false,
+        return res.status(500).json({
+            "status": "error",
             message: "Error In get user Datail API",
             error
         })
@@ -185,15 +205,15 @@ export const userDetailUpdateController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
-            return res.status(401).send({
-                success: false,
+            return res.status(401).json({
+                "status": "error",
                 message: checkDetails.error.message
             })
         }
         const checkUser = await userModel.findById(req.user._id)
         if (!checkUser) {
-            return res.status(401).send({
-                success: false,
+            return res.status(401).json({
+                "status": "error",
                 message: "User Not Found"
             })
         }
@@ -206,76 +226,76 @@ export const userDetailUpdateController = async (req, res) => {
         if (country) checkUser.country = country;
 
         const userUpdate = await checkUser.save();
-        if(!userUpdate){
-            return res.status(401).send({
-                success:false,
-                message:"User cannot Updated"
+        if (!userUpdate) {
+            return res.status(401).json({
+                "status": "error",
+                message: "User cannot Updated"
             })
         }
-        res.status(200).send({
-            success:true,
-            message:"user Updated",
+        res.status(200).json({
+            "status": "success",
+            message: "user Updated",
             userUpdate
         })
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
-            success:false,
-            message:"Error In User Update API",
+        return res.status(500).json({
+            "status": "error",
+            message: "Error In User Update API",
             error
         })
     }
 }
 
-export const userLogoutController = async (req,res)=>{
+export const userLogoutController = async (req, res) => {
     try {
         const user = req.user;
-        if(!user){
-            return res.status(401).send({
-                success:false,
-                message:"user NOT found"
+        if (!user) {
+            return res.status(401).json({
+                "status": "error",
+                message: "user NOT found"
             })
         }
-        res.status(200).clearCookie("auth").send({
-            success:true,
-            message:"User Logout"
+        res.status(200).clearCookie("auth").json({
+            "status": "success",
+            message: "User Logout"
         })
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
-            success:false,
-            message:"Error in user Logout API",
+        return res.status(500).json({
+            "status": "error",
+            message: "Error in user Logout API",
             error
         })
     }
 }
 
-export const deleteUserController = async (req,res)=>{
+export const deleteUserController = async (req, res) => {
     try {
-        const checkUser= await userModel.findById(req.user._id);
-        if(!checkUser){
-            return res.status(401).send({
-                success:false,
-                message:"User Not Found"
+        const checkUser = await userModel.findById(req.user._id);
+        if (!checkUser) {
+            return res.status(401).json({
+                "status": "error",
+                message: "User Not Found"
             })
         }
         const deleteUser = await checkUser.deleteOne();
-        if(!deleteUser){
-            return res.status(401).send({
-                success:false,
-                message:"Delete User Successfully"
+        if (!deleteUser) {
+            return res.status(401).json({
+                "status": "error",
+                message: "Delete User Successfully"
             })
         }
-        res.status(200).send({
-            success:true,
-            message:"user Deleted Successfully",
+        res.status(200).json({
+            "status": "success",
+            message: "user Deleted Successfully",
             deleteUser
         })
     } catch (error) {
         console.log(error);
-        return res.status(401).send({
-            success:false,
-            message:"Error in Delete User API",
+        return res.status(500).json({
+            "status": "error",
+            message: "Error in Delete User API",
             error
         })
     }

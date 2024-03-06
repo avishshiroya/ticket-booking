@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/create-payment',createPaymentController)
 router.get('/success',paymentSuccess)
-router.get('/cancel',paymentCancel)
+router.get('/cancel/:id',paymentCancel)
 router.get('/checkOut/:id',paymentCheckOut)
 // app.post("/orders", async (req, res) => {
 //     const order = await paypal.createOrder(req.body.paymentSource);

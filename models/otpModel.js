@@ -13,7 +13,12 @@ const otpSchema = new Schema({
     },
     expireAfter: {
         type: Date,
-        default: new Date(Date.now() + 5 * 60 * 1000),
+        default: new Date(Date.now() +15 * 60 * 1000),
+    },
+    status:{
+        type:String,
+        enum:["pending","approve","expired"],
+        default:"pending"
     }
 
 },

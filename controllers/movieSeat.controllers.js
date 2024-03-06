@@ -10,14 +10,14 @@ export const addMovieSeatsController = async (req, res) => {
         })
         if (checkDetails.error) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: checkDetails.error.message
             })
         }
         const checkMovieSlot = await movieSlotModel.findById(movieSlotId);
         if (!checkMovieSlot) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "MovieSlot Not Found"
             })
         }
@@ -29,13 +29,13 @@ export const addMovieSeatsController = async (req, res) => {
             await movieSeats.save();
         }
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "Seats Added"
         })
     } catch (error) {
         console.log(error);
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error In Add Movie Seats Controller",
             error
         })
@@ -45,29 +45,30 @@ export const addMovieSeatsController = async (req, res) => {
 export const getMovieSeatsController = async (req, res) => {
     try {
         const { movieSlotId } = req.body
-        const checkMovieSlot = await movieSlotModel.findById(movieSlotId)
+        const checkMovieSlot = await movieSlotModel.findOne({ _id: movieSlotId, showDate: { $gte: new Date().getDate() } })
+        console.log(checkMovieSlot)
         if (!checkMovieSlot) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Movie Slot Not Found"
             })
         }
-        const movieSeats = await movieSeatModel.find({ movieSlotId, isBooked: false }, { seat: 1, _id: 1 });
+        const movieSeats = await movieSeatModel.find({ movieSlotId, }, { seat: 1, _id: 1, isBooked: 1, price: 1 });
         if (!movieSeats[0]) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Movie Seats Add In Upcoming Time || Slot Not Have any unReserved Seats"
             })
         }
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "UnBooked Seats",
             movieSeats
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error in get All Movies Seats By Slot API"
         })
     }
@@ -81,53 +82,53 @@ export const deleteMovieSeatsController = async (req, res) => {
         const checkSeats = await movieSeatModel.find({ movieSlotId, seat: new RegExp(rowChar, "g") });
         if (!checkSeats[0]) {
             return res.status(401).send({
-                success: false,
+                "status": "error",
                 message: "Cannot Have Seats of series " + row,
                 checkSeats
             })
         }
         const deleteSeats = await movieSeatModel.deleteMany({ movieSlotId, seat: new RegExp(rowChar, "g") });
         res.status(200).send({
-            success: true,
+            "status": "success",
             message: "All Seats delete of series " + row,
             deleteSeats
         })
     } catch (error) {
         console.log(error)
         res.status(401).send({
-            success: false,
+            "status": "error",
             message: "Error in Delete Movies Seats API"
         })
     }
 }
 
-export const deleteAllMovieSeatsController = async (req,res)=>{
+export const deleteAllMovieSeatsController = async (req, res) => {
     try {
-        const {movieSlotId} = req.body
-        const checkMovieSlot = await movieSeatModel.find({movieSlotId});
-        if(!checkMovieSlot[0]){
+        const { movieSlotId } = req.body
+        const checkMovieSlot = await movieSeatModel.find({ movieSlotId });
+        if (!checkMovieSlot[0]) {
             return res.status(401).send({
-                success:false,
-                message:"MovieSeats Not Found"
+                "status": "error",
+                message: "MovieSeats Not Found"
             })
         }
-        const deleteMovieSeats = await movieSeatModel.deleteMany({movieSlotId});
-        if(!deleteMovieSeats){
+        const deleteMovieSeats = await movieSeatModel.deleteMany({ movieSlotId });
+        if (!deleteMovieSeats) {
             return res.status(401).send({
-                success:false,
-                message:"Can't Delete Movie Seats"
+                "status": "error",
+                message: "Can't Delete Movie Seats"
             })
         }
         res.status(401).send({
-            success:true,
-            message:"Deleted Movie Sets",
+            "status": "success",
+            message: "Deleted Movie Sets",
             deleteMovieSeats
         })
     } catch (error) {
         console.log(error)
         return res.status(401).send({
-            success:false,
-            message:"Error in Delete All Movie Seats API",
+            "status": "error",
+            message: "Error in Delete All Movie Seats API",
             error
         })
     }
