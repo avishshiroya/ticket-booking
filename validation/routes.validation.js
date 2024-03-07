@@ -1,4 +1,3 @@
-import e from "express"
 import joi from "joi"
 export const addRoutesValidation = joi.object({
     category:joi.string().required().trim().messages({

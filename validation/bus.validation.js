@@ -23,3 +23,22 @@ export const addBusValidation = joi.object({
         "number.min":"Seats Are minimum 15 Fro register Bus",
     })
 })
+
+export const updateBusValidation = joi.object({
+    name: joi.string().trim().messages({
+        "string.empty": "name Cannot Be Empty"
+    }),
+    type: joi.string().trim().messages({
+        "string.empty":"Bus type cannot Be Empty"
+    }),
+    uniqueId:joi.string().trim().messages({
+        "string.empty":"bus uniqueId cannot be empty"
+    }),
+    categoryId:joi.string().hex().trim().messages({
+        "string.empty":"Category cannot Be Empty",
+        "string.hex":"CategoryId In must Be Hex"
+    }),
+    totalSeats:joi.number().min(15).messages({
+        "number.min":"Seats Are minimum 15 Fro register Bus",
+    })
+})

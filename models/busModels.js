@@ -31,7 +31,7 @@ const busSchema = new Schema({
     updatedBy:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Admin"
-    }
+    },
 
 })
 
