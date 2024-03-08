@@ -77,7 +77,7 @@ export const bookMovieTicketController = async (req, res) => {
         res.status(200).send({
             "status": "success",
             message: "Total Amount is " + discountAmount > 0 ? discountAmount : totalAmount,
-            movieBook
+            data:null
         })
         // console.log(totalAmount)
 

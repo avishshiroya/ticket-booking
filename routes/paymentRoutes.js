@@ -1,12 +1,15 @@
 import express from "express"
 import { isAuth } from "../middleware/authentication.js";
-import { createPaymentController, paymentCancel, paymentCheckOut, paymentSuccess } from "../controllers/payment.controllers.js";
+import { busTrainPaymentcancel, busTraincreatePaymentController, busTrainpaymentCheckOut, createPaymentController, paymentCancel, paymentCheckOut } from "../controllers/payment.controllers.js";
 const router = express.Router();
 
 router.post('/create-payment',createPaymentController)
-router.get('/success',paymentSuccess)
+router.get('/busTrain/cancel/:id',busTrainPaymentcancel)
 router.get('/cancel/:id',paymentCancel)
 router.get('/checkOut/:id',paymentCheckOut)
+router.post('/busTrain/create-payment',busTraincreatePaymentController)
+router.get('/busTrain/checkOut/:id',busTrainpaymentCheckOut)
+
 // app.post("/orders", async (req, res) => {
 //     const order = await paypal.createOrder(req.body.paymentSource);
 //     res.json(order);
