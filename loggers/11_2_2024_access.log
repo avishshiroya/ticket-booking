@@ -1,0 +1,142 @@
+[11/Mar/2024:03:26:29 +0000] PUT /api/v1/trainSlot/65eaf9c7f5185a070585fdf6 401 2.011 ms - 64
+[11/Mar/2024:03:26:40 +0000] POST /api/v1/admin/login 200 32.031 ms - 226
+[11/Mar/2024:03:26:50 +0000] PUT /api/v1/trainSlot/65eaf9c7f5185a070585fdf6 200 81.176 ms - 62
+[11/Mar/2024:03:45:07 +0000] GET /api/v1/trainSlot/ 404 75.444 ms - 63
+[11/Mar/2024:03:46:20 +0000] GET /api/v1/trainSlot/ 404 91.218 ms - 63
+[11/Mar/2024:03:46:46 +0000] POST /api/v1/trainSlot/ 200 160.198 ms - 67
+[11/Mar/2024:03:46:59 +0000] GET /api/v1/trainSlot/ 200 82.819 ms - 504
+[11/Mar/2024:03:47:51 +0000] GET /api/v1/trainSlot/ 200 102.251 ms - 1054
+[11/Mar/2024:04:02:05 +0000] DELETE /api/v1/trainSlot/65eaf9c7f5185a070585fdf6 200 733.204 ms - 76
+[11/Mar/2024:04:54:51 +0000] POST /api/v1/trainseat/ 404 65.344 ms - 78
+[11/Mar/2024:04:57:39 +0000] POST /api/v1/trainseat/ 200 96.896 ms - 432
+[11/Mar/2024:05:01:58 +0000] POST /api/v1/trainseat/ 200 384.298 ms - 61
+[11/Mar/2024:05:21:11 +0000] PUT /api/v1/trainseat/65ee9045856147d44db72279 404 119.664 ms - 63
+[11/Mar/2024:05:21:19 +0000] PUT /api/v1/trainseat/65ee9045856147d44db72279 200 125.110 ms - 71
+[11/Mar/2024:05:32:19 +0000] GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c 200 60.830 ms - 1604
+[11/Mar/2024:05:45:46 +0000] DELETE /api/v1/trainseat/65ee7ea6da21723a4609072c 404 65.670 ms - 57
+[11/Mar/2024:05:46:13 +0000] DELETE /api/v1/trainseat/65ee9045856147d44db72279 200 76.440 ms - 70
+[11/Mar/2024:05:53:33 +0000] POST /api/v1/seatBooking 404 67.425 ms - 73
+[11/Mar/2024:05:54:12 +0000] GET /api/v1/busSeat/65e9876c0f473a398231dc6a 200 62.473 ms - 4988
+[11/Mar/2024:05:54:40 +0000] POST /api/v1/payment/busTrain/create-payment 302 1969.779 ms - 88
+[11/Mar/2024:05:54:41 +0000] POST /api/v1/seatBooking 200 3057.987 ms - 56
+[11/Mar/2024:05:55:15 +0000] GET /api/v1/payment/busTrain/checkOut/65ee9c9e76e88cf40c6e4f53?token=5PA35650ER1394032&PayerID=BMQ3JSMEFDJEY 200 1526.371 ms - 62
+[11/Mar/2024:05:55:16 +0000] GET /favicon.ico 404 1.364 ms - 150
+[11/Mar/2024:06:01:47 +0000] GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c 200 84.039 ms - 1449
+[11/Mar/2024:06:02:21 +0000] POST /api/v1/payment/busTrain/create-payment 302 2235.412 ms - 88
+[11/Mar/2024:06:02:23 +0000] POST /api/v1/seatBooking/train 200 3738.796 ms - 56
+[11/Mar/2024:06:02:38 +0000] GET /api/v1/payment/busTrain/checkOut/65ee9e6b5a1b779e77df3ce2?token=9E332241X58732139&PayerID=BMQ3JSMEFDJEY 200 1891.923 ms - 62
+[11/Mar/2024:06:03:01 +0000] GET /api/v1/payment/busTrain/create-payment 404 3.801 ms - 177
+[11/Mar/2024:06:06:14 +0000] GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c 200 57.253 ms - 1525
+[11/Mar/2024:06:06:40 +0000] POST /api/v1/payment/busTrain/create-payment 200 1477.269 ms - 377
+[11/Mar/2024:06:06:40 +0000] POST /api/v1/seatBooking/train 500 1692.027 ms - 57
+[11/Mar/2024:06:07:33 +0000] POST /api/v1/payment/busTrain/create-payment 200 1709.985 ms - 377
+[11/Mar/2024:06:07:33 +0000] POST /api/v1/seatBooking/train 200 1962.430 ms - 44
+[11/Mar/2024:06:07:50 +0000] GET /api/v1/payment/busTrain/cancel/65ee9fa3bf2cbc3b794708f1?token=8CH91769956475710 200 55.640 ms - 45
+[11/Mar/2024:06:09:29 +0000] POST /api/v1/payment/busTrain/create-payment 200 1914.232 ms - 377
+[11/Mar/2024:06:09:29 +0000] POST /api/v1/seatBooking/train 500 2138.859 ms - 57
+[11/Mar/2024:06:10:49 +0000] POST /api/v1/seatBooking/train 404 5135.707 ms - 83
+[11/Mar/2024:06:11:28 +0000] POST /api/v1/payment/busTrain/create-payment 200 1872.806 ms - 377
+[11/Mar/2024:06:11:28 +0000] POST /api/v1/seatBooking/train 200 2095.876 ms - 429
+[11/Mar/2024:06:11:39 +0000] GET /api/v1/payment/busTrain/checkOut/65eea08e4c6b69a6a7e9b1e5?token=22U9294955981283R&PayerID=BMQ3JSMEFDJEY 200 1303.296 ms - 69
+[11/Mar/2024:06:11:48 +0000] POST /api/v1/seatBooking/train 401 0.314 ms - 52
+[11/Mar/2024:06:20:18 +0000] GET /api/v1/movieSeat/ 200 79.093 ms - 4870
+[11/Mar/2024:06:21:10 +0000] POST /api/v1/movieSeatBooking/ 401 0.663 ms - 52
+[11/Mar/2024:06:21:53 +0000] GET /api/v1/user/sendMailToLogin 200 3025.226 ms - 54
+[11/Mar/2024:06:22:07 +0000] POST /api/v1/user/login 200 64.902 ms - 46
+[11/Mar/2024:06:22:16 +0000] POST /api/v1/movieSeatBooking/ 401 172.316 ms - 62
+[11/Mar/2024:06:22:56 +0000] POST /api/v1/movieSeatBooking/ 401 59.737 ms - 64
+[11/Mar/2024:06:28:52 +0000] POST /api/v1/payment/busTrain/create-payment 200 1684.500 ms - 377
+[11/Mar/2024:06:28:52 +0000] POST /api/v1/movieSeatBooking/ 200 1898.006 ms - 429
+[11/Mar/2024:06:29:15 +0000] GET /api/v1/payment/busTrain/checkOut/65eea4a36d37848841778cf8?token=0EA00172MK6504626&PayerID=BMQ3JSMEFDJEY 200 1368.024 ms - 69
+[11/Mar/2024:06:35:06 +0000] GET /api/v1/user/orders 500 77.328 ms - 56
+[11/Mar/2024:06:35:43 +0000] GET /api/v1/user/orders 200 104.136 ms - 9100
+[11/Mar/2024:06:36:36 +0000] GET /api/v1/user/orders 200 102.852 ms - 9116
+[11/Mar/2024:06:39:57 +0000] POST /api/v1/admin/login 200 30.267 ms - 226
+[11/Mar/2024:06:40:16 +0000] POST /api/v1/movie/add 200 101.963 ms - 402
+[11/Mar/2024:06:40:54 +0000] GET /api/v1/theater/ 200 49.721 ms - 219
+[11/Mar/2024:06:41:43 +0000] POST /api/v1/movieSlot/ 200 148.986 ms - 403
+[11/Mar/2024:06:42:10 +0000] POST /api/v1/movieSeat/ 200 562.341 ms - 44
+[11/Mar/2024:06:42:20 +0000] GET /api/v1/movieSeat/ 200 49.040 ms - 1670
+[11/Mar/2024:06:46:03 +0000] GET /api/v1/movieSeat/ 200 64.166 ms - 1667
+[11/Mar/2024:06:46:30 +0000] GET /api/v1/user/sendMailToLogin 200 2859.056 ms - 54
+[11/Mar/2024:06:46:42 +0000] POST /api/v1/user/login 200 47.764 ms - 46
+[11/Mar/2024:06:47:03 +0000] GET /api/v1/movie/ 200 23.248 ms - 759
+[11/Mar/2024:07:03:42 +0000] GET /api/v1/movieSlot/name 200 95.412 ms - 978
+[11/Mar/2024:07:04:13 +0000] GET /api/v1/movieSeat/ 200 56.032 ms - 1667
+[11/Mar/2024:07:04:56 +0000] POST /api/v1/payment/busTrain/create-payment 200 1978.633 ms - 377
+[11/Mar/2024:07:04:56 +0000] POST /api/v1/movieSeatBooking/ 200 2213.831 ms - 429
+[11/Mar/2024:07:05:28 +0000] GET /api/v1/payment/busTrain/checkOut/65eead166c468e582d7bc096?token=7U6731692R3566016&PayerID=BMQ3JSMEFDJEY 200 1391.217 ms - 69
+[11/Mar/2024:07:10:13 +0000] GET /api/v1/busSlot/route 404 60.271 ms - 77
+[11/Mar/2024:07:10:21 +0000] GET /api/v1/busSlot/route 200 47.581 ms - 523
+[11/Mar/2024:07:10:41 +0000] GET /api/v1/busSeat/65e9876c0f473a398231dc6a 200 54.760 ms - 5064
+[11/Mar/2024:07:11:21 +0000] POST /api/v1/payment/busTrain/create-payment 200 1893.867 ms - 377
+[11/Mar/2024:07:11:21 +0000] POST /api/v1/seatBooking 200 2121.570 ms - 56
+[11/Mar/2024:07:11:33 +0000] GET /api/v1/payment/busTrain/cancel/65eeae9757210be1c3923423?token=57F70303R8918514W 200 50.333 ms - 45
+[11/Mar/2024:07:16:37 +0000] GET /api/v1/admin/logout 401 42.005 ms - 45
+[11/Mar/2024:07:16:53 +0000] GET /api/v1/admin/logout 200 31.838 ms - 45
+[11/Mar/2024:09:50:46 +0000] GET /api/v1/user/sendMailToLogin 200 2037.116 ms - 54
+[11/Mar/2024:09:51:00 +0000] POST /api/v1/user/login 200 112.921 ms - 229
+[11/Mar/2024:09:51:15 +0000] GET /api/v1/user/orders 401 0.575 ms - 52
+[11/Mar/2024:09:51:36 +0000] GET /api/v1/user/orders 401 0.731 ms - 62
+[11/Mar/2024:09:52:09 +0000] GET /api/v1/user/orders 401 4.641 ms - 62
+[11/Mar/2024:09:53:02 +0000] GET /api/v1/user/orders 200 192.429 ms - 10513
+[11/Mar/2024:09:53:12 +0000] GET /api/v1/user/orders 401 0.859 ms - 52
+[11/Mar/2024:09:54:16 +0000] GET /api/v1/user/orders 401 2.099 ms - 52
+[11/Mar/2024:09:54:17 +0000] GET /api/v1/user/orders 401 0.535 ms - 52
+[11/Mar/2024:09:54:18 +0000] GET /api/v1/user/orders 401 0.208 ms - 52
+[11/Mar/2024:09:55:44 +0000] GET /api/v1/user/orders 401 4.461 ms - 62
+[11/Mar/2024:09:56:48 +0000] GET /api/v1/user/orders 401 1.281 ms - 62
+[11/Mar/2024:09:56:54 +0000] GET /api/v1/user/orders 401 1.350 ms - 62
+[11/Mar/2024:10:16:30 +0000] POST /api/v1/user/login 401 198.593 ms - 42
+[11/Mar/2024:10:16:47 +0000] GET /api/v1/user/sendMailToLogin 200 2027.579 ms - 54
+[11/Mar/2024:10:16:57 +0000] POST /api/v1/user/login 200 116.263 ms - 236
+[11/Mar/2024:10:17:23 +0000] POST /api/v1/user/login 401 103.223 ms - 42
+[11/Mar/2024:10:17:31 +0000] GET /api/v1/user/sendMailToLogin 200 1945.987 ms - 54
+[11/Mar/2024:10:17:39 +0000] POST /api/v1/user/login 200 98.261 ms - 236
+[11/Mar/2024:10:18:21 +0000] GET /api/v1/user/detail 200 48.403 ms - 378
+[11/Mar/2024:10:18:46 +0000] GET /api/v1/user/detail 401 1.502 ms - 62
+[11/Mar/2024:10:20:29 +0000] GET /api/v1/user/detail 401 1.235 ms - 62
+[11/Mar/2024:10:20:42 +0000] GET /api/v1/user/refresh 404 2.041 ms - 158
+[11/Mar/2024:10:21:06 +0000] GET /api/v1/user/refresh 500 5.353 ms - 54
+[11/Mar/2024:10:21:36 +0000] GET /api/v1/user/refresh 200 65.219 ms - 227
+[11/Mar/2024:10:22:03 +0000] GET /api/v1/user/refresh 200 64.172 ms - 234
+[11/Mar/2024:10:22:29 +0000] GET /api/v1/user/detail 200 56.709 ms - 378
+[11/Mar/2024:10:23:04 +0000] GET /api/v1/user/detail 401 5.135 ms - 62
+[11/Mar/2024:10:23:45 +0000] GET /api/v1/user/refresh 200 58.160 ms - 234
+[11/Mar/2024:10:24:11 +0000] GET /api/v1/user/detail 200 31.050 ms - 378
+{
+  message: 'Not Connected',
+  level: 'info',
+  timestamp: '2024-03-11T11:22:49.258Z'
+}
+undefined
+{
+  message: 'Token verified',
+  level: 'info',
+  timestamp: '2024-03-11T11:27:30.226Z'
+}
+{
+  message: 'Token verified',
+  level: 'info',
+  timestamp: '2024-03-11T11:33:38.595Z'
+}
+{
+  message: 'Token verified',
+  level: 'info',
+  timestamp: '2024-03-11T11:34:25.812Z'
+}
+{
+  message: 'GET /api/v1/user/detail 200 378 - 50.648 ms',
+  level: 'http',
+  timestamp: '2024-03-11T11:34:25.818Z'
+}
+{
+  message: 'Token verified',
+  level: 'info',
+  timestamp: '2024-03-11 05:06:35.868 PM'
+}
+{
+  message: 'GET /api/v1/user/detail 200 378 - 47.332 ms',
+  level: 'http',
+  timestamp: '2024-03-11 05:06:35.875 PM'
+}

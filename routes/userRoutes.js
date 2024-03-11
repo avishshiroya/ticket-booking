@@ -1,5 +1,5 @@
 import express from "express"
-import { deleteUserController, getDetailUserController, registerUserController, sendMailTOLoginController, userDetailUpdateController, userLoginController, userLogoutController } from "../controllers/user.contollers.js";
+import { deleteUserController, getAllUsersOrder, getDetailUserController, refreshToken, registerUserController, sendMailTOLoginController, userDetailUpdateController, userLoginController, userLogoutController } from "../controllers/user.contollers.js";
 import { isAuth } from "../middleware/authentication.js";
 const router = express.Router();
 
@@ -10,5 +10,7 @@ router.get("/detail",isAuth, getDetailUserController)
 router.put("/update-detail",isAuth,userDetailUpdateController )
 router.get("/logout",isAuth,userLogoutController )
 router.delete("/delete-user",isAuth,deleteUserController)
+router.get("/orders",isAuth,getAllUsersOrder)
+router.get("/refresh",refreshToken)
 
 export default router;

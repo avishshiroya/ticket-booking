@@ -62,7 +62,7 @@ export const getMovieSeatsController = async (req, res) => {
         }
         res.status(200).send({
             "status": "success",
-            message: "UnBooked Seats",
+            message: "Movie Seats",
             movieSeats
         })
     } catch (error) {

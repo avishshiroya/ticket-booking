@@ -1,9 +1,10 @@
 import JWT from "jsonwebtoken"
 import userModel from "../models/userModel.js";
 import adminModel from "../models/adminModels.js";
+import { logger } from "../server.js";
 export const isAuth = async(req,res,next)=>{
     try {
-        const {auth}= req.cookies;
+        const auth= req.body.auth || req.query.auth || req.headers.auth;
 
         if(!auth)
         {
@@ -15,6 +16,7 @@ export const isAuth = async(req,res,next)=>{
         const token = auth.split(" ")[1];
         const tokenVerify = JWT.verify(token,process.env.JWT_PASS)
         if(!tokenVerify){
+            // logger.error("Token cannot Verify")
             return res.success(401).send({
                 success:true,
                 message:"Token cannot Verify "
@@ -28,7 +30,7 @@ export const isAuth = async(req,res,next)=>{
                 message:"Login Again"
             })
         }
-        
+        // logger.info("Token verified")
         req.user = user;
         next()
         // const checkToken = 

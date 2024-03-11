@@ -2,6 +2,7 @@ import axios from "axios";
 import movieBookingModel from "../models/movieBooking.js";
 import movieSeatModel from "../models/movieSeatModels.js";
 import promoCodeModel from "../models/promoCode.js";
+import seatbookingModel from "../models/busSeatBookingModels.js";
 
 export const bookMovieTicketController = async (req, res) => {
     try {
@@ -35,14 +36,14 @@ export const bookMovieTicketController = async (req, res) => {
         }
         var promoAmount = 0;
         if (promocode) {
-            const checkInUser = await movieBookingModel.findOne({ userId: req.user._id, promoCode: promocode })
-            console.log(checkInUser)
-            if (checkInUser) {
-                return res.status(401).send({
-                    status: "error",
-                    message: "Promocode One Time Used Already"
-                })
-            }
+            // const checkInUser = await movieBookingModel.findOne({ userId: req.user._id, promoCode: promocode })
+            // console.log(checkInUser)
+            // if (checkInUser) {
+            //     return res.status(401).send({
+            //         status: "error",
+            //         message: "Promocode One Time Used Already"
+            //     })
+            // }
             const promoCheck = await promoCodeModel.findOne({ code: promocode });
 
 
@@ -53,31 +54,32 @@ export const bookMovieTicketController = async (req, res) => {
         }
         const discountAmount = totalAmount - promoAmount;
         // console.log(discountAmount);
-        const movieBook = new movieBookingModel({
+        const movieBook = new seatbookingModel({
             userId: req.user.id,
-            movieSeatsId: seats,
+            movieSeats: seats,
             promoCode: promocode,
             totalAmount,
-            discountAmount,
+            discountedAmount:discountAmount,
             // isPaid:true
         })
         console.log(movieBook);
         //save movieBooking
-        await movieBook.save();
         // console.log(totalAmount)
-        const Payment = await axios.post("http://localhost:4040/api/v1/payment/create-payment", {
-            amount: discountAmount, movieBookingId: movieBook._id
+        const Payment = await axios.post("http://localhost:4040/api/v1/payment/busTrain/create-payment", {
+            amount: movieBook.discountedAmount, bookingId: movieBook._id
         })
         if (!Payment) {
             return res.status(401).send({
                 "status": "error",
                 message: "Cannot Book Ticket"
+
             })
         }
+        await movieBook.save();
         res.status(200).send({
             "status": "success",
-            message: "Total Amount is " + discountAmount > 0 ? discountAmount : totalAmount,
-            data:null
+            message: "Seat Booked",
+            data:Payment.data
         })
         // console.log(totalAmount)
 

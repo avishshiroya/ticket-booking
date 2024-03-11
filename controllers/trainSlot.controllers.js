@@ -1,4 +1,6 @@
 import routesModel from "../models/RoutesModels.js"
+import seatbookingModel from "../models/busSeatBookingModels.js"
+import categoryModel from "../models/categoryModel.js"
 import trainModel from "../models/trainModels.js"
 import trainSlotModel from "../models/trainSlotModels.js"
 import { addTrainSlotValidation, updateTrainSlotValidation } from "../validation/trainSlot.validation.js"
@@ -129,6 +131,76 @@ export const updateTrainSlotController = async (req, res) => {
             status: "error",
             message: "Invalid Error",
             data: null
+        })
+    }
+}
+
+export const getTrainSlotByRoutesController = async (req,res)=>{
+    try {
+        const {from,to,date} = req.body
+        const getCategory = await categoryModel.findOne({name:"train"});
+        if(!getCategory){
+            return res.status(404).json({
+                status:"error",
+                message:"category Not Found",
+                data:null
+            })
+        }
+        const getRoutes= await routesModel.findOne({categoryId:getCategory._id,from,to})
+        if(!getRoutes){
+            return res.status(404).json({
+                status:"error",
+                message:"Routes Not Found",
+                data:null
+            })
+        }
+        const getSlots = await trainSlotModel.find({routeId:getRoutes._id,arrivalDate:date}).populate("routeId").populate("trainId")
+        if(!getSlots[0]){
+            return res.status(404).json({
+                status:"error",
+                message:"TrainSlots Not Found",
+                data:null
+            })
+        }
+
+        return res.status(200).json({
+            status:"Success",
+            message:"Slots of Routes " +from + " to " +to,
+            data:getSlots
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status:"error",
+            message:"Internal Error",
+            data:null
+        })
+    }
+}
+
+export const deleteTrainSlotController = async(req,res)=>{
+    try {
+        const checkTrainSlot = await trainSlotModel.findById(req.params.id);
+        if(!checkTrainSlot){
+            return res.status(404).json({
+                status:"error",
+                message:"TrainSlot Not Found",
+                data:null
+            })
+        }
+        const deleteSlot = await checkTrainSlot.deleteOne();
+        console.log(deleteSlot);
+        return res.status(200).json({
+            status:"success",
+            message:"Train Slot Deleted successfully",
+            data:null
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status:"error",
+            message:"Internal Error",
+            data:null
         })
     }
 }

@@ -15,6 +15,7 @@ import promoCodeRoutes from "./promoCodeRoutes.js"
 import busRoutes from "./busRoutes.js"
 import busSlotRoutes from "./busSlotRoutes.js"
 import busSeatRoutes from "./busSeatRoutes.js"
+import trainSeatRoutes from "./trainSeatRoutes.js"
 import trainRoutes from "./trainRoutes.js"
 import trainSlotRoutes from "./trainSlotRoutes.js"
 import busTrainSeatBookRoutes from "./busTrainSeatBookRoutes.js"
@@ -37,6 +38,7 @@ router.use('/busSlot',busSlotRoutes)
 router.use('/trainSlot',trainSlotRoutes)
 router.use('/busSeat',busSeatRoutes)
 router.use('/seatBooking',busTrainSeatBookRoutes)
+router.use('/trainSeat',trainSeatRoutes)
 
 
 export default router

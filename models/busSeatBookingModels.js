@@ -12,7 +12,12 @@ export const busSeatBookSchema = new Schema({
         ref:'busSeat'
     }],
     trainSeats:[{
-        type:String
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'trainSeat'
+    }],
+    movieSeats:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'MovieSeat'
     }],
     promoCode:{
         type:String

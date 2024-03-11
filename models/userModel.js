@@ -39,10 +39,21 @@ const userSchema = new Schema({
     country:{
         type:String,
         required:true
+    },
+    token:{
+        type:String
+    },
+    refreshToken:{
+        type:String
     }
 },{timestamps:true})
 
 userSchema.methods.generateToken = function(){
+    return JWT.sign({_id:this._id},process.env.JWT_PASS,{
+        expiresIn:'1d'
+    });
+}
+userSchema.methods.generateRefreshToken = function(){
     return JWT.sign({_id:this._id},process.env.JWT_PASS,{
         expiresIn:'7d'
     });

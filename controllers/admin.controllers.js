@@ -105,3 +105,26 @@ export const getAdminDetails = async (req, res) => {
         })
     }
 }
+
+export const adminLogoutController = async (req, res) => {
+    try {
+        const user = req.admin;
+        if (!user) {
+            return res.status(401).json({
+                "status": "error",
+                message: "user NOT found"
+            })
+        }
+        res.status(200).clearCookie("aAuth").json({
+            "status": "success",
+            message: "Admin Logout"
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            "status": "error",
+            message: "Error in user Logout API",
+            error
+        })
+    }
+}

@@ -225,3 +225,43 @@ export const deleteMovieSlotController = async (req, res) => {
         })
     }
 }
+export const getMovieSlotBynameController = async(req,res)=>{
+    try {
+        const {movieName} = req.body
+        if(!movieName){
+            return res.status(400).json({
+                status:"error",
+                message:"Movie Name is Required",
+                data:null
+            })
+        }
+        const checkMovie = await movieModel.findOne({title:movieName});
+        if(!checkMovie){
+            return res.status(404).json({
+                status:"error",
+                message:"Movie Come Soon....",
+                data:null
+            })
+        }
+        const getSlot = await movieSlotModel.find({movieId:checkMovie._id}).populate("theaterId").populate("screenId").populate("movieId");
+        if(!getSlot[0]){
+            return res.status(404).json({
+                status:"error",
+                message:"cannot find movieSlot",
+                data:null
+            })
+        }
+        res.status(200).json({
+            status:"success",
+            message:"slots",
+            data:getSlot
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status:"error",
+            message:"Internal Error",
+            data:null
+        })
+    }
+}

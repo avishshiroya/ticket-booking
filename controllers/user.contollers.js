@@ -1,3 +1,4 @@
+import seatbookingModel from "../models/busSeatBookingModels.js"
 import otpModel from "../models/otpModel.js"
 import userModel from "../models/userModel.js"
 import { addOTP } from "../services/userServices.js"
@@ -5,6 +6,7 @@ import { otpGenerate } from "../utils/otpGenerator.js"
 import { sendMailOtp } from "../utils/sendMail.js"
 import { sendMSG } from "../utils/twilioMsg.js"
 import { detailUpdateUserValidation, registerUserValidation, userToSendOTP } from "../validation/user.validation.js"
+import JWT from "jsonwebtoken"
 
 export const registerUserController = async (req, res) => {
     try {
@@ -153,7 +155,8 @@ export const userLoginController = async (req, res) => {
         checkOtpDetails.save();
         // console.log(updateOTPStatus)
         const token = checkUser.generateToken();
-        res.status(200).cookie("auth", "Bearer " + token, {
+        const refreshToken = checkUser.generateRefreshToken();
+        res.status(200).cookie("auth", "Bearer " + refreshToken, {
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             secure: process.env.NODE_ENV == "development" ? true : false,
             HttpOnly: process.env.NODE_ENV == "development" ? true : false,
@@ -161,6 +164,7 @@ export const userLoginController = async (req, res) => {
         }).json({
             status: true,
             message: "Login SuccessFully",
+            token:"Bearer " + token
         })
     } catch (error) {
         console.log(error)
@@ -297,6 +301,70 @@ export const deleteUserController = async (req, res) => {
             "status": "error",
             message: "Error in Delete User API",
             error
+        })
+    }
+}
+
+export const getAllUsersOrder = async (req, res) => {
+    try {
+
+        const orders = await seatbookingModel.find({ userId: req.user._id }).populate("busSeats").populate("trainSeats").populate("movieSeats");
+        if (!orders[0]) {
+            return res.status(404).json({
+                success: "error",
+                message: "Orders Not Found",
+                data: null
+            })
+        }
+        res.status(200).json({
+            status: "success",
+            message: "Orders",
+            totalOrder:orders.length,
+            data: orders,
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            "status": "error",
+            message: "Internal Error",
+            error
+        })
+    }
+}
+
+export const refreshToken = async (req,res)=>{
+    try {
+        const {auth}= req.cookies;
+
+        if(!auth)
+        {
+            return res.status(401).send({
+                success:false,
+                message:"User Not Authenticated"
+            })
+        }
+        const token = auth.split(" ")[1];
+        const tokenVerify = JWT.verify(token,process.env.JWT_PASS)
+        if(!tokenVerify){
+            return res.success(401).send({
+                success:true,
+                message:"Token cannot Verify "
+            })
+        }
+        const user = await userModel.findById(tokenVerify);
+        const accesstoken = await user.generateToken();
+        res.status(200).json({
+            status:"success",
+            message:"accesstoken",
+            token:"Bearer " + accesstoken
+        })
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status:"error",
+            message:'Login Pls!!',
+            data:null
         })
     }
 }
