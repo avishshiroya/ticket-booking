@@ -154,3 +154,20 @@ export const theaterScreenOnTheaterController = async (req, res) => {
         })
     }
 }
+export const deleteTheaterScreenController = async(req,res)=>{
+    try {
+        const deletescreen = await theaterScreenModel.findByIdAndDelete(req.params.id)
+        res.status(200).json({
+            status:"success",
+            message:"DELETED ",
+            data:null
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status:"error",
+            message:"INTERNAL ERROR",
+            data:null
+        })
+    }
+}

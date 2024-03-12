@@ -82,7 +82,8 @@ export const sendMailTOLoginController = async (req, res) => {
             const sendOtp = await addOTP(checkUser._id, otpGenerator)
             return res.status(200).json({
                 "status": "success",
-                message: "OTP SEND TO " + email
+                message: "OTP SEND TO " + email,
+                otp:otpGenerator
             })
 
         }
@@ -92,7 +93,8 @@ export const sendMailTOLoginController = async (req, res) => {
             const sendOtp = await addOTP(checkUser._id, otpGenerator)
             return res.status(200).json({
                 "status": "success",
-                message: "OTP SEND TO" + mobile
+                message: "OTP SEND TO" + mobile,
+                otp:otpGenerator
             })
         }
     } catch (error) {
@@ -164,7 +166,8 @@ export const userLoginController = async (req, res) => {
         }).json({
             status: true,
             message: "Login SuccessFully",
-            token:"Bearer " + token
+            token:"Bearer " + token,
+            refreshToken:"Bearer " + refreshToken,
         })
     } catch (error) {
         console.log(error)
@@ -335,7 +338,7 @@ export const getAllUsersOrder = async (req, res) => {
 export const refreshToken = async (req,res)=>{
     try {
         const {auth}= req.cookies;
-
+        console.log();
         if(!auth)
         {
             return res.status(401).send({

@@ -6,8 +6,7 @@ const router = express.Router();
 router.post("/",adminIsAuth,addMovieSlotController)
 router.put("/:id",adminIsAuth,updateMovieSlotController)
 router.get("/",getMovieSlotController)
-router.get("/time",adminIsAuth,getMovieSlotByTimeController)
-router.get("/get",adminIsAuth,getMovieSlotByTimeController)
+router.get("/time",getMovieSlotByTimeController)
 router.delete("/:id",adminIsAuth,deleteMovieSlotController)
 router.get("/name",getMovieSlotBynameController)
 

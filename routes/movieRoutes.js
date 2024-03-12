@@ -9,7 +9,7 @@ router.put("/:id",adminIsAuth, movieUpdateController)
 router.get("/",movieGetController)
 router.get('/genre/:type',movieGetGenreController)
 router.get('/casts/:name',movieGetCastController)
-router.delete('/:id',deleteMovieController)
+router.delete('/:id',adminIsAuth,deleteMovieController)
 
 
 export default router

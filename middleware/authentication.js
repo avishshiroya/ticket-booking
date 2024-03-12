@@ -5,7 +5,7 @@ import { logger } from "../server.js";
 export const isAuth = async(req,res,next)=>{
     try {
         const auth= req.body.auth || req.query.auth || req.headers.auth;
-
+        console.log(auth);
         if(!auth)
         {
             return res.status(401).send({
@@ -23,7 +23,7 @@ export const isAuth = async(req,res,next)=>{
             })
         }
         const user = await userModel.findById(tokenVerify);
-        console.log(user)
+        // console.log(user)
         if(!user){
             return res.status(401).send({
                 success:false,
@@ -45,6 +45,7 @@ export const isAuth = async(req,res,next)=>{
  export const adminIsAuth = async (req,res,next)=>{
     try {
         const {aAuth} = req.cookies;
+        console.log('123' + aAuth);
         if(!aAuth){
             return res.status(401).send({
                 success:false,

@@ -5,7 +5,6 @@ const trainSchema = new Schema({
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
-        unique: true
     }
     , name: {
         type: String,

@@ -53,32 +53,23 @@ export const userToSendOTP = joi.object({
     }),
 })
 export const detailUpdateUserValidation = joi.object({
-    name: joi.string().required().trim().messages({
-        "any.required": " name must be required",
+    name: joi.string().trim().messages({
         "string.empty": " name can not be empty",
     }),
-    DOB: joi.date().required().messages({
-        "any.required": "DOB must be required"
-    }),
-    address: joi.string().required().trim().messages({
-        "any.required": "address must be required",
+    address: joi.string().trim().messages({
         "string.empty": "Address can not be empty"
     }),
-    pincode: joi.string().required().length(6).trim().messages({
-        "any.required": "Pincode Must be required",
+    pincode: joi.string().length(6).trim().messages({
         "string.empty": "pincode cannot be empty",
         "string.length": "Pincode must be have 6 letter/numbers"
     }),
-    city: joi.string().required().trim().messages({
-        "any.required": "City must be required",
+    city: joi.string().trim().messages({
         "string.empty": "City cannot be empty",
     }),
-    state: joi.string().required().trim().messages({
-        "any.required": "state must be required",
+    state: joi.string().trim().messages({
         "string.empty": "State cannot be empty"
     }),
-    country: joi.string().required().messages({
-        "any.required": "Country must be required",
+    country: joi.string().messages({
         "string.empty":"country canot be empty"
     })
 })

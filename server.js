@@ -66,7 +66,7 @@ import Routes from "./routes/index.js"
 app.use("/api/v1", Routes)
 
 app.get("/", async (req, res) => {
-    res.status(200).send({
+    res.status(200).json({
         success: true,
         message: "First Routes 214 214"
     })
@@ -82,3 +82,5 @@ app.listen(PORT, (err, res) => {
         console.log(`Port ${PORT} run successfully`)
     }
 })
+
+export default app
