@@ -102,7 +102,7 @@ export const sendMailTOLoginController = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             "status": "error",
-            message: "Error In User OTP send API"
+            message: "Invalid Mobile Number"
         })
     }
 }
@@ -174,7 +174,7 @@ export const userLoginController = async (req, res) => {
         console.log(error)
         return res.status(500).json({
             "status": "error",
-            message: "Invalid Mobile Number"
+            message: "Internal Error"
         })
     }
 }
