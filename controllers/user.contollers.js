@@ -49,8 +49,8 @@ export const registerUserController = async (req, res) => {
 export const sendMailTOLoginController = async (req, res) => {
     try {
         const { user } = req.body
-        console.log(req.body);
-        if (!user) { return res.status(400).json({ "status": "error", message: "Please Provide Mobile Number OR Email" }) }
+        console.log(user);
+        if (!user) { return res.status(401).json({ "status": "error", message: "Please Provide Mobile Number OR Email" }) }
         var mobile, email;
         if (user) {
             if (user.length == 10) {
@@ -102,7 +102,7 @@ export const sendMailTOLoginController = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             "status": "error",
-            message: "Error In User OTP send API"
+            message: "Mobile Number Invalid"
         })
     }
 }
@@ -143,8 +143,7 @@ export const userLoginController = async (req, res) => {
                 message: "OTP Invalid"
             })
         }
-        console.log(checkExpires < checkOtpDetails.expireAfter)
-        if (checkExpires < checkOtpDetails.expireAfter) {
+        if (checkExpires > checkOtpDetails.expireAfter) {
             {
                 if (checkOtpDetails.expireAfter) checkOtpDetails.status = "expired"
                 await checkOtpDetails.save();
@@ -166,7 +165,7 @@ export const userLoginController = async (req, res) => {
             HttpOnly: process.env.NODE_ENV == "development" ? true : false,
             sameSite: process.env.NODE_ENV == "development" ? true : false
         }).json({
-            status: "success",
+            status: true,
             message: "Login SuccessFully",
             token:"Bearer " + token,
             refreshToken:"Bearer " + refreshToken,
@@ -175,7 +174,7 @@ export const userLoginController = async (req, res) => {
         console.log(error)
         return res.status(500).json({
             "status": "error",
-            message: "Mobile Number Invalid"
+            message: "Error In User Login API"
         })
     }
 }
