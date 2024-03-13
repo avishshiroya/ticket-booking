@@ -7,6 +7,7 @@ import fs from "fs"
 import paypal from "paypal-rest-sdk"
 import path from "path"
 import winston from "winston"
+import cors from "cors"
 const { combine, timestamp, json, prettyPrint } = winston.format
 dotenv.config();
 
