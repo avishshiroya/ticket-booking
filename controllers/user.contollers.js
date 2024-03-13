@@ -174,7 +174,7 @@ export const userLoginController = async (req, res) => {
         console.log(error)
         return res.status(500).json({
             "status": "error",
-            message: "Error In User Login API"
+            message: "Invalid Mobile Number"
         })
     }
 }
