@@ -41,10 +41,10 @@ describe('Tasks API', () => {
         //         // expect(response.statusCode).to.be.equal(200)
         // })
     })
-    describe("GET /sendmailToLogin", () => {
+    describe("POST /sendmailToLogin", () => {
         it("Send OTp FOr Login", async () => {
             //    const response =  request
-            //         .get('/user/sendMailToLogin') // Relative to the base URL
+            //         .post('/user/sendMailToLogin') // Relative to the base URL
             //         .set('content-type','application/json')
             //         .send({
             //             user:'9601458205'

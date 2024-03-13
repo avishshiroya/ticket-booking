@@ -4,7 +4,7 @@ import { isAuth } from "../middleware/authentication.js";
 const router = express.Router();
 
 router.post("/register",registerUserController)
-router.get("/sendMailTOLogin",sendMailTOLoginController)
+router.post("/sendMailTOLogin",sendMailTOLoginController)
 router.post("/login",userLoginController)
 router.get("/detail",isAuth, getDetailUserController)
 router.put("/update-detail",isAuth,userDetailUpdateController )
