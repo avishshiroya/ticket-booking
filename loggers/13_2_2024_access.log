@@ -1,0 +1,15 @@
+{
+  message: 'GET /api/v1/user/sendMailToLogin 401 68 - 3.856 ms',
+  level: 'http',
+  timestamp: '2024-03-13 11:12:40.755 AM'
+}
+{
+  message: 'GET /api/v1/user/sendMailToLogin 401 68 - 2.559 ms',
+  level: 'http',
+  timestamp: '2024-03-13 11:13:20.211 AM'
+}
+{
+  message: 'GET /api/v1/user/sendMailToLogin 401 68 - 3.628 ms',
+  level: 'http',
+  timestamp: '2024-03-13 11:13:33.395 AM'
+}

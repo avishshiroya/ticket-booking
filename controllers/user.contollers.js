@@ -49,6 +49,7 @@ export const registerUserController = async (req, res) => {
 export const sendMailTOLoginController = async (req, res) => {
     try {
         const { user } = req.body
+        console.log(user);
         if (!user) { return res.status(401).json({ "status": "error", message: "Please Provide Mobile Number OR Email" }) }
         var mobile, email;
         if (user) {
