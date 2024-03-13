@@ -198,3 +198,153 @@
   level: 'http',
   timestamp: '2024-03-13 12:33:29.233 PM'
 }
+{
+  message: 'POST /api/v1/user/sendMailToLogin 500 57 - 2765.961 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:37:27.795 PM'
+}
+{
+  message: 'POST /api/v1/user/sendMailToLogin 500 57 - 2648.717 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:42:42.177 PM'
+}
+{
+  message: 'POST /api/v1/user/sendMailToLogin 200 84 - 665.219 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:45:20.003 PM'
+}
+{
+  message: 'GET /api/v1/user/sendMailToLogin 404 166 - 4.116 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:46:04.159 PM'
+}
+{
+  message: 'POST /api/v1/user/sendMailToLogin 200 67 - 2979.077 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:49:29.286 PM'
+}
+{
+  message: 'POST /api/v1/user/sendMailToLogin 200 67 - 2602.182 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:55:50.123 PM'
+}
+{
+  message: 'POST /api/v1/user/login 200 433 - 59.083 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:55:53.087 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 56.704 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:59:12.513 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 47.913 ms',
+  level: 'http',
+  timestamp: '2024-03-13 12:59:43.903 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 46.470 ms',
+  level: 'http',
+  timestamp: '2024-03-13 01:00:01.294 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 194.080 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:03:48.003 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 68 - 0.771 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:10:32.548 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 68 - 0.325 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:11:01.979 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 68 - 0.317 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:11:33.104 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 68 - 0.268 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:11:58.360 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 68 - 0.435 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:12:18.250 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 68 - 0.324 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:12:43.016 PM'
+}
+{
+  message: 'POST /api/v1/user/sendMailToLogin 200 67 - 2834.762 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:13:19.474 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 72.304 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:13:34.296 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 98.933 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:13:59.722 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 242.048 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:13:59.910 PM'
+}
+{
+  message: 'POST /api/v1/user/sendMailToLogin 200 67 - 2570.261 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:14:08.673 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 82.292 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:14:23.787 PM'
+}
+{
+  message: 'POST /api/v1/user/sendMailToLogin 200 84 - 830.776 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:16:30.972 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 86.577 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:16:47.621 PM'
+}
+{
+  message: 'POST /api/v1/user/login 200 438 - 97.433 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:18:31.751 PM'
+}
+{
+  message: 'POST /api/v1/user/login 200 438 - 98.697 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:20:03.172 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 58.126 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:20:06.660 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 61.180 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:20:14.930 PM'
+}
+{
+  message: 'POST /api/v1/user/login 401 42 - 58.861 ms',
+  level: 'http',
+  timestamp: '2024-03-13 02:20:14.950 PM'
+}

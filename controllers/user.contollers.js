@@ -143,7 +143,8 @@ export const userLoginController = async (req, res) => {
                 message: "OTP Invalid"
             })
         }
-        if (checkExpires > checkOtpDetails.expireAfter) {
+        console.log(checkExpires < checkOtpDetails.expireAfter)
+        if (checkExpires < checkOtpDetails.expireAfter) {
             {
                 if (checkOtpDetails.expireAfter) checkOtpDetails.status = "expired"
                 await checkOtpDetails.save();
@@ -165,7 +166,7 @@ export const userLoginController = async (req, res) => {
             HttpOnly: process.env.NODE_ENV == "development" ? true : false,
             sameSite: process.env.NODE_ENV == "development" ? true : false
         }).json({
-            status: true,
+            status: "success",
             message: "Login SuccessFully",
             token:"Bearer " + token,
             refreshToken:"Bearer " + refreshToken,
@@ -174,7 +175,7 @@ export const userLoginController = async (req, res) => {
         console.log(error)
         return res.status(500).json({
             "status": "error",
-            message: "Error In User Login API"
+            message: "Mobile Number Invalid"
         })
     }
 }
