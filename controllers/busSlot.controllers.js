@@ -2,7 +2,7 @@ import routesModel from "../models/RoutesModels.js"
 import busModel from "../models/busModels.js"
 import busSlotModel from "../models/busSlotModels.js"
 import { addBusSlotValidation, getBusSlotByRoutesValidation, updateBusSlotValidation } from "../validation/busSlot.validation.js"
-
+import logger from "../utils/logger.js"
 export const busSlotAddController = async (req, res) => {
     try {
         const { busId, routeId, arrivalTime, despatureTime, viaStops, despatureDate, arrivalDate, totalDistance, travellingHours } = req.body
@@ -11,6 +11,7 @@ export const busSlotAddController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
+            logger.error(checkDetails.error.message)
             return res.status(400).json({
                 status: "failed",
                 message: checkDetails.error.message,
@@ -20,6 +21,7 @@ export const busSlotAddController = async (req, res) => {
 
         const checkBusId = await busModel.findById(busId);
         if (!checkBusId) {
+            logger.error('Bus Not Found Busslot')
             return res.status(404).json({
                 status: "error",
                 message: "Bus Not Found",
@@ -28,6 +30,7 @@ export const busSlotAddController = async (req, res) => {
         }
         const checkRouteId = await routesModel.findById(routeId)
         if (!checkRouteId) {
+            logger.error('Route Not Found Busslot')
             return res.status(404).json({
                 status: "error",
                 message: "Route Not Found",
@@ -36,6 +39,7 @@ export const busSlotAddController = async (req, res) => {
         }
         const checkBusSlotOnTime = await busSlotModel.findOne({ busId, arrivalTime, arrivalDate });
         if (checkBusSlotOnTime) {
+            logger.error("Slot once booked Busslot")
             return res.status(401).json({
                 status: "error",
                 message: 'Slot Once booked Allready on time' + arrivalTime + " " + arrivalDate,
@@ -54,8 +58,10 @@ export const busSlotAddController = async (req, res) => {
             message: "busSlot Added Successfully",
             data: null
         })
+        logger.info("busslot added Successfully")
     } catch (error) {
         console.log(error)
+        logger.error("Error in add busslot")
         return res.status(500).send({
             status: "Error",
             message: "Internal Error",
@@ -68,6 +74,7 @@ export const getBusSlotController = async (req, res) => {
     try {
         const getAllBusSlot = await busSlotModel.find({});
         if (!getAllBusSlot[0]) {
+            logger.error("Busslot not found getBusSlot")
             return res.status(404).json(
                 {
                     status: "error",
@@ -81,8 +88,10 @@ export const getBusSlotController = async (req, res) => {
             message: "BusSlots",
             data: getAllBusSlot
         })
+        logger.info("get all Busslot")
     } catch (error) {
         console.log(error)
+        logger.error("Error In get All busslots")
         return res.status(500).json({
             status: "error",
             message: "Internal Error",
@@ -96,6 +105,7 @@ export const updateBusSlotController = async (req, res) => {
         const { routeId, arrivalTime, despatureTime, viaStops, arrivalDate, despatureDate, totalDistance, travellingHours } = req.body
         const checkDetails = updateBusSlotValidation.validate(req.body, { abortEarly: false })
         if (checkDetails.error) {
+            logger.error(checkDetails.error.message +"updateBusSlot")
             return res.status(400).json({
                 status: "error",
                 message: checkDetails.error.message,
@@ -104,6 +114,7 @@ export const updateBusSlotController = async (req, res) => {
         }
         const checkBusSlot = await busSlotModel.findById(req.params.id);
         if (!checkBusSlot) {
+            logger.error("Busslot Not Found UpdateBusSlot")
             return res.status(404).json({
                 status: "error",
                 message: "busSlot Not Found",
@@ -113,6 +124,7 @@ export const updateBusSlotController = async (req, res) => {
         if (routeId) {
             const checkRouteId = await routesModel.findById(routeId)
             if (!checkRouteId) {
+                logger.error("Route Not Found updateBusSlot")
                 return res.status(404).json({
                     status: "error",
                     message: "Route Not Found",
@@ -126,6 +138,7 @@ export const updateBusSlotController = async (req, res) => {
                 if (checkBusSlotOnTime._id == checkBusSlot._id) {
                     console.log(checkBusSlotOnTime)
                 } else {
+                    logger.error("Slot Once Booked Allready UpdateBusSlot")
                     return res.status(401).json({
                         status: "error",
                         message: 'Slot Once booked Allready on time' + arrivalTime + " " + arrivalDate,
@@ -149,8 +162,10 @@ export const updateBusSlotController = async (req, res) => {
             status: "success",
             message: "BusSlot Updated Successfully"
         })
+        logger.info("busslot Update Successfully")
     } catch (error) {
         console.log(error)
+        logger.error("Error in Busslot update API")
         return res.status(500).json({
             status: "error",
             message: "Internal Error",
@@ -163,6 +178,7 @@ export const deleteBusSlotController = async (req, res) => {
     try {
         const checkBusSlot = await busSlotModel.findById(req.params.id);
         if(!checkBusSlot){
+            logger.error("Busslot not Found DeleteBusSlot")
             return res.status(404).json({
                 status:"failed",
                 message:"BusSlot Not Found",
@@ -176,8 +192,10 @@ export const deleteBusSlotController = async (req, res) => {
             status:"success",
             message:"Bus Slot Deleted Successfully"
         })
+        logger.error("Delete busslot Successfully")
     } catch (error) {
         console.log(error)
+        logger.error("Error in DeleteBusslot ")
         return res.status(500).json({
             status:"error",
             message:'Internal Error',
@@ -193,6 +211,7 @@ export const getBusSlotOnRoutesController = async (req,res)=>{
             abortEarly:false
         })
         if(checkDetails.error){
+            logger.error(checkDetails.error.message + " getbusslot by routes")
             return res.status(400).json({
                 status:"error",
                 message:checkDetails.error.message,
@@ -201,6 +220,7 @@ export const getBusSlotOnRoutesController = async (req,res)=>{
         }
         const findRoutes = await routesModel.findOne({categoryId,from,to})
         if(!findRoutes){
+            logger.error("routes not found getbusslot by routes")
             return res.status(404).json({
                 status:"error",
                 message:"oops !! no one bus for this routes"
@@ -208,6 +228,7 @@ export const getBusSlotOnRoutesController = async (req,res)=>{
         }
         const findBusSlot = await busSlotModel.find({routeId:findRoutes._id,arrivalDate:date});
         if(!findBusSlot[0]){
+            logger.error("busslot not Found getbusslotbyroutes")
             return res.status(404).json({
                 status:"error",
                 message:"oops !! no one bus for this routes on that day"
@@ -220,6 +241,7 @@ export const getBusSlotOnRoutesController = async (req,res)=>{
         })
     } catch (error) {
         console.log(error)
+        logger.error("Error in getBusslotByRoutes")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",

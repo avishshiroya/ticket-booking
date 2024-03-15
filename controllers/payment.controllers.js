@@ -3,11 +3,13 @@ import { createPay } from "../middleware/paymentHelper.js"
 import axios from "axios"
 import movieBookingModel from "../models/movieBooking.js"
 import seatbookingModel from "../models/busSeatBookingModels.js"
+import logger from "../utils/logger.js"
 export const busTrainPaymentcancel = async (req, res) => {
     try {
         const { id } = req.params
         const checkBooking = await seatbookingModel.findById(id);
         if (!checkBooking) {
+            logger.error("Ticket booking not found  paymentcancel")
             return res.status(404).json({
                 status: "Error",
                 message: "Booking Not Found",
@@ -21,11 +23,13 @@ export const busTrainPaymentcancel = async (req, res) => {
             status: "Error",
             message: "Booking Cancel"
         })
+        logger.info("payment rejectt")
     } catch (error) {
         console.log(error)
-        return res.status(401).json({
+        logger.error("Error In payment cancel api")
+        return res.status(500).json({
             "status": "error",
-            message: "Error In Payment cancel API"
+            message: "Internal Error"
         })
     }
 }
@@ -34,6 +38,7 @@ export const paymentCancel = async (req, res) => {
         const { id } = req.params
         const checkBooking = await movieBookingModel.findById(id);
         if (!checkBooking) {
+            logger.error("Movie Booking Not Found  paymentcancel")
             return res.status(404).json({
                 status: "Error",
                 message: "Movie Booking Not Found",
@@ -46,6 +51,7 @@ export const paymentCancel = async (req, res) => {
             status: "Error",
             message: "Booking Cancel"
         })
+        logger.info("Payment cancel")
     } catch (error) {
         console.log(error)
         return res.status(401).json({
@@ -219,7 +225,7 @@ export const busTraincreatePaymentController = async (req, res) => {
     })
     console.log(response.data)
 
-
+    logger.info("Send the payment link  createpayment")
     return res.cookie("token", response.data.id).send({
         status:"success",
         message:"Link Of payment",
@@ -244,6 +250,7 @@ export const busTrainpaymentCheckOut = async (req, res) => {
         // console.log(response);
         // console.log(response.data.id)
         if (!response.data.id) {
+            logger.error("Error in payment checkout")
             return res.status(401).json({
                 "status": "error",
                 message: "Paymnet Not Successfull",
@@ -257,12 +264,14 @@ export const busTrainpaymentCheckOut = async (req, res) => {
             message: "Ticket Book successfully",
             data:null
         })
+        lopgger.info("Payment checkout successfully")
         return true
     } catch (error) {
         console.log(error)
-        return res.status(401).json({
+        logger.error("Error In payment checkout")
+        return res.status(500).json({
             "status": "error",
-            message: "Error In Captutre payment API",
+            message: "Internal Error",
             data:null
         })
     }

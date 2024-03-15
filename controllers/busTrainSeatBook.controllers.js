@@ -3,10 +3,12 @@ import busSeatModel from "../models/busSeatModel.js"
 import promoCodeModel from "../models/promoCode.js"
 import axios from "axios"
 import trainSeatModel from "../models/trainSeatModels.js"
+import logger from "../utils/logger.js"
 export const busSeatBookingController = async(req,res)=>{
     try {
         const {busSeats,promocode,passanger} = req.body
         if(!req.user._id){
+            logger.error("User unauthorized busseatbooking")
             return res.status(401).json({
                 status:"error",
                 message:"User UnAuathenticated",
@@ -14,6 +16,7 @@ export const busSeatBookingController = async(req,res)=>{
             })
         }
         if(!busSeats[0]){
+            logger.error("Bus not selected busseatbooking")
             return res.status(404).json({
                 status:"error",
                 message:"Pls ! Select Seats",
@@ -22,6 +25,7 @@ export const busSeatBookingController = async(req,res)=>{
         }
         console.log(busSeats.length,passanger.length)
         if(busSeats.length != passanger.length){
+            logger.error("not correct passenger details  busseatbooking")
             return res.status(400).json({
                 status:"error",
                 message:"Please give the correct details of passanger",
@@ -35,6 +39,7 @@ export const busSeatBookingController = async(req,res)=>{
             const checkPromoCode = await promoCodeModel.findOne({code:promocode});
             console.log(checkPromoCode);
             if(!checkPromoCode){
+                logger.error("Promocode Not Found busseatbooking")
                 return res.status(404).json({
                     status:"error",
                     message:"PromoCode Not Found",
@@ -49,6 +54,7 @@ export const busSeatBookingController = async(req,res)=>{
             const checkSeats = await busSeatModel.findOne({_id:busSeats[i],isBooked:false,inMaintainance:false});
             console.log(checkSeats);
             if(!checkSeats){
+                logger.error("seat Not Found or in maintainance and booked busseatbooking ")
                 return res.status(404).json({
                     status:"error",
                     message:"Selected Seats In Maintainance or Booked",
@@ -57,6 +63,7 @@ export const busSeatBookingController = async(req,res)=>{
             }
             console.log(checkSeats)
             if(!passanger[i].name || !passanger[i].age || !passanger[i].gender){
+                logger.error("Not Have correct detail in the data busseatbooking")
                 return res.status(404).json({
                     status:"error",
                     message:"give the correct information for the passenger" +passanger[i].name,
@@ -85,6 +92,7 @@ export const busSeatBookingController = async(req,res)=>{
             amount: booking.discountedAmount, bookingId: booking._id
         })
         if (!Payment) {
+            logger.error("Error in payment bussseatbooking")
             return res.status(401).send({
                 "status": "error",
                 message: "Cannot Book Ticket"
@@ -97,9 +105,10 @@ export const busSeatBookingController = async(req,res)=>{
             message:"Seat Booked",
             data:Payment.data
         })
-
+        logger.info("Seat booked as pending status buseatbooking")
     } catch (error) {
         console.log(error)
+        logger.error("Error in busseatbooking")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",
@@ -112,6 +121,7 @@ export const TrainSeatBookingController = async(req,res)=>{
     try {
         const {trainSeats,promocode,passanger} = req.body
         if(!req.user._id){
+            logger.error("User unauthorized trainseatbooking")
             return res.status(401).json({
                 status:"error",
                 message:"User UnAuathenticated",
@@ -119,6 +129,7 @@ export const TrainSeatBookingController = async(req,res)=>{
             })
         }
         if(!trainSeats[0]){
+            logger.error("not Selected seats trainseatbooking")
             return res.status(404).json({
                 status:"error",
                 message:"Pls ! Select Seats",
@@ -127,6 +138,7 @@ export const TrainSeatBookingController = async(req,res)=>{
         }
         console.log(trainSeats.length,passanger.length)
         if(trainSeats.length != passanger.length){
+            logger.error("not have correct details of passenger trainseatbooking")
             return res.status(400).json({
                 status:"error",
                 message:"Please give the correct details of passanger",
@@ -140,6 +152,7 @@ export const TrainSeatBookingController = async(req,res)=>{
             const checkPromoCode = await promoCodeModel.findOne({code:promocode});
             console.log(checkPromoCode);
             if(!checkPromoCode){
+                logger.error("Promocode not found  trainseatbooking")
                 return res.status(404).json({
                     status:"error",
                     message:"PromoCode Not Found",
@@ -154,6 +167,7 @@ export const TrainSeatBookingController = async(req,res)=>{
             const checkSeats = await trainSeatModel.findOne({_id:trainSeats[i],isBooked:false,inMaintainance:false});
             console.log(checkSeats);
             if(!checkSeats){
+                logger.error("Selected Seats In Maintainance or Booked  trainseatbooking")
                 return res.status(404).json({
                     status:"error",
                     message:"Selected Seats In Maintainance or Booked",
@@ -162,6 +176,7 @@ export const TrainSeatBookingController = async(req,res)=>{
             }
             console.log(checkSeats)
             if(!passanger[i].name || !passanger[i].age || !passanger[i].gender){
+                logger.error("Not Have correct Information of passenger  trainseatbooking")
                 return res.status(404).json({
                     status:"error",
                     message:"give the correct information for the passenger" +passanger[i].name,
@@ -190,6 +205,7 @@ export const TrainSeatBookingController = async(req,res)=>{
             amount: booking.discountedAmount, bookingId: booking._id
         })
         if (!Payment) {
+            logger.error("Error in payment trainseatbooking")
             return res.status(401).send({
                 "status": "error",
                 message: "Cannot Book Ticket"
@@ -203,9 +219,10 @@ export const TrainSeatBookingController = async(req,res)=>{
             message:"Seat Booked",
             data:Payment.data
         })
-
+        logger.info("Train Seat booking as pending")
     } catch (error) {
         console.log(error)
+        logger.error("Error in trainseatbooking")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",

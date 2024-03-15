@@ -11,12 +11,12 @@ const authToken = process.env.TWILIO_ACCOUNT_AUTH;
 const verifySid = process.env.TWILIO_VERIFY_SID;
 
 const client = twilio(accountSid, authToken);
-export const sendMSG = async (to, otp) => {
+export const sendMSG = async (code,to, otp) => {
 
        await  client.messages
             .create({
                 body: 'YOUR OTP IS : ' + otp,
                 from: process.env.TWILIO_FROM_NUMBER,
-                to: '+91' + to,
+                to: '+' + code + to,
             })
 }

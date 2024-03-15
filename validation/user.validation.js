@@ -1,14 +1,22 @@
 import joi from "joi";
 
 export const registerUserValidation = joi.object({
-    name: joi.string().required().trim().messages({
-        "any.required": " name must be required",
-        "string.empty": " name can not be empty",
+    firstName: joi.string().required().trim().messages({
+        "any.required": " first name must be required",
+        "string.empty": " first name can not be empty",
+    }),
+    lastName: joi.string().required().trim().messages({
+        "any.required": " last name must be required",
+        "string.empty": " last name can not be empty",
     }),
     email: joi.string().email().required().trim().messages({
         "any.required": " email must be required",
         "string.empty": " Email can not be empty",
         "string.email": "Invalid Email"
+    }),
+    callingCode: joi.number().required().messages({
+        "any.required": "Calling Code must be required",
+        "string.empty": "Calling Code  can not be empty",
     }),
     mobile: joi.string().length(10).required().messages({
         "any.required": "Mobile number must be required",
@@ -53,8 +61,11 @@ export const userToSendOTP = joi.object({
     }),
 })
 export const detailUpdateUserValidation = joi.object({
-    name: joi.string().trim().messages({
-        "string.empty": " name can not be empty",
+    firstName: joi.string().trim().messages({
+        "string.empty": "first name can not be empty",
+    }),
+    lastName: joi.string().trim().messages({
+        "string.empty": "last name can not be empty",
     }),
     address: joi.string().trim().messages({
         "string.empty": "Address can not be empty"

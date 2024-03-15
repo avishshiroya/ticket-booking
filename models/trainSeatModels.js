@@ -41,7 +41,7 @@ const trainSeatSchema = new Schema({
         default:false,
         required:true
     }
-})
+},{timestamps:true})
 
 const trainSeatModel = mongoose.model("trainSeat",trainSeatSchema)
 export default trainSeatModel

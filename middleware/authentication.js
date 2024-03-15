@@ -1,7 +1,6 @@
 import JWT from "jsonwebtoken"
 import userModel from "../models/userModel.js";
 import adminModel from "../models/adminModels.js";
-import { logger } from "../server.js";
 export const isAuth = async(req,res,next)=>{
     try {
         const auth= req.body.auth || req.query.auth || req.headers.auth;

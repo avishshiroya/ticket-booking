@@ -1,6 +1,6 @@
 import adminModel from "../models/adminModels.js"
 import { registerAdminValidation } from "../validation/admin.validation.js"
-
+import logger from "../utils/logger.js"
 export const registerAdminController = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -8,7 +8,8 @@ export const registerAdminController = async (req, res) => {
             abortEarly: false
         })
         if (checkAdminDetails.error) {
-            return res.status(401).send({
+            logger.error(checkAdminDetails.error.message)
+            return res.status(400).send({
                 "status": "error",
                 message: checkAdminDetails.error.message
             })
@@ -21,11 +22,13 @@ export const registerAdminController = async (req, res) => {
             "status": "success",
             message: "Admin register successfully"
         })
+        logger.info("Admin Register Successfully")
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
+        logger.error("Error in Admin register API")
+        return res.status(500).send({
             "status": "error",
-            message: "Error in Admin register API"
+            message: "Internal Error"
         })
     }
 }
@@ -37,21 +40,24 @@ export const loginAdminController = async (req, res) => {
             abortEarly: false
         })
         if (checkAdminDetails.error) {
-            return res.status(401).send({
+            logger.error(checkAdminDetails.error.message)
+            return res.status(400).send({
                 "status": "success",
                 message: checkAdminDetails.error.message
             })
         }
         const checkAdminEmail = await adminModel.findOne({ email });
         if (!checkAdminEmail) {
-            return res.status(401).send({
+            logger.error("Admin Not Found! Check Email")
+            return res.status(400).send({
                 "status": "error",
                 message: "Admin Not Found! Check Email"
             })
         }
         const comparePassword = checkAdminEmail.comparePassword(password);
         if (!comparePassword) {
-            return res.status(401).send({
+            logger.error("Compare Password In Admin")
+            return res.status(400).send({
                 "status": "error",
                 message: "Check Your Password"
             })
@@ -64,14 +70,16 @@ export const loginAdminController = async (req, res) => {
             sameSite: process.env.NODE_ENV == "development" ? true : false
         }).send({
             "status": "success",
-            message: "User Login",
+            message: "Admin Login",
             token
         })
+        logger.info("Admin Login Successfully")
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
+        logger.error("Error In Admin Login")
+        return res.status(500).send({
             "status": "error",
-            message: "Error in login Admin API"
+            message: "Interanl Error"
         })
     }
 }
@@ -80,14 +88,16 @@ export const getAdminDetails = async (req, res) => {
     try {
         const admin = req.admin
         if (!admin) {
+            logger.error("Admin Not authorized Get Admin")
             return res.status(401).send({
                 "status": "error",
-                message: "Not Find Admin"
+                message: "Admin Unauthorized"
             })
         }
         const checkAdmin = await adminModel.findById(admin._id)
         if (!checkAdmin) {
-            return res.status(401).send({
+            logger.error("Admin Not Found get Admin")
+            return res.status(400).send({
                 "status": "error",
                 message: "Admin Not Found"
             })
@@ -97,11 +107,13 @@ export const getAdminDetails = async (req, res) => {
             message: "Admin Details",
             checkAdmin
         })
+        logger.info("Get Admin Detail Successfully")
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
+        logger.error("Error In Get Admin Detail")
+        return res.status(500).send({
             "status": "error",
-            message: "Error In Admin Details Get API"
+            message: "Internal Error"
         })
     }
 }
@@ -110,20 +122,23 @@ export const adminLogoutController = async (req, res) => {
     try {
         const user = req.admin;
         if (!user) {
+            logger.error("Admin Not Authorized logout")
             return res.status(401).json({
                 "status": "error",
-                message: "user NOT found"
+                message: "Admin unauthorized"
             })
         }
         res.status(200).clearCookie("aAuth").json({
             "status": "success",
             message: "Admin Logout"
         })
+        logger.info("Admin Logout")
     } catch (error) {
         console.log(error)
+        logger.error("Error in user logout API")
         return res.status(500).json({
             "status": "error",
-            message: "Error in user Logout API",
+            message: "Internal error",
             error
         })
     }

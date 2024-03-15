@@ -8,7 +8,6 @@ import paypal from "paypal-rest-sdk"
 import path from "path"
 import winston from "winston"
 import cors from "cors"
-const { combine, timestamp, json, prettyPrint } = winston.format
 dotenv.config();
 
 paypal.configure({
@@ -16,37 +15,14 @@ paypal.configure({
     client_id: process.env.PAYPAL_CLIENT_ID,
     client_secret: process.env.PAYPAL_CLIENT_SECRET
 })
-const todayDate = new Date();
 
-export const logger = winston.createLogger({
-    level: 'http',
-    format: combine(
-        timestamp({
-            format: 'YYYY-MM-DD hh:mm:ss.SSS A',
-        }), prettyPrint()
-    ),
-    transports: [
 
-        new winston.transports.File({ filename: `loggers/${todayDate.getDate()}_${todayDate.getMonth()}_${todayDate.getFullYear()}_access.log` })
-
-    ]
-})
-const morganMiddleware = morgan(
-    ':method :url :status :res[content-length] - :response-time ms',
-    {
-        stream: {
-            // Configure Morgan to use our custom logger with the http severity
-            write: (message) => logger.http(message.trim()),
-        },
-    }
-);
 const app = express();
 app.use(express.json())
 // app.use(bodyParser.json())
 app.use(morgan("dev"))
 app.use(cors())
 app.use(cookieParser())
-app.use(morganMiddleware)
 
 // app.use('/', express.static(path.join('public'))); 
 

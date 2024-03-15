@@ -42,7 +42,7 @@ const busSeatSchema = new Schema({
         default:false,
         required:true
     }
-})
+},{timeStamps:true})
 
 const busSeatModel = mongoose.model("busSeat",busSeatSchema)
 export default busSeatModel

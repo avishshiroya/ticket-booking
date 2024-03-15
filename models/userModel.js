@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import JWT from "jsonwebtoken"
 const userSchema = new Schema({
-    name:{
+    firstName:{
+        type:String,
+        required:true
+    },
+    lastName:{
         type:String,
         required:true
     },
@@ -10,6 +14,10 @@ const userSchema = new Schema({
         type:String,
         required:true,
         unique:true
+    },
+    callingCode:{
+        type:Number,
+        required:true
     },
     mobile:{
         type:String,

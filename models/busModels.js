@@ -33,7 +33,7 @@ const busSchema = new Schema({
         ref:"Admin"
     },
 
-})
+},{timestamps:true})
 
 const busModel = mongoose.model("Bus",busSchema)
 export default busModel

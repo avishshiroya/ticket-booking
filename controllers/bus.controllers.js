@@ -1,7 +1,7 @@
 import busModel from "../models/busModels.js"
 import categoryModel from "../models/categoryModel.js"
 import { addBusValidation, updateBusValidation } from "../validation/bus.validation.js"
-
+import logger from "../utils/logger.js"
 export const addBusContoller = async (req, res) => {
     try {
         const { name, type, uniqueId, categoryId, totalSeats } = req.body
@@ -9,6 +9,7 @@ export const addBusContoller = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
+            logger.error(checkDetails.error.message + "bus")
             return res.status(400).json({
                 status: "error",
                 message: checkDetails.error.message,
@@ -17,6 +18,7 @@ export const addBusContoller = async (req, res) => {
         }
         const checkCategory = await categoryModel.findById(categoryId);
         if (!checkCategory) {
+            logger.error("Category Not Found bus")
             return res.status(404).json({
                 status: "error",
                 message: "Category Not Found",
@@ -25,6 +27,7 @@ export const addBusContoller = async (req, res) => {
         }
         const checkUniqueId = await busModel.findOne({ uniqueId });
         if (checkUniqueId) {
+            logger.error("Bus number used Once")
             return res.status(400).json({
                 status: "error",
                 message: "Uniqueid use Onces",
@@ -41,8 +44,10 @@ export const addBusContoller = async (req, res) => {
             message: "Bus Add Successfully",
             data: null
         })
+        logger.info("Bus Added Successfully")
     } catch (error) {
         console.log(error)
+        logger.error("Error in Bus Add")
         return res.status(500).json({
             status: "error",
             message: "Internal Error",
@@ -58,6 +63,7 @@ export const updateBusController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
+            logger.error(checkDetails.error.message + "Bus update")
             return res.status(400).json({
                 status: "error",
                 message: checkDetails.error.message,
@@ -66,6 +72,7 @@ export const updateBusController = async (req, res) => {
         }
         const checkBus = await busModel.findById(req.params.id);
         if (!checkBus) {
+            logger.error("Bus Not Found bus update")
             return res.status(404).json({
                 status: "error",
                 message: "Bus Not Found",
@@ -75,6 +82,7 @@ export const updateBusController = async (req, res) => {
         if (categoryId) {
             const checkCategory = await categoryModel.findById(categoryId)
             if (!checkCategory) {
+                logger.error("Category Not Found busupdate")
                 return res.status(404).json({
                     status: "error",
                     message: "Category Not Found",
@@ -87,6 +95,7 @@ export const updateBusController = async (req, res) => {
             if (checkUniqueId.uniqueId == checkBus.uniqueId) {
                 console.log("uniqueId match")
             } else {
+                logger.error("Unique id Used Once bus update")
                 return res.status(401).json({
                     status: "error",
                     message: "UniqueId allready Used Once",
@@ -108,7 +117,7 @@ export const updateBusController = async (req, res) => {
             message: "Bus Updated Successfully",
             data: null
         })
-
+        logger.info("Bus Updated successfuuly")
     } catch (error) {
         console.log(error)
         return res.status(500).json({
@@ -123,6 +132,7 @@ export const getAllBusController = async (req,res)=>{
     try {
         const AllBuses = await busModel.find({});
         if(!AllBuses[0]){
+            logger.error("Buses Not found GetAllBus")
             return res.status(404).json({
                 status:"error",
                 message:"Buses Not Found",
@@ -134,8 +144,10 @@ export const getAllBusController = async (req,res)=>{
             message:"All Buses",
             data:AllBuses
         })
+        logger.info("Get All Bus")
     } catch (error) {
         console.log(error)
+        logger.error("Error in Get All Bus")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",
@@ -149,6 +161,7 @@ export const getBusOnNameController = async(req,res)=>{
         const {name} = req.body
         const buses = await busModel.find({name});
         if(!buses[0]){
+            logger.error("Buses Not Found GetBusOnName")
             return res.status(404).json({
                 status:"error",
                 message:"Buses not Found",
@@ -160,8 +173,10 @@ export const getBusOnNameController = async(req,res)=>{
             message:"Buses Of " +name,
             data:buses
         })
+        logger.info("Get Bus on Name Successfully")
     } catch (error) {
         console.log(error)
+        logger.error("Error In GetBusOnName ")
         return res.status(500).json({
             status:"error",
             message:"Internal Error"
@@ -173,6 +188,7 @@ export const getBusOnuniqueIdController = async(req,res)=>{
         const {uniqueId} = req.body
         const buses = await busModel.findOne({uniqueId});
         if(!buses){
+            logger.error("Cannot Get bus on Uniqueid")
             return res.status(404).json({
                 status:"error",
                 message:"Bus not Found",
@@ -184,8 +200,10 @@ export const getBusOnuniqueIdController = async(req,res)=>{
             message:"Buses Of " +uniqueId,
             data:buses
         })
+        logger.info("Get Bus Usin uniqueid")
     } catch (error) {
         console.log(error)
+        logger.error("Error in get bus by uniqueId")
         return res.status(500).json({
             status:"error",
             message:"Internal Error"
@@ -197,6 +215,7 @@ export const deleteBusController = async(req,res)=>{
     try {
        const checkBus = await busModel.findById(req.params.id) ;
        if(!checkBus){
+        logger.error("Bus Not Found Deletebus")
         return res.status(404).json({
             status:"error",
             message:"Bus Not Found",
@@ -205,13 +224,15 @@ export const deleteBusController = async(req,res)=>{
        }
        //delete bus
        await checkBus.deleteOne();
-       return res.status(200).json({
+        res.status(200).json({
             status:"success",
             message:"Bus Deleted Successfully",
             data:null
        })
+       logger.info("Bus Deleted successfully")
     } catch (error) {
         console.log(error);
+        logger.error("Error In Delete Bus Controller")
         return res.status(500).json({
             status:'error',
             message:"Internal Error",

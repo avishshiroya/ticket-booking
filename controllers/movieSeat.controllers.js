@@ -1,6 +1,7 @@
 import movieSeatModel from "../models/movieSeatModels.js";
 import movieSlotModel from "../models/movieSlotModels.js";
 import { addMovieSeatsValidation } from "../validation/movieSeat.validation.js";
+import logger from "../utils/logger.js";
 
 export const addMovieSeatsController = async (req, res) => {
     try {
@@ -9,14 +10,16 @@ export const addMovieSeatsController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
-            return res.status(401).send({
+            logger.error(checkDetails.error.message + " addmovieseat")
+            return res.status(400).send({
                 "status": "error",
                 message: checkDetails.error.message
             })
         }
         const checkMovieSlot = await movieSlotModel.findById(movieSlotId);
         if (!checkMovieSlot) {
-            return res.status(401).send({
+            logger.error("Movie slot not found  addmovieseat")
+            return res.status(400).send({
                 "status": "error",
                 message: "MovieSlot Not Found"
             })
@@ -32,12 +35,14 @@ export const addMovieSeatsController = async (req, res) => {
             "status": "success",
             message: "Seats Added"
         })
+        logger.info("movie Seats Created")
     } catch (error) {
         console.log(error);
-        return res.status(401).send({
+        logger.error("Error in add movie seat")
+        return res.status(500).send({
             "status": "error",
-            message: "Error In Add Movie Seats Controller",
-            error
+            message: "Internal Error",
+            
         })
     }
 }
@@ -48,14 +53,16 @@ export const getMovieSeatsController = async (req, res) => {
         const checkMovieSlot = await movieSlotModel.findOne({ _id: movieSlotId, showDate: { $gte: new Date().getDate() } })
         console.log(checkMovieSlot)
         if (!checkMovieSlot) {
-            return res.status(401).send({
+            logger.error("Movie slot not found  getmovieseat")
+            return res.status(400).send({
                 "status": "error",
                 message: "Movie Slot Not Found"
             })
         }
         const movieSeats = await movieSeatModel.find({ movieSlotId, }, { seat: 1, _id: 1, isBooked: 1, price: 1 });
         if (!movieSeats[0]) {
-            return res.status(401).send({
+            logger.error("Movie seat not found  getmovieseat")
+            return res.status(400).send({
                 "status": "error",
                 message: "Movie Seats Add In Upcoming Time || Slot Not Have any unReserved Seats"
             })
@@ -65,11 +72,13 @@ export const getMovieSeatsController = async (req, res) => {
             message: "Movie Seats",
             movieSeats
         })
+        logger.info("Get movie seat")
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
+        logger.error("Error in get movieseats")
+        return res.status(500).send({
             "status": "error",
-            message: "Error in get All Movies Seats By Slot API"
+            message: "Internal Error"
         })
     }
 }
@@ -81,7 +90,8 @@ export const deleteMovieSeatsController = async (req, res) => {
         console.log(rowChar);
         const checkSeats = await movieSeatModel.find({ movieSlotId, seat: new RegExp(rowChar, "g") });
         if (!checkSeats[0]) {
-            return res.status(401).send({
+            logger.error("no thave movie seat series  deletemovieseat")
+            return res.status(400).send({
                 "status": "error",
                 message: "Cannot Have Seats of series " + row,
                 checkSeats
@@ -91,13 +101,15 @@ export const deleteMovieSeatsController = async (req, res) => {
         res.status(200).send({
             "status": "success",
             message: "All Seats delete of series " + row,
-            deleteSeats
+            data:null
         })
+        logger.info("Delete movie seats ")
     } catch (error) {
         console.log(error)
-        res.status(401).send({
+        logger.error("Error in deletemovieseat")
+        res.status(500).send({
             "status": "error",
-            message: "Error in Delete Movies Seats API"
+            message: "Internal Error"
         })
     }
 }
@@ -107,29 +119,31 @@ export const deleteAllMovieSeatsController = async (req, res) => {
         const { movieSlotId } = req.body
         const checkMovieSlot = await movieSeatModel.find({ movieSlotId });
         if (!checkMovieSlot[0]) {
-            return res.status(401).send({
+            logger.error("Movie seats not found  deleteallmovieseat")
+            return res.status(400).send({
                 "status": "error",
                 message: "MovieSeats Not Found"
             })
         }
         const deleteMovieSeats = await movieSeatModel.deleteMany({ movieSlotId });
         if (!deleteMovieSeats) {
-            return res.status(401).send({
+            logger.error("Cannot delete Movie seat")
+            return res.status(400).send({
                 "status": "error",
                 message: "Can't Delete Movie Seats"
             })
         }
-        res.status(401).send({
+        res.status(200).send({
             "status": "success",
             message: "Deleted Movie Sets",
-            deleteMovieSeats
         })
+        logger.info("Delete movie seat")
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
+        logger.error("Error in delete all movie seat");
+        return res.status(500).send({
             "status": "error",
-            message: "Error in Delete All Movie Seats API",
-            error
+            message: "Internal Error",
         })
     }
 }

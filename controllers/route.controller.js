@@ -1,5 +1,6 @@
 import routesModel from "../models/RoutesModels.js"
 import categoryModel from "../models/categoryModel.js"
+import logger from "../utils/logger.js"
 import { addRoutesValidation, checkCategoryForSearchRoutesValidation, checkFromForSearchRoutesValidation, checkToForSearchRoutesValidation, updateRoutesValidation } from "../validation/routes.validation.js"
 
 
@@ -11,14 +12,16 @@ export const addRoutesController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
-            return res.status(401).json({
+            logger.error(checkDetails.error.message +" add routes")
+            return res.status(400).json({
                 "status":"error",
                 message: checkDetails.error.message
             })
         }
         const checkCategory = await categoryModel.findOne({ name: category });
         if (!checkCategory) {
-            return res.status(401).json({
+            logger.error("Category not found addRoutes")
+            return res.status(400).json({
                 "status":"error",
                 message: "Category Not Found"
             })
@@ -30,13 +33,14 @@ export const addRoutesController = async (req, res) => {
         res.status(200).json({
             "status":"success",
             message: "Routes Added",
-            saveRoutes
+            data:saveRoutes
         })
     } catch (error) {
         console.log(error)
-        return res.status(401).json({
+        logger.error("Error in routes add")
+        return res.status(400).json({
             "status":"error",
-            message: "Error in Routes Add API"
+            message: "Internal Error"
         })
     }
 }
@@ -45,7 +49,8 @@ export const getRoutesController = async (req, res) => {
     try {
         const allRoutes = await routesModel.find({});
         if (!allRoutes[0]) {
-            return res.status(200).json({
+            logger.error("Routes not found  getroutes")
+            return res.status(400).json({
                 "status":"error",
                 message: "Please Add Routes"
             })
@@ -53,14 +58,15 @@ export const getRoutesController = async (req, res) => {
         res.status(200).json({
             "status":"success",
             message: "All Routes",
-            allRoutes
+            data:allRoutes
         })
+        logger.info("get all routes")
     } catch (error) {
         console.log(error)
-        return res.status(401).json({
+        logger.error("Error in get all routes")
+        return res.status(500).json({
             "status":"error",
-            message: "Error in get all routes API",
-            error
+            message: "Internal Error",
         })
     }
 }
@@ -72,14 +78,16 @@ export const updateRoutesController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
-            return res.status(401).json({
+            logger.error(checkDetails.error.message + " updateroute")
+            return res.status(400).json({
                 "status":"error",
                 message: checkDetails.error.message
             })
         }
         const checkRoutes = await routesModel.findById(req.params.id);
         if (!checkRoutes) {
-            return res.status(401).json({
+            logger.error("routes not found  updateroute")
+            return res.status(400).json({
                 "status":"error",
                 message: "Routes Not Found"
             })
@@ -87,8 +95,9 @@ export const updateRoutesController = async (req, res) => {
         console.log(checkRoutes);
         if (category) {
             const checkCategory = await categoryModel.findOne({ name: category });
+            logger.error("category not available  updateroute")
             if (!checkCategory) {
-                return res.status(401).json({
+                return res.status(400).json({
                     "status":"error",
                     message: 'Category Not Available'
                 })
@@ -102,7 +111,8 @@ export const updateRoutesController = async (req, res) => {
 
         const updateRoutes = await checkRoutes.save();
         if (!updateRoutes) {
-            return res.status(401).json({
+            logger.error("route cannot update ")
+            return res.status(400).json({
                 "status":"success",
                 message: "Route Cannot Update"
             })
@@ -110,13 +120,15 @@ export const updateRoutesController = async (req, res) => {
         res.status(200).json({
             "status":"success",
             message: "Update Routes",
-            updateRoutes
+            data:updateRoutes
         })
+        logger.info("Route updated")
     } catch (error) {
         console.log(error)
-        return res.status(401).json({
+        logger.error("Error in route update")
+        return res.status(400).json({
             "status":"error",
-            message: "Error in routes update API"
+            message: "Internal Error"
         })
     }
 }
@@ -128,7 +140,8 @@ export const searchRoutesByCategoryController = async (req, res) => {
             abortEarly: false
         })
         if (categoryValidation.error) {
-            return res.status(401).json({
+            logger.error(categoryValidation.error.message +" searchroutebycategory")
+            return res.status(400).json({
                 "status":"error",
                 message: categoryValidation.error.message
             })
@@ -136,7 +149,8 @@ export const searchRoutesByCategoryController = async (req, res) => {
         console.log(category)
         const checkCategory = await categoryModel.findOne({ name: category })
         if (!checkCategory) {
-            return res.status(401).json({
+            logger.error("Category not found  searchroutebycategory")
+            return res.status(400).json({
                 "status":"error",
                 message: "category Not Found"
             })
@@ -145,7 +159,8 @@ export const searchRoutesByCategoryController = async (req, res) => {
         const routes = await routesModel.find({ categoryId: checkCategory._id });
         console.log(routes)
         if (!routes[0]) {
-            return res.status(401).json({
+            logger.error("Route not found searchroutebycategory")
+            return res.status(400).json({
                 "status":"error",
                 message: "Routes Not Found"
             })
@@ -155,11 +170,13 @@ export const searchRoutesByCategoryController = async (req, res) => {
             message: "Routes on category " + category,
             routes
         })
+        logger.info("router get by category")
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        logger.error("Error in getroutebycategory")
+        return res.status(500).json({
             "status":"error",
-            message: "Error In Find Routes with Category API"
+            message: "Internal Error"
         })
     }
 }
@@ -171,7 +188,8 @@ export const searchRoutesByFromController = async (req, res) => {
             abortEarly: false
         })
         if (checkFrom.error) {
-            return res.status(401).json({
+            logger.error(checkFrom.error.message +" searchroutesbyfrom")
+            return res.status(400).json({
                 "status":"error",
                 message: checkFrom.error.message
             })
@@ -179,7 +197,8 @@ export const searchRoutesByFromController = async (req, res) => {
         const routes = await routesModel.find({ from });
         console.log(routes)
         if (!routes[0]) {
-            return res.status(401).json({
+            logger.error("routes not found  searchroutesbyfrom")
+            return res.status(400).json({
                 "status":"error",
                 message: "Routes Not Found"
             })
@@ -187,12 +206,14 @@ export const searchRoutesByFromController = async (req, res) => {
         res.status(200).json({
             "status":"success",
             message: "Routes on From  " + from,
-            routes
+            data:routes
         })
+        logger.error("get Routes by from")
     } catch (error) {
-        return res.status(401).json({
+        logger.error("Error in searchRoutesByFromController API")
+        return res.status(500).json({
             "status":"error",
-            message: "Error in searchRoutesByFromController API"
+            message: "Internal Error"
         })
     }
 }
@@ -204,7 +225,8 @@ export const searchRoutesByToController = async (req, res) => {
             abortEarly: false
         })
         if (checkTo.error) {
-            return res.status(401).json({
+            logger.error(checkTo.error.message +" searchroutesbyto")
+            return res.status(400).json({
                 "status":"error",
                 message: checkTo.error.message
             })
@@ -212,7 +234,8 @@ export const searchRoutesByToController = async (req, res) => {
         const routes = await routesModel.find({ to });
         console.log(routes)
         if (!routes[0]) {
-            return res.status(401).json({
+            logger.error("routes not found  searchroutesbyto")
+            return res.status(400).json({
                 "status":"error",
                 message: "Routes Not Found"
             })
@@ -222,10 +245,12 @@ export const searchRoutesByToController = async (req, res) => {
             message: "Routes on to  " + to,
             routes
         })
+        logger.info("get routes by searching with to")
     } catch (error) {
-        return res.status(401).json({
+        logger.error("Error in searchRoutesByToController API")
+        return res.status(500).json({
             "status":"error",
-            message: "Error in searchRoutesByToController API"
+            message: "Internal Error"
         })
     }
 }
@@ -235,28 +260,31 @@ export const deleteRoutesController = async (req, res) => {
         const { id } = req.params;
         const checkRoutes = await routesModel.findById(id);
         if (!checkRoutes) {
-            return res.status(401).json({
+            logger.route("routes not found deleteroutes")
+            return res.status(400).json({
                 "status":"error",
                 message: "routes not found"
             })
         }
         const deleteRoutes = await checkRoutes.deleteOne();
         if (!deleteRoutes) {
-            return res.status(401).json({
+            logger.error("cannot route delete")
+            return res.status(400).json({
                 "status":"error",
-                message: "Csnnot User Delete"
+                message: "Cannot route Delete"
             })
         }
         res.status(200).json({
             "status":"success",
             message: "Routes Deleted",
-            deleteRoutes
         })
+        logger.info("Route delete successfully")
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        logger.error("Error in delete routes API")
+        return res.status(500).json({
             "status":"error",
-            message: "Error in delete routes API"
+            message: "Internal Error"
         })
     }
 }

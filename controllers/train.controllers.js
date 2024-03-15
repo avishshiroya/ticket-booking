@@ -1,5 +1,6 @@
 import categoryModel from "../models/categoryModel.js";
 import trainModel from "../models/trainModels.js";
+import logger from "../utils/logger.js";
 import { addTrainValidation, updateTrainValidation } from "../validation/train.validation.js";
 
 export const addTrainController = async(req,res)=>{
@@ -9,6 +10,7 @@ export const addTrainController = async(req,res)=>{
             abortEarly:false
         })
         if(checkDetails.error){
+            logger.error(checkDetails.error.message + " addtrain")
             return res.status(400).json({
                 status:"error",
                 message:checkDetails.error.message,
@@ -17,6 +19,7 @@ export const addTrainController = async(req,res)=>{
         }
         const checkCategory = await categoryModel.findOne({name:category});
         if(!checkCategory){
+            logger.error("category not found  addtrain")
             return res.status(404).json({
                 status:"error",
                 message:"category Not Found",
@@ -25,6 +28,7 @@ export const addTrainController = async(req,res)=>{
         }
         const checkUniqueId = await trainModel.findOne({uniqueId});
         if(checkUniqueId){
+            logger.error("Train uniqueId Once  addtrain")
             return res.status(400).json({
                 status:"error",
                 message:"UniqueId Used Once " + uniqueId,
@@ -42,8 +46,10 @@ export const addTrainController = async(req,res)=>{
             message:'Train added Successfully',
             data:null
         })
+        logger.info("train added successfully")
     } catch (error) {
         console.log(error);
+        logger.error("Error in train add")
         return res.status(500).json({
             status:'error',
             message:"Internal Error",
@@ -59,6 +65,7 @@ export const updateTrainController = async(req,res)=>{
             abortEarly:false
         })
         if(checkDetails.error){
+            logger.error(checkDetails.error.message + " updatetrain")
             return res.status(400).json({
                 status:"error",
                 message:checkDetails.error.message,
@@ -67,6 +74,7 @@ export const updateTrainController = async(req,res)=>{
         }
         const checktrain = await trainModel.findById(req.params.id);
         if(!checktrain){
+            logger.error("train not found updatetrain")
             return res.status(404).json({
                 status:'error',
                 message:"Train not Found",
@@ -76,6 +84,7 @@ export const updateTrainController = async(req,res)=>{
         if(category){
             const checkCategory = await categoryModel.findOne({name:category});
             if(!checkCategory){
+                logger.error("category not found  updatetrain")
                 return res.status(404).json({
                     status:"error",
                     message:"category Not Found",
@@ -87,6 +96,7 @@ export const updateTrainController = async(req,res)=>{
         if(uniqueId){
             const checkUniqueId = await trainModel.findOne({uniqueId});
             if(checkUniqueId._id !=checktrain._id){
+                logger.error("train uniqueid once  updatetrain")
                 return res.status(400).json({
                     status:"error",
                     message:"Train UniqueID used Once " + checkUniqueId.uniqueId,
@@ -108,8 +118,10 @@ export const updateTrainController = async(req,res)=>{
             status:"success",
             message:"Train updated Successfully"
         })
+        logger.info("train updated successfully")
     } catch (error) {
         console.log(error);
+        logger.error("Error in update train")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",
@@ -121,6 +133,7 @@ export const getAllTrainController = async(req,res)=>{
     try {
         const getTrains = await trainModel.find({});
         if(!getTrains[0]){
+            logger.error("train not found  getalltrain")
             return res.status(404).json({
                 status:"error",
                 message:"Trains Not Found",
@@ -132,8 +145,10 @@ export const getAllTrainController = async(req,res)=>{
             message:"All Trains",
             data:getTrains
         })
+        logger.info("get all train")
     } catch (error) {
         console.log(error)
+        logger.error("Error in Getalltrain")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",
@@ -147,6 +162,7 @@ export const getTrainByUniqueIdController = async(req,res)=>{
         const {uniqueId} = req.body
         const checkUniqueId = await trainModel.findOne({uniqueId});
         if(!checkUniqueId){
+            logger.error("train not found gettrainbyuniqueid")
             return res.status(404).json({
                 status:"error",
                 message:"train Not Found",
@@ -158,8 +174,10 @@ export const getTrainByUniqueIdController = async(req,res)=>{
             message:"Train of " + uniqueId,
             data:checkUniqueId
         })
+        logger.info("get train by uniqueid")
     } catch (error) {
         console.log(error);
+        logger.error("Error in get train bu uniqueid")
         return res.status(500).json({
             status:"error",
             message:"Iternal Error",
@@ -172,9 +190,10 @@ export const deleteTrainController = async (req,res)=>{
     try {
         const checkTrain = await trainModel.findById(req.params.id);
         if(!checkTrain){
+            logger.error("train not found  deletetrain")
             return res.status(404).json({
                 status:"error",
-                message:"Train Not",
+                message:"Train Not Found",
                 data:null
             })
         }
@@ -185,8 +204,10 @@ export const deleteTrainController = async (req,res)=>{
             message:"Train Deleted",
             data:null
         })
+        logger.info("Train deleted")
     } catch (error) {
         console.log(error);
+        logger.error("Error in Deletetrain")
         return res.status(500).send({
             status:"error",
             message:"Internal Error",

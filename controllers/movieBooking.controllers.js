@@ -1,14 +1,15 @@
 import axios from "axios";
-import movieBookingModel from "../models/movieBooking.js";
 import movieSeatModel from "../models/movieSeatModels.js";
 import promoCodeModel from "../models/promoCode.js";
 import seatbookingModel from "../models/busSeatBookingModels.js";
+import logger from "../utils/logger.js";
 
 export const bookMovieTicketController = async (req, res) => {
     try {
         const { seats, promocode } = req.body
         // console.log(promocode)
         if (!seats[0]) {
+            logger.error("Movie Seat not found bookmovieticket")
             return res.status(401).send({
                 "status": "error",
                 message: "Please Provide MovieSeats "
@@ -19,7 +20,8 @@ export const bookMovieTicketController = async (req, res) => {
             console.log(seats[i])
             const checkSeats = await movieSeatModel.findOne({ _id: seats[i], isBooked: false });
             if (!checkSeats) {
-                return res.status(401).send({
+                logger.error("Seat booked allready  bookmovieticket")
+                return res.status(400).send({
                     "status": "error",
                     message: "Selected Seats Are Already Booked"
                 })
@@ -27,7 +29,8 @@ export const bookMovieTicketController = async (req, res) => {
             totalAmount += checkSeats.price
             const updateSeats = await movieSeatModel.findOneAndUpdate({ _id: seats[i], isBooked: false }, { isBooked: true });
             if (!updateSeats) {
-                return res.status(401).send({
+                logger.error("Seat cannot booked  bookmovieticket")
+                return res.status(400).send({
                     "status": "error",
                     message: "Selected Seats can't Booked"
                 })
@@ -69,7 +72,8 @@ export const bookMovieTicketController = async (req, res) => {
             amount: movieBook.discountedAmount, bookingId: movieBook._id
         })
         if (!Payment) {
-            return res.status(401).send({
+            logger.error("Error in payment  bookmovieticket")
+            return res.status(400).send({
                 "status": "error",
                 message: "Cannot Book Ticket"
 
@@ -82,12 +86,13 @@ export const bookMovieTicketController = async (req, res) => {
             data:Payment.data
         })
         // console.log(totalAmount)
-
+        logger.info("movie ticker booked as pending bookmovieticket")
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
+        logger.error("Error in movie Ticket booking")
+        return res.status(500).send({
             "status": "error",
-            message: "Error In Movie Ticket Booking API"
+            message: "Internal Error"
         })
     }
 }

@@ -1,23 +1,26 @@
 import trainModel from "../models/trainModels.js";
 import trainSeatModel from "../models/trainSeatModels.js";
 import trainSlotModel from "../models/trainSlotModels.js";
+import logger from "../utils/logger.js";
 import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
 
  export const addTrainSeatController = async(req,res)=>{
     try {
         const {seatClass,seatStart,seatEnd,price,slotId} = req.body
-        const checkDeatils = addTrainSeatValidation.validate(req.body,{
+        const checkDetails = addTrainSeatValidation.validate(req.body,{
             abortEarly:false
         })
-        if(checkDeatils.error){
+        if(checkDetails.error){
+            logger.error(checkDetails.error.message +" addtrainseat")
             return res.status(400).json({
                 status:"error",
-                message:checkDeatils.error.message,
+                message:checkDetails.error.message,
                 data:null
             })
         }
         const checkTrainSlot = await trainSlotModel.findById(slotId);
         if(!checkTrainSlot){
+            logger.error("Train slot not found  addtrainseat")
             return res.status(404).json({
                 status:"error",
                 message:"Train Slot Not Found ",
@@ -26,6 +29,7 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
         }
         const checkClass = await trainModel.findOne({_id:checkTrainSlot.trainId,classes:{$in:[seatClass]}})
         if(!checkClass){
+            logger.error("train not found given class   addtrainseat")
             return res.status(404).json({
                 status:"error",
                 message:"Train Not Found Which have Class " + seatClass,
@@ -43,15 +47,16 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
             await addSeat.save();
         }
 
-        return res.status(200).send({
+         res.status(200).send({
             status:"success",
             message:"Train seat added",
             data:null
         })
-        
+        logger.info("Train seat added successfully")
 
     } catch (error) {
         console.log(error);
+        logger.error("errror in trainseatadd")
         return res.status(500).json({
             status:"error",
             message:"internal Error",
@@ -65,6 +70,7 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
         const {seatClass,seatNo,price} = req.body
         const checkSeat = await trainSeatModel.findById(req.params.id).populate("slotId");
         if(!checkSeat){
+            logger.error("seat not found  updatetrainseat")
             return res.status(404).json({
                 status:"error",
                 message:"Seat Not Found",
@@ -73,6 +79,7 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
         }
         const checkClass = await trainModel.findOne({_id:checkSeat.slotId.trainId,classes:seatClass})
         if(!checkClass){
+            logger.error("seat class not found   updatetrainseat")
             return res.status(404).json({
                 status:"error",
                 message:"Seat Class Not Found",
@@ -89,8 +96,10 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
             message:"Seat updated successfully ",
             data:null
         })
+        logger.info("update trainseat")
     } catch (error) {
         console.log(error);
+        logger.error("Error in train Seat update")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",
@@ -102,6 +111,7 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
     try {
         const checkTrainSlot = await trainSlotModel.findById(req.params.id);
         if(!checkTrainSlot){
+            logger.error("train slot not found  gettrainseatbyslotid")
             return res.status(404).json({
                 status:"error",
                 message:"TrainSlot Not Found",
@@ -110,6 +120,7 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
         }
         const getSeats = await trainSeatModel.find({slotId:req.params.id});
         if(!getSeats[0]){
+            logger.error("seats not found   gettrainseatbyslotid")
             return res.status(404).json({
                 status:"error",
                 message:"Seats Not Found",
@@ -121,8 +132,10 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
             message:"train seats",
             data:getSeats
         })
+        logger.info("Get train seat by slot")
     } catch (error) {
         console.log(error);
+        logger.error("Error in getTrainseatbyslot")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",
@@ -135,6 +148,7 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
     try {
         const checkSeat = await trainSeatModel.findById(req.params.id);
         if(!checkSeat){
+            logger.error("seat not found  deletetrainseat")
             return res.status(404).json({
                 status:"error",
                 message:"Seat Not Found",
@@ -148,8 +162,10 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
             message:"Seat Deleted Successfully",
             data:null
         })
+        logger.info("delete train seat")
     } catch (error) {
         console.log(error)
+        logger.error("Error in deletetrainseat")
         return res.status(500).json({
             status:"error",
             message:"Internal Error",

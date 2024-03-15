@@ -1,5 +1,6 @@
 import theaterScreenModel from "../models/theaterScreen.js"
 import theaterModel from "../models/theatersModel.js"
+import logger from "../utils/logger.js"
 import { theaterScreenAddValidation, theaterScreenOnTheaterValidation, theaterScreenUpdateValidation } from "../validation/theaterScreen.validation.js"
 
 export const addTheaterScreenControlller = async (req, res) => {
@@ -9,12 +10,14 @@ export const addTheaterScreenControlller = async (req, res) => {
             abortEarly: false
         })
         if (checkValidation.error) {
+            logger.error(checkValidation.error.message + " add theaterscreen")
             return res.status(401).send({
                 "status": "error",
                 message: checkValidation.error.message
             })
         }
         const checkTheater = await theaterModel.findById(theaterId);
+        logger.error("theater not found addtheaterscreen")
         if (!checkTheater) {
             return res.status(401).send({
                 "status": "error",
@@ -23,6 +26,7 @@ export const addTheaterScreenControlller = async (req, res) => {
         }
         const checkTheaterTotalScreen = await theaterScreenModel.find({ theaterId: checkTheater._id });
         if (checkTheater.totalScreens == checkTheaterTotalScreen.length) {
+            logger.error("added allready all screen  addtheaterscreen")
             return res.status(401).send({
                 "status": "error",
                 message: "You already added all screens to thaters total screens"
@@ -39,11 +43,13 @@ export const addTheaterScreenControlller = async (req, res) => {
             message: "Theater Screen Save",
             theaterScreen
         })
+        logger.info("theaterscreen added successfully")
     } catch (error) {
         console.log(error)
+        logger.error("Error In Add Theater Screen")
         return res.status(401).send({
             "status": "error",
-            message: "Error In Add Theater Screen",
+            message: "Internal Error",
             error
         })
     }
@@ -53,6 +59,7 @@ export const getTheaterScreenController = async (req, res) => {
     try {
         const getAllTheaterScreen = await theaterScreenModel.find({});
         if (!getAllTheaterScreen[0]) {
+            logger.error("not found screen  gettheaterscreen")
             return res.status(200).send({
                 "status": "error",
                 message: "Please Enter Screen"
@@ -63,11 +70,13 @@ export const getTheaterScreenController = async (req, res) => {
             message: "get all theaters ",
             getAllTheaterScreen
         })
+        logger.info("getall theater screen")
     } catch (error) {
         console.log(error);
+        logger.error("Error in Get All Theater Screen")
         return res.status(500).send({
             "status": "error",
-            message: "Error in Get All Theater Screen"
+            message: "Internal Error"
         })
     }
 }
@@ -79,6 +88,7 @@ export const updateTheaterScreenController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
+            logger.error(checkDetails.error.message + " updatescreen")
             return res.status(401).send({
                 "status": "error",
                 message: checkDetails.error.message
@@ -86,6 +96,7 @@ export const updateTheaterScreenController = async (req, res) => {
         }
         const theaterScreen = await theaterScreenModel.findById(req.params.id);
         if (!theaterScreen) {
+            logger.error("screen not found  updatescreen")
             return res.status(401).send({
                 "status": "error",
                 message: "Theater Screen Not Found"
@@ -99,11 +110,13 @@ export const updateTheaterScreenController = async (req, res) => {
             message: "theaterScreen Update Successfully",
             theaterScreen
         })
+        logger.info("screen updated")
     } catch (error) {
         console.log(error)
+        logger.error("Error in Update theaterScreen Controller")
         return res.status(500).send({
             "status": "error",
-            message: "Error in Update theaterScreen Controller"
+            message: "Internal Error"
         })
     }
 }
@@ -115,6 +128,7 @@ export const theaterScreenOnTheaterController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
+            logger.error(checkDetails.error.message + "screenbytheater")
             return res.status(401).send({
                 "status": "error",
                 message: checkDetails.error.message
@@ -122,6 +136,7 @@ export const theaterScreenOnTheaterController = async (req, res) => {
         }
         const getTheater = await theaterModel.find({ name: { $regex: new RegExp(theaterName, 'i') } });
         if (!getTheater[0]) {
+            logger.error("not find theater  screenbytheater")
             return res.status(401).send({
                 "status": "error",
                 message: "Theater Not Found",
@@ -134,6 +149,7 @@ export const theaterScreenOnTheaterController = async (req, res) => {
         })
         const theaterScreen = await theaterScreenModel.find({ theaterId: { $in: theaters } }).populate("theaterId");
         if (!theaterScreen) {
+            logger.error("screen not found")
             return res.status(401).send({
                 "status": "error",
                 message: "Theater Screen Not Found",
@@ -145,12 +161,13 @@ export const theaterScreenOnTheaterController = async (req, res) => {
             message: "Theater Screen",
             data: theaterScreen
         })
-
+        logger.info("theater screen by theater")
     } catch (error) {
         console.log(error)
+        logger.error("Errot in get theater screen on the theater controller")
         return res.status(500).send({
             "status": "error",
-            message: "Errot in get theater screen on the theater controller"
+            message: "Internal Error"
         })
     }
 }
@@ -162,8 +179,10 @@ export const deleteTheaterScreenController = async(req,res)=>{
             message:"DELETED ",
             data:null
         })
+        logger.info("delete screen")
     } catch (error) {
         console.log(error);
+        logger.error("Error in delete theater")
         return res.status(500).json({
             status:"error",
             message:"INTERNAL ERROR",

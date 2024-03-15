@@ -1,5 +1,6 @@
 import theaterScreenModel from "../models/theaterScreen.js";
 import theaterModel from "../models/theatersModel.js";
+import logger from "../utils/logger.js";
 import { addTheaterValidation, getTheaterByNameValidation, updateTheaterValidation } from "../validation/theater.validation.js";
 
 export const addTheaterController = async (req, res) => {
@@ -9,7 +10,8 @@ export const addTheaterController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
-            return res.status(401).send({
+            logger.error(checkDetails.error.message + " addtheater") 
+            return res.status(400).send({
                 "status":"error",
                 message: checkDetails.error.message
             })
@@ -23,11 +25,13 @@ export const addTheaterController = async (req, res) => {
             message: "Theater Created ",
             theater
         })
+        logger.info("Theater created")
     } catch (error) {
         console.log(error);
-        return res.status(401).send({
+        logger.error("Error in add theater")
+        return res.status(500).send({
             "status":"error",
-            message: "Error In Add Theater Controller API",
+            message: "Internal Error ",
             error
         })
     }
@@ -36,7 +40,8 @@ export const getAllTheaterController = async (req, res) => {
     try {
         const theaters = await theaterModel.find({});
         if (!theaters[0]) {
-            return res.status(200).send({
+            logger.error("Theater not found  getalltheater")
+            return res.status(400).send({
                 "status":"success",
                 message: "Please Add Theaters"
             })
@@ -44,14 +49,15 @@ export const getAllTheaterController = async (req, res) => {
         res.status(200).send({
             "status":"success",
             message: "Get All Theaters",
-            theaters
+            data:theaters
         })
+        logger.info("GEt all theater")
     } catch (error) {
         console.log(error);
-        return res.status(401).send({
+        logger.error("error in get6 all theater")
+        return res.status(400).send({
             "status":"success",
-            message: "Error in the Get Theaters API",
-            error
+            message: "Internal Error",
         })
     }
 }
@@ -62,14 +68,16 @@ export const getTheaterByNameController = async (req, res) => {
             abortEarly: false
         })
         if (isNameVAlidate.error) {
-            return res.status(401).send({
+            logger.error(isNameVAlidate.error.message + " gettheaterbyname")
+            return res.status(400).send({
                 "status":"error",
                 message: isNameVAlidate.error.message
             })
         }
         const getTheater = await theaterModel.find({ name: { $regex: new RegExp(name, 'i') } });
         if (!getTheater[0]) {
-            return res.status(401).send({
+            logger.error("theater not found  gettheaterbyname")
+            return res.status(400).send({
                 "status":"error",
                 message: "Theater Not Found"
             })
@@ -79,11 +87,13 @@ export const getTheaterByNameController = async (req, res) => {
             message: "Get All Theaters Of " + name,
             getTheater
         })
+        logger.info("get all theater by name")
     } catch (error) {
         console.log(error);
-        return res.status(401).send({
+        logger.error("Error in get theater by name")
+        return res.status(400).send({
             "status":"success",
-            message: "Error in the Get Theaters By Name API",
+            message: "Internal Error",
             error
         })
     }
@@ -95,14 +105,16 @@ export const updateTheaterController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
-            return res.status(401).send({
+            logger.error(checkDetails.error.message +" update theater")
+            return res.status(400).send({
                 "status":"success",
                 message: checkDetails.error.message
             })
         }
         const checkTheater = await theaterModel.findById(req.params.id);
         if (!checkTheater) {
-            return res.status(401).send({
+            logger.error("theater not found    updatetheater")
+            return res.status(400).send({
                 "status":"error",
                 message: "Theater Not Found"
             })
@@ -120,11 +132,13 @@ export const updateTheaterController = async (req, res) => {
             message: "Update the theater",
             checkTheater
         })
+        logger.info("update theater")
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
+        logger.error("Error in update theater")
+        return res.status(400).send({
             "status":"error",
-            message: "Error in Update Theater API"
+            message: "Internal Error"
         })
     }
 }
@@ -132,13 +146,15 @@ export const deleteTheaterController = async (req, res) => {
     try {
         const checkTheater = await theaterModel.findById(req.params.id);
         if (!checkTheater) {
-            return res.status(401).send({
+            logger.error("theater not found  deletetheater")
+            return res.status(400).send({
                 "status":"error",
                 message: "Theater Not Found"
             })
         }
         const checkScreen = await theaterScreenModel.find({ theaterId: req.params.id });
         if (checkScreen[0]) {
+            logger.error("delete first theater screen  delete theater")
             return res.status(200).send({
                 "status":"error",
                 message: "Please Delete First Theater screens"
@@ -147,7 +163,8 @@ export const deleteTheaterController = async (req, res) => {
         //delete the theater
         const deleteTheater = await checkTheater.deleteOne();
         if (!deleteTheater) {
-            return res.status(401).send({
+            logger.error("theater not deleted")
+            return res.status(400).send({
                 "status":"error",
                 message: "Theater cannot delete"
             })
@@ -157,11 +174,13 @@ export const deleteTheaterController = async (req, res) => {
             message: "Theater delete",
             checkTheater
         })
+        logger.info("theater deleted")
     } catch (error) {
         console.log(error)
-        return res.status(401).send({
+        logger.error("Error in delete theater")    
+        return res.status(400).send({
             "status":"error",
-            message: "Error in Delete Theater Controller",
+            message: "Invalid Error",
             error
         })
     }

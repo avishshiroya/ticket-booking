@@ -1,4 +1,5 @@
 import promoCodeModel from "../models/promoCode.js";
+import logger from "../utils/logger.js";
 import { addPromoCodeVAlidation, updatePromoCodeVAlidation } from "../validation/promocode.validation.js";
 
 export const AddPromoCodeController = async (req, res) => {
@@ -8,7 +9,8 @@ export const AddPromoCodeController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
-            return res.status(401).josn({
+            logger.error(checkDetails.error.message + " addpromocode")
+            return res.status(400).josn({
                 status: "error",
                 message: checkDetails.error.message,
                 data: null
@@ -16,7 +18,8 @@ export const AddPromoCodeController = async (req, res) => {
         }
         const checkPromoCode = await promoCodeModel.findOne({ code });
         if (checkPromoCode) {
-            return res.status(401).json({
+            logger.error("Promocode cannot unique  addpromocode")
+            return res.status(400).json({
                 status: "error",
                 message: "PromoCode Name Must Be unique"
             })
@@ -31,8 +34,10 @@ export const AddPromoCodeController = async (req, res) => {
             message: "PromoCode Add Successfully",
             data: null
         })
+        logger.info("Promocode added")
     } catch (error) {
         console.log(error);
+        logger.error("Error in add Promocode")
         return res.status(500).josn({
             status: "error",
             message: "Internal Server Error"
@@ -44,7 +49,8 @@ export const getPromoCodesController = async (req, res) => {
     try {
         const allPromo = await promoCodeModel.find({});
         if (!allPromo[0]) {
-            return res.status(401).json({
+            logger.error("promocode not found  getpromocodes")
+            return res.status(400).json({
                 status: "error",
                 message: "PromoCode Not Found",
                 data: null
@@ -55,8 +61,10 @@ export const getPromoCodesController = async (req, res) => {
             message: "PromoCodes",
             data: allPromo
         })
+        logger.info("Promocode Get successfully")
     } catch (error) {
         console.log(error)
+        logger.error("Error in getallpromocode")
         return res.status(500).json({
             status: "error",
             message: "Internal Server Error",
@@ -72,6 +80,7 @@ export const updatePromoCodeController = async (req, res) => {
             abortEarly: false
         })
         if (checkDetails.error) {
+            logger.error(checkDetails.error.message + " update promocode")
             return res.status(401).json({
                 status: "error",
                 message: checkDetails.error.message,
@@ -80,6 +89,7 @@ export const updatePromoCodeController = async (req, res) => {
         }
         const checkPromoCode = await promoCodeModel.findById(req.params.id)
         if (!checkPromoCode) {
+            logger.error("promocode not found  updatePromocode")
             return res.status(401).json({
                 status: "error",
                 message: "PromoCode Not Found",
@@ -88,6 +98,7 @@ export const updatePromoCodeController = async (req, res) => {
         }
         const checkPromoCodeName = await promoCodeModel.findOne({ code });
         if (checkPromoCodeName) {
+            logger.error("Promocode Must be unique  updatepromocode")
             return res.status(401).json({
                 status: "error",
                 message: "PromoCode name Must Be Unique",
@@ -104,8 +115,10 @@ export const updatePromoCodeController = async (req, res) => {
             message: "PromoCode Update Successfully",
             data: null
         })
+        logger.info("Promocode update successfully")
     } catch (error) {
         console.log(error);
+        logger.error("Error in updatepromocode")
         return res.status(500).json({
             status: "error",
             message: "Internal Error",
@@ -117,6 +130,7 @@ export const deletePromoCodeController = async (req, res) => {
     try {
         const checkPromoCode = await promoCodeModel.findById(req.params.id);
         if (!checkPromoCode) {
+            logger.error("promocode not found  deletepromocode")
             return res.status(401).json({
                 status: "error",
                 message: "Promocode Not Found",
@@ -129,8 +143,10 @@ export const deletePromoCodeController = async (req, res) => {
             message: "PromoCode delete Successfully",
             data: null
         })
+        logger.info("Promocode Deleted")
     } catch (error) {
         console.log(error)
+        logger.error("Error in delete promode")
         return res.status(500).json({
             status: "error",
             message: 'Internal Error',
