@@ -30,3 +30,54 @@
  [info] 2024-03-28T10:25:18.712Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
  [info] 2024-03-28T10:28:42.764Z  custom POST /api/v1/admin/login PostmanRuntime/7.37.0 undefined 
  [info] 2024-03-28T10:28:43.019Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:34:42.145Z  custom POST /api/v1/admin/register PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:34:42.281Z  Admin Register Successfully
+ [info] 2024-03-28T10:34:53.599Z  custom POST /api/v1/admin/login PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:34:53.722Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:56:47.687Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:56:47.772Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T10:57:57.910Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:57:58.003Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T10:58:00.124Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:58:00.171Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T10:58:01.354Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:58:01.397Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T10:58:02.197Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:58:02.242Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T10:58:02.989Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:58:03.031Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T10:58:03.854Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:58:03.900Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T10:58:04.764Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:58:04.819Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T10:59:42.492Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:59:42.551Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:00:31.465Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T11:00:31.538Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:00:59.069Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T11:00:59.136Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:01:54.423Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T11:01:54.527Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:01:58.772Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T11:01:58.807Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:01:58.835Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:02:39.000Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T11:02:39.072Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:02:43.300Z  custom GET /api/v1/admin/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T11:02:43.331Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:03:38.653Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:03:42.262Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:03:45.831Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:03:48.588Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:03:53.230Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:04:16.279Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:10:38.794Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:11:31.823Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:11:41.455Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T11:12:02.618Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:12:13.756Z  Admin Logout
+ [info] 2024-03-28T11:12:18.855Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T11:12:23.542Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T11:12:31.501Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [info] 2024-03-28T12:04:19.885Z  Bus Seat getBusSeatBySlot
+ [info] 2024-03-28T12:04:52.503Z  Get train seat by slot

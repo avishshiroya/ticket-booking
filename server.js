@@ -9,6 +9,7 @@ import path from "path"
 import winston from "winston"
 import cors from "cors"
 import loggerPrint from "./utils/printLogger.js"
+import apicache from "apicache"
 dotenv.config();
 
 paypal.configure({
@@ -17,14 +18,16 @@ paypal.configure({
     client_secret: process.env.PAYPAL_CLIENT_SECRET
 })
 
+const cache = apicache.middleware
 
 const app = express();
 app.use(express.json())
 // app.use(bodyParser.json())
 app.use(morgan("dev"))
-app.use(loggerPrint)
+// app.use(loggerPrint)
 app.use(cors())
 app.use(cookieParser())
+app.use(cache('5 minutes'))
 // app.use('/', express.static(path.join('public'))); 
 // app.use(morgan('[:date[clf]] :method :url :status :response-time ms - :res[content-length]', { stream: accessLogStream }))
 //connectDB
