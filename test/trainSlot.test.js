@@ -25,6 +25,7 @@ describe("TrainSlot API",()=>{
             //                 })
             //                 .then(response=>{
             //                     console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //                 })
             //                 .catch(error=>{
             //                     console.error(error);
@@ -40,6 +41,7 @@ describe("TrainSlot API",()=>{
                             })
                             .then(response=>{
                                 console.log(response.statusCode);
+                                // expect(response.statusCode).to.be.equal(200)
                             })
                             .catch(error=>{
                                 console.error(error);
@@ -56,6 +58,7 @@ describe("TrainSlot API",()=>{
                             })
                             .then(response=>{
                                 console.log(response.statusCode);
+                                // expect(response.statusCode).to.be.equal(200)
                             })
                             .catch(error=>{
                                 console.error(error);
@@ -68,6 +71,7 @@ describe("TrainSlot API",()=>{
             //                 .set('Cookie',"aAuth="+cookie)
             //                 .then(response=>{
             //                     console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //                 })
             //                 .catch(error=>{
             //                     console.error(error);

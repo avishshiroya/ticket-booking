@@ -21,6 +21,7 @@ describe("Train Seat API",()=>{
             //             })
             //             .then(response=>{
             //                 console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //             })
             //             .catch((error=>{
             //                 console.error(error);
@@ -37,6 +38,7 @@ describe("Train Seat API",()=>{
                         })
                         .then(response=>{
                             console.log(response.statusCode);
+                            expect(response.statusCode).to.be.equal(200)
                         })
                         .catch((error=>{
                             console.error(error);
@@ -48,6 +50,7 @@ describe("Train Seat API",()=>{
             const response = await request.get("/slot/65ee7ea6da21723a4609072c")
                         .then(response=>{
                             console.log(response.statusCode);
+                            expect(response.statusCode).to.be.equal(200)
                         })
                         .catch((error=>{
                             console.error(error);
@@ -60,6 +63,7 @@ describe("Train Seat API",()=>{
                         .set('Cookie','aAuth='+cookie)
                         .then(response=>{
                             console.log(response.statusCode);
+                            expect(response.statusCode).to.be.equal(200)
                         })
                         .catch((error=>{
                             console.error(error);

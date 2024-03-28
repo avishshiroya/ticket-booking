@@ -1,0 +1,249 @@
+ [info]  2024-03-28T05:48:48.382Z  Admin Login Successfully
+ [error]  2024-03-28T05:49:20.531Z  password has minimum 8 letters
+ [info]  2024-03-28T05:51:00.021Z  undefined Admin Login Successfully
+ [info]  2024-03-28T05:51:32.821Z  65e15690e2586c187e5dbe99 Admin Login Successfully
+{
+  message: '65e15690e2586c187e5dbe99 Admin Login Successfully',
+  level: 'info',
+  timestamp: '2024-03-28T06:00:09.726Z'
+}
+{
+  message: 'Get Admin Detail Successfully',
+  level: 'info',
+  timestamp: '2024-03-28T06:30:39.959Z'
+}
+ [info] 2024-03-28T06:31:08.516Z function logger (req, res, next) {
+    // request data
+    req._startAt = undefined
+    req._startTime = undefined
+    req._remoteAddress = getip(req)
+
+    // response data
+    res._startAt = undefined
+    res._startTime = undefined
+
+    // record request start
+    recordStartTime.call(req)
+
+    function logRequest () {
+      if (skip !== false && skip(req, res)) {
+        debug('skip request')
+        return
+      }
+
+      var line = formatLine(morgan, req, res)
+
+      if (line == null) {
+        debug('skip line')
+        return
+      }
+
+      debug('log request')
+      stream.write(line + '\n')
+    };
+
+    if (immediate) {
+      // immediate log
+      logRequest()
+    } else {
+      // record response start
+      onHeaders(res, recordStartTime)
+
+      // log when response finished
+      onFinished(res, logRequest)
+    }
+
+    next()
+  }    Get Admin Detail Successfully
+ [info] 2024-03-28T06:53:54.482Z function logger (req, res, next) {
+    // request data
+    req._startAt = undefined
+    req._startTime = undefined
+    req._remoteAddress = getip(req)
+
+    // response data
+    res._startAt = undefined
+    res._startTime = undefined
+
+    // record request start
+    recordStartTime.call(req)
+
+    function logRequest () {
+      if (skip !== false && skip(req, res)) {
+        debug('skip request')
+        return
+      }
+
+      var line = formatLine(morgan, req, res)
+
+      if (line == null) {
+        debug('skip line')
+        return
+      }
+
+      debug('log request')
+      stream.write(line + '\n')
+    };
+
+    if (immediate) {
+      // immediate log
+      logRequest()
+    } else {
+      // record response start
+      onHeaders(res, recordStartTime)
+
+      // log when response finished
+      onFinished(res, logRequest)
+    }
+
+    next()
+  }    Get Admin Detail Successfully
+ [info] 2024-03-28T06:54:20.802Z function logger (req, res, next) {
+    // request data
+    req._startAt = undefined
+    req._startTime = undefined
+    req._remoteAddress = getip(req)
+
+    // response data
+    res._startAt = undefined
+    res._startTime = undefined
+
+    // record request start
+    recordStartTime.call(req)
+
+    function logRequest () {
+      if (skip !== false && skip(req, res)) {
+        debug('skip request')
+        return
+      }
+
+      var line = formatLine(morgan, req, res)
+
+      if (line == null) {
+        debug('skip line')
+        return
+      }
+
+      debug('log request')
+      stream.write(line + '\n')
+    };
+
+    if (immediate) {
+      // immediate log
+      logRequest()
+    } else {
+      // record response start
+      onHeaders(res, recordStartTime)
+
+      // log when response finished
+      onFinished(res, logRequest)
+    }
+
+    next()
+  }    Get Admin Detail Successfully
+ [info] 2024-03-28T06:54:37.386Z    Get Admin Detail Successfully
+ [info] 2024-03-28T06:57:28.510Z    Get Admin Detail Successfully
+ 2024-03-28T06:59:47.840Z    Get Admin Detail Successfully
+ [info] 2024-03-28T07:05:20.824Z function logger (req, res, next) {
+    // request data
+    req._startAt = undefined
+    req._startTime = undefined
+    req._remoteAddress = getip(req)
+
+    // response data
+    res._startAt = undefined
+    res._startTime = undefined
+
+    // record request start
+    recordStartTime.call(req)
+
+    function logRequest () {
+      if (skip !== false && skip(req, res)) {
+        debug('skip request')
+        return
+      }
+
+      var line = formatLine(morgan, req, res)
+
+      if (line == null) {
+        debug('skip line')
+        return
+      }
+
+      debug('log request')
+      stream.write(line + '\n')
+    };
+
+    if (immediate) {
+      // immediate log
+      logRequest()
+    } else {
+      // record response start
+      onHeaders(res, recordStartTime)
+
+      // log when response finished
+      onFinished(res, logRequest)
+    }
+
+    next()
+  }   [object Object] Get Admin Detail Successfully
+ [info] 2024-03-28T07:05:52.372Z  [object Object] Get Admin Detail Successfully
+ [info] 2024-03-28T07:06:14.142Z  [object Object] Get Admin Detail Successfully
+ [info] 2024-03-28T07:08:52.550Z  /api/v1/admin/ null Get Admin Detail Successfully
+ [info] 2024-03-28T07:10:28.481Z  undefined /api/v1/admin/ null Get Admin Detail Successfully
+ [info] 2024-03-28T07:11:24.835Z  GET /api/v1/admin/ null Get Admin Detail Successfully
+ [info] 2024-03-28T07:12:29.661Z  GET /api/v1/admin/ 200 Get Admin Detail Successfully
+ [error] 2024-03-28T07:17:10.010Z  GET /api/v1/admin/ 200 Admin unAuthenticated!!
+ [error] 2024-03-28T07:17:48.109Z  GET /api/v1/admin/ 401 Admin unAuthenticated!!
+ [error] 2024-03-28T07:18:29.484Z  GET /api/v1/admin/ 401 Admin unAuthenticated!!
+ [error] 2024-03-28T07:18:29.493Z  GET /api/v1/admin/ 401 Admin unAuthenticated!!
+ [error] 2024-03-28T07:18:50.027Z  GET /api/v1/admin/ 401 Admin unAuthenticated!!
+ [error] 2024-03-28T07:18:50.028Z  GET /api/v1/admin/ 401 Admin unAuthenticated!!
+ [error] 2024-03-28T07:19:15.307Z  GET /api/v1/admin/ 401 Admin unAuthenticated!!
+ [error] 2024-03-28T07:19:37.968Z  GET /api/v1/admin/ 200 Admin unAuthenticated!!
+ [info] 2024-03-28T07:24:08.651Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [info] 2024-03-28T07:24:46.502Z  POST /api/v1/admin/login null Get Admin Detail Successfully
+ [info] 2024-03-28T07:24:53.116Z  POST /api/v1/admin/login null Get Admin Detail Successfully
+ [info] 2024-03-28T07:25:15.046Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [info] 2024-03-28T07:25:16.194Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [info] 2024-03-28T07:25:17.041Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [info] 2024-03-28T07:25:17.812Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [info] 2024-03-28T07:25:42.662Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [info] 2024-03-28T07:26:21.180Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [info] 2024-03-28T07:26:39.430Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [error] 2024-03-28T07:26:51.473Z  Compare Password In Admin
+ [error] 2024-03-28T07:27:15.384Z  Compare Password In Admin
+ [info] 2024-03-28T07:27:22.628Z  POST /api/v1/admin/login 200 Get Admin Detail Successfully
+ [info] 2024-03-28T07:27:46.672Z  POST /api/v1/admin/login 200  Admin Login Successfully
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+ [info] 2024-03-28T08:46:38.376Z  POST /api/v1/admin/login 200  Admin Login Successfully
+undefined
+ [info] 2024-03-28T08:48:00.971Z undefined POST /api/v1/admin/login 200  Admin Login Successfully
+ [info] 2024-03-28T08:48:41.502Z undefined POST /api/v1/admin/login 200  Admin Login Successfully
+ [info] 2024-03-28T08:48:51.959Z undefined POST /api/v1/admin/login 200  Admin Login Successfully
+[object Promise]
+[object Promise]
+[object Promise]
+[object Promise]
+ [info] 2024-03-28T08:52:42.329Z  POST /api/v1/admin/login 200  Admin Login Successfully
+ [error] 2024-03-28T08:57:59.275Z  Error In Admin Login
+ [error] 2024-03-28T08:58:12.092Z  Error In Admin Login
+ [info] 2024-03-28T08:59:47.975Z  POST /api/v1/admin/login [object Object] 200  Admin Login Successfully
+ [info] 2024-03-28T09:00:33.430Z  POST /api/v1/admin/login [object Object] 200  Admin Login Successfully
+ [info] 2024-03-28T09:00:59.559Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T09:02:42.990Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 200  Get All Buses
+ [info] 2024-03-28T09:08:17.579Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Safari/605.1.15 200  Get All Buses
+ [info] 2024-03-28T09:08:56.538Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 304  Get All Buses
+ [info] 2024-03-28T09:09:24.928Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Safari/605.1.15 304  Get All Buses
+ [info] 2024-03-28T09:12:55.789Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 304  Get All Buses

@@ -1,6 +1,7 @@
 import JWT from "jsonwebtoken"
 import userModel from "../models/userModel.js";
 import adminModel from "../models/adminModels.js";
+import logger from "../utils/logger.js";
 export const isAuth = async(req,res,next)=>{
     try {
         const auth= req.body.auth || req.query.auth || req.headers.auth;
@@ -46,6 +47,7 @@ export const isAuth = async(req,res,next)=>{
         const {aAuth} = req.cookies;
         console.log('123' + aAuth);
         if(!aAuth){
+        logger.error( `${req.method} ${req.originalUrl} ${res.statusCode} Admin unAuthenticated!!`)
             return res.status(401).send({
                 success:false,
                 message:"Admin unAuthenticated!! Login PLS."
@@ -70,6 +72,7 @@ export const isAuth = async(req,res,next)=>{
         next();
     } catch (error) {
         console.log(error);
+        logger.error( `${req.method} ${req.originalUrl} ${res.statusCode} Admin unAuthenticated!!`)
         return res.status(401).send({
             success:false,
             message:"Error In Admin Authentication API"

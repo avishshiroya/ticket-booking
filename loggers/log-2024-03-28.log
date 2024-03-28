@@ -1,0 +1,32 @@
+ [info] 2024-03-28T09:24:32.999Z  GET /api/v1/bus/ PostmanRuntime/7.37.0 200  Get All Buses
+ [info] 2024-03-28T09:24:48.907Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 304  Get All Buses
+ [info] 2024-03-28T09:34:19.526Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 304  Get All Buses
+ [info] 2024-03-28T09:35:04.298Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 304  Get All Buses
+ [info] 2024-03-28T09:36:53.351Z  GET /api/v1/bus/ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Safari/605.1.15 304  Get All Buses
+ [info] 2024-03-28T09:37:21.645Z  GET /api/v1/bus/ PostmanRuntime/7.37.0 200  Get All Buses
+ [info] 2024-03-28T09:37:51.168Z  GET /api/v1/bus/ PostmanRuntime/7.37.0 200  Get All Buses
+ [info] 2024-03-28T09:54:27.856Z  GET /api/v1/bus/ PostmanRuntime/7.37.0 200  Get All Buses
+ [error] 2024-03-28T09:54:37.485Z  Error In Admin Login
+ [info] 2024-03-28T09:55:02.951Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 1711620647514  POST /api/v1/admin/login
+ [info] 2024-03-28T10:10:47.646Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 1711620676410  custom POST /api/v1/admin/login
+ [info] 2024-03-28T10:11:16.533Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:12:14.052Z  custom POST /api/v1/admin/login undefined
+ [info] 2024-03-28T10:12:14.179Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:12:46.591Z  custom POST /api/v1/admin/login undefined
+ [info] 2024-03-28T10:12:46.717Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:14:32.517Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:15:01.685Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:15:23.964Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:15:23.965Z  custom POST /login undefined 
+ [info] 2024-03-28T10:18:13.281Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:19:22.193Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:19:48.982Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:20:43.298Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:25:02.583Z  custom POST /api/v1/admin/login PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:25:02.708Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:25:18.588Z  custom POST /api/v1/admin/login PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:25:18.712Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-03-28T10:28:42.764Z  custom POST /api/v1/admin/login PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-28T10:28:43.019Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully

@@ -25,6 +25,7 @@ describe('BUSSLOT API', () => {
                     "travellingHours": 10
                 }).then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })
@@ -39,6 +40,7 @@ describe('BUSSLOT API', () => {
                     "despatureDate": "2024-03-14",
                 }).then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })
@@ -49,6 +51,7 @@ describe('BUSSLOT API', () => {
             const response = request.get("/65e9876c0f473a398231dc6a")
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })
@@ -61,6 +64,7 @@ describe('BUSSLOT API', () => {
 
         //         .then(response => {
         //             console.log(response.body);
+        // expect(response.statusCode).to.be.equal(200)
         //         })
         //         .catch(error => {
         //             console.error(error);
@@ -78,6 +82,7 @@ describe('BUSSLOT API', () => {
                 })
                 .then(response=>{
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error=>{
                     console.error(error);

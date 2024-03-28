@@ -28,6 +28,7 @@ describe("Bus Train Seat Booking API", () => {
                 })
                 .then(response => {
                     console.log(response.body);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })
@@ -52,6 +53,7 @@ describe("Bus Train Seat Booking API", () => {
                 })
                 .then(response => {
                     console.log(response.body);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })
@@ -76,6 +78,7 @@ describe("Bus Train Seat Booking API", () => {
             //                 })
             //                 .then(response=>{
             //                     console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //                 }).catch(error=>{
             //                     console.error(error);
             //                 })
@@ -100,6 +103,7 @@ describe("Bus Train Seat Booking API", () => {
             //                 })
             //                 .then(response=>{
             //                     console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //                 }).catch(error=>{
             //                     console.error(error);
             //                 })

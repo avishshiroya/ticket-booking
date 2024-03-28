@@ -19,6 +19,7 @@ describe("PROMOCODE API",()=>{
                             })
                             .then(response=>{
                                 console.log(response.statusCode);
+                                expect(response.statusCode).to.be.equal(200)
                             })
                             .catch(error=>{
                                 console.error(error);
@@ -31,6 +32,7 @@ describe("PROMOCODE API",()=>{
             const response = await request.get("/")
                             .then(response=>{
                                 console.log(response.statusCode);
+                                expect(response.statusCode).to.be.equal(200)
                             })
                             .catch(error=>{
                                 console.error(error);
@@ -47,6 +49,7 @@ describe("PROMOCODE API",()=>{
                             })
                             .then(response=>{
                                 console.log(response.statusCode);
+                                expect(response.statusCode).to.be.equal(200)
                             })
                             .catch(error=>{
                                 console.error(error);
@@ -60,6 +63,7 @@ describe("PROMOCODE API",()=>{
             //                 .set('Cookie','aAuth='+cookie)
             //                 .then(response=>{
             //                     console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //                 })
             //                 .catch(error=>{
             //                     console.error(error);

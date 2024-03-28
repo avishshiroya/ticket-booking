@@ -5,7 +5,7 @@ import { addBusSlotValidation, getBusSlotByRoutesValidation, updateBusSlotValida
 import logger from "../utils/logger.js"
 export const busSlotAddController = async (req, res) => {
     try {
-        const { busId, routeId, arrivalTime, despatureTime, viaStops, despatureDate, arrivalDate, totalDistance, travellingHours } = req.body
+        const { busId, routeId, arrivalTime, depatureTime, viaStops, depatureDate, arrivalDate, totalDistance, travellingHours } = req.body
 
         const checkDetails = addBusSlotValidation.validate(req.body, {
             abortEarly: false
@@ -46,10 +46,10 @@ export const busSlotAddController = async (req, res) => {
                 data: null
             })
         }
-        // const despatureDate = new Date(arrivalDate) + travellingHours * 60 * 60 * 1000;
-        // console.log(despatureDate)
+        // const depatureDate = new Date(arrivalDate) + travellingHours * 60 * 60 * 1000;
+        // console.log(depatureDate)
         const busSlot = new busSlotModel({
-            busId, routeId, arrivalTime, despatureTime, viaStops, arrivalDate, despatureDate, totalDistance, travellingHours, createdBy: req.admin._id
+            busId, routeId, arrivalTime, depatureTime, viaStops, arrivalDate, depatureDate, totalDistance, travellingHours, createdBy: req.admin._id
         })
         //save busSlot
         await busSlot.save();
@@ -102,7 +102,7 @@ export const getBusSlotController = async (req, res) => {
 
 export const updateBusSlotController = async (req, res) => {
     try {
-        const { routeId, arrivalTime, despatureTime, viaStops, arrivalDate, despatureDate, totalDistance, travellingHours } = req.body
+        const { routeId, arrivalTime, depatureTime, viaStops, arrivalDate, depatureDate, totalDistance, travellingHours } = req.body
         const checkDetails = updateBusSlotValidation.validate(req.body, { abortEarly: false })
         if (checkDetails.error) {
             logger.error(checkDetails.error.message +"updateBusSlot")
@@ -149,12 +149,12 @@ export const updateBusSlotController = async (req, res) => {
         }
         if (routeId) checkBusSlot.routeId = routeId
         if (arrivalTime) checkBusSlot.arrivalTime = arrivalTime
-        if (despatureTime) checkBusSlot.despatureTime = despatureTime
+        if (depatureTime) checkBusSlot.depatureTime = depatureTime
         if (viaStops) checkBusSlot.viaStops = viaStops
         if (arrivalDate) checkBusSlot.arrivalDate = arrivalDate
         if (totalDistance) checkBusSlot.totalDistance = totalDistance
         if (travellingHours) checkBusSlot.travellingHours = travellingHours
-        if (despatureDate) checkBusSlot.despatureDate = despatureDate
+        if (depatureDate) checkBusSlot.depatureDate = depatureDate
         if (req.admin._id) checkBusSlot.updatedBy = req.admin._id
         //save the busslot
         await checkBusSlot.save();

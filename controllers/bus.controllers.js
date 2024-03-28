@@ -4,7 +4,7 @@ import { addBusValidation, updateBusValidation } from "../validation/bus.validat
 import logger from "../utils/logger.js"
 export const addBusContoller = async (req, res) => {
     try {
-        const { name, type, uniqueId, categoryId, totalSeats } = req.body
+        const { name, type, license_plate, categoryId, totalSeats } = req.body
         const checkDetails = addBusValidation.validate(req.body, {
             abortEarly: false
         })
@@ -25,17 +25,17 @@ export const addBusContoller = async (req, res) => {
                 data: null
             })
         }
-        const checkUniqueId = await busModel.findOne({ uniqueId });
-        if (checkUniqueId) {
+        const checklicense_plate = await busModel.findOne({ license_plate });
+        if (checklicense_plate) {
             logger.error("Bus number used Once")
             return res.status(400).json({
                 status: "error",
-                message: "Uniqueid use Onces",
+                message: "license_plate use Onces",
                 data: null
             })
         }
         const bus = new busModel({
-            name, type, uniqueId, categoryId, totalSeats, createdBy: req.admin._id
+            name, type, license_plate, categoryId, totalSeats, createdBy: req.admin._id
         })
         //save bus model
         await bus.save();
@@ -58,7 +58,7 @@ export const addBusContoller = async (req, res) => {
 
 export const updateBusController = async (req, res) => {
     try {
-        const { name, type, uniqueId, categoryId, totalSeats } = req.body
+        const { name, type, license_plate, categoryId, totalSeats } = req.body
         const checkDetails = updateBusValidation.validate(req.body, {
             abortEarly: false
         })
@@ -90,22 +90,22 @@ export const updateBusController = async (req, res) => {
                 })
             }
         }
-        if (uniqueId) {
-            const checkUniqueId = await busModel.findOne({ uniqueId })
-            if (checkUniqueId.uniqueId == checkBus.uniqueId) {
-                console.log("uniqueId match")
+        if (license_plate) {
+            const checklicense_plate = await busModel.findOne({ license_plate })
+            if (checklicense_plate.license_plate == checkBus.license_plate) {
+                console.log("license_plate match")
             } else {
                 logger.error("Unique id Used Once bus update")
                 return res.status(401).json({
                     status: "error",
-                    message: "UniqueId allready Used Once",
+                    message: "license_plate allready Used Once",
                     data: null
                 })
             }
         }
         if (name) checkBus.name = name
         if (type) checkBus.type = type
-        if (uniqueId) checkBus.uniqueId = uniqueId
+        if (license_plate) checkBus.license_plate = license_plate
         if (categoryId) checkBus.categoryId = categoryId
         if (totalSeats) checkBus.totalSeats = totalSeats
         if (req.admin._id) checkBus.updatedBy = req.admin._id
@@ -144,7 +144,9 @@ export const getAllBusController = async (req,res)=>{
             message:"All Buses",
             data:AllBuses
         })
-        logger.info("Get All Bus")
+        // logger.info("Get All Bus")
+        logger.info( `${req.method} ${req.originalUrl} ${req.headers['user-agent']} ${res.statusCode}  Get All Buses`)
+
     } catch (error) {
         console.log(error)
         logger.error("Error in Get All Bus")
@@ -183,12 +185,12 @@ export const getBusOnNameController = async(req,res)=>{
         })
     }
 }
-export const getBusOnuniqueIdController = async(req,res)=>{
+export const getBusOnlicensePlateController = async(req,res)=>{
     try {
-        const {uniqueId} = req.body
-        const buses = await busModel.findOne({uniqueId});
+        const {license_plate} = req.body
+        const buses = await busModel.findOne({license_plate});
         if(!buses){
-            logger.error("Cannot Get bus on Uniqueid")
+            logger.error("Cannot Get bus on license_plate")
             return res.status(404).json({
                 status:"error",
                 message:"Bus not Found",
@@ -197,13 +199,13 @@ export const getBusOnuniqueIdController = async(req,res)=>{
         }
         res.status(200).json({
             status:"success",
-            message:"Buses Of " +uniqueId,
+            message:"Buses Of " +license_plate,
             data:buses
         })
-        logger.info("Get Bus Usin uniqueid")
+        logger.info("Get Bus Usin license_plate")
     } catch (error) {
         console.log(error)
-        logger.error("Error in get bus by uniqueId")
+        logger.error("Error in get bus by license_plate")
         return res.status(500).json({
             status:"error",
             message:"Internal Error"

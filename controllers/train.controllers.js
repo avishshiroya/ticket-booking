@@ -5,7 +5,7 @@ import { addTrainValidation, updateTrainValidation } from "../validation/train.v
 
 export const addTrainController = async(req,res)=>{
     try {
-        const {category,name,uniqueId,sourceStn,destinationStn,viaStations,totalDistance,classes,capacity} = req.body
+        const {category,name,license_plate,sourceStn,destinationStn,viaStations,totalDistance,classes,capacity} = req.body
         const checkDetails = addTrainValidation.validate(req.body,{
             abortEarly:false
         })
@@ -26,17 +26,17 @@ export const addTrainController = async(req,res)=>{
                 data:null
             })
         }
-        const checkUniqueId = await trainModel.findOne({uniqueId});
-        if(checkUniqueId){
-            logger.error("Train uniqueId Once  addtrain")
+        const checklicense_plate = await trainModel.findOne({license_plate});
+        if(checklicense_plate){
+            logger.error("Train license_plate Once  addtrain")
             return res.status(400).json({
                 status:"error",
-                message:"UniqueId Used Once " + uniqueId,
+                message:"license_plate Used Once " + license_plate,
                 data:null
             })
         }
         const train = new trainModel({
-            categoryId:checkCategory._id,name,uniqueId,sourceStn,destinationStn,viaStations,totalDistance,classes,capacity,createdBy:req.admin._id
+            categoryId:checkCategory._id,name,license_plate,sourceStn,destinationStn,viaStations,totalDistance,classes,capacity,createdBy:req.admin._id
         })
         //save train
         await train.save();
@@ -60,7 +60,7 @@ export const addTrainController = async(req,res)=>{
 
 export const updateTrainController = async(req,res)=>{
     try {
-        const {category,name,uniqueId,sourceStn,destinationStn,viaStations,totalDistance,classes,capacity} = req.body
+        const {category,name,license_plate,sourceStn,destinationStn,viaStations,totalDistance,classes,capacity} = req.body
         const checkDetails = updateTrainValidation.validate(req.body,{
             abortEarly:false
         })
@@ -93,19 +93,19 @@ export const updateTrainController = async(req,res)=>{
             }
             checktrain.categoryId = checkCategory._id
         }
-        if(uniqueId){
-            const checkUniqueId = await trainModel.findOne({uniqueId});
-            if(checkUniqueId._id !=checktrain._id){
-                logger.error("train uniqueid once  updatetrain")
+        if(license_plate){
+            const checklicense_plate = await trainModel.findOne({license_plate});
+            if(checklicense_plate._id !=checktrain._id){
+                logger.error("train license_plate once  updatetrain")
                 return res.status(400).json({
                     status:"error",
-                    message:"Train UniqueID used Once " + checkUniqueId.uniqueId,
+                    message:"Train license_plate used Once " + checklicense_plate.license_plate,
                     data:null
                 })
             }
         }
         if(name) checktrain.name = name
-        if(uniqueId) checktrain.uniqueId = uniqueId
+        if(license_plate) checktrain.license_plate = license_plate
         if(sourceStn) checktrain.sourceStn = sourceStn
         if(destinationStn) checktrain.destinationStn = destinationStn
         if(viaStations) checktrain.viaStations = viaStations
@@ -157,12 +157,12 @@ export const getAllTrainController = async(req,res)=>{
     }
 }
 
-export const getTrainByUniqueIdController = async(req,res)=>{
+export const getTrainBylicensePlateController = async(req,res)=>{
     try {
-        const {uniqueId} = req.body
-        const checkUniqueId = await trainModel.findOne({uniqueId});
-        if(!checkUniqueId){
-            logger.error("train not found gettrainbyuniqueid")
+        const {license_plate} = req.body
+        const checklicense_plate = await trainModel.findOne({license_plate});
+        if(!checklicense_plate){
+            logger.error("train not found gettrainbylicense_plate")
             return res.status(404).json({
                 status:"error",
                 message:"train Not Found",
@@ -171,13 +171,13 @@ export const getTrainByUniqueIdController = async(req,res)=>{
         }
         res.status(200).json({
             staus:"success",
-            message:"Train of " + uniqueId,
-            data:checkUniqueId
+            message:"Train of " + license_plate,
+            data:checklicense_plate
         })
-        logger.info("get train by uniqueid")
+        logger.info("get train by license_plate")
     } catch (error) {
         console.log(error);
-        logger.error("Error in get train bu uniqueid")
+        logger.error("Error in get train bu license_plate")
         return res.status(500).json({
             status:"error",
             message:"Iternal Error",

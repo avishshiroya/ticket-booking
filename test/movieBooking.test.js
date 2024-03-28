@@ -18,6 +18,7 @@ describe('MOVIE BOOKING API',()=>{
             //                 })
             //                 .then(response=>{
             //                     console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //                 })
             //                 .catch(error=>{
             //                     console.error(errors);

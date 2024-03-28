@@ -18,6 +18,7 @@ describe("Category API", () => {
                 })
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -34,6 +35,7 @@ describe("Category API", () => {
                 })
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -50,6 +52,7 @@ describe("Category API", () => {
                 })
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -61,6 +64,7 @@ describe("Category API", () => {
             const response = await request.get('/get-all')
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -72,6 +76,7 @@ describe("Category API", () => {
             const response = await request.get('/type/traveling')
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -84,6 +89,7 @@ describe("Category API", () => {
                 .set('Cookie', 'aAuth=' + cookie)
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);

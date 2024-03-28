@@ -1,6 +1,8 @@
 import adminModel from "../models/adminModels.js"
 import { registerAdminValidation } from "../validation/admin.validation.js"
 import logger from "../utils/logger.js"
+import passwordHash from "../services/passwordHash.js"
+import loggerPrint from "../utils/printLogger.js"
 export const registerAdminController = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -14,8 +16,9 @@ export const registerAdminController = async (req, res) => {
                 message: checkAdminDetails.error.message
             })
         }
+        const hashPassword = await passwordHash(password)
         const admin = new adminModel({
-            email, password
+            email, password:hashPassword
         })
         await admin.save();
         res.status(200).send({
@@ -54,7 +57,7 @@ export const loginAdminController = async (req, res) => {
                 message: "Admin Not Found! Check Email"
             })
         }
-        const comparePassword = checkAdminEmail.comparePassword(password);
+        const comparePassword = await checkAdminEmail.comparePassword(password);
         if (!comparePassword) {
             logger.error("Compare Password In Admin")
             return res.status(400).send({
@@ -62,6 +65,7 @@ export const loginAdminController = async (req, res) => {
                 message: "Check Your Password"
             })
         }
+        console.log(comparePassword);
         const token = checkAdminEmail.generateToken();
         res.status(200).cookie("aAuth", "bearer " + token, {
             expiresIn: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
@@ -73,7 +77,10 @@ export const loginAdminController = async (req, res) => {
             message: "Admin Login",
             token
         })
-        logger.info("Admin Login Successfully")
+        // console.log(req);
+        // logger.info(`${checkAdminEmail._id} Admin Login Successfully`)
+        // console.log(req.headers['user-agent']);
+        logger.info( `${req.method} ${req.originalUrl} ${req.headers['user-agent']} ${res.statusCode}  Admin Login Successfully`)
     } catch (error) {
         console.log(error)
         logger.error("Error In Admin Login")
@@ -86,6 +93,7 @@ export const loginAdminController = async (req, res) => {
 
 export const getAdminDetails = async (req, res) => {
     try {
+        // console.log(req)
         const admin = req.admin
         if (!admin) {
             logger.error("Admin Not authorized Get Admin")
@@ -107,7 +115,8 @@ export const getAdminDetails = async (req, res) => {
             message: "Admin Details",
             checkAdmin
         })
-        logger.info("Get Admin Detail Successfully")
+        // console.log()
+        logger.info( `${req.method} ${req.originalUrl} ${res.statusCode} Get Admin Detail Successfully`)
     } catch (error) {
         console.log(error)
         logger.error("Error In Get Admin Detail")

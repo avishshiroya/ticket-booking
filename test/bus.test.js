@@ -20,6 +20,7 @@ describe("BUS API", () => {
             //         "totalSeats": "30"
             //     }).then(response=>{
             //         console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //     }).catch(error=>{
             //         console.error(error);
             //     })
@@ -33,6 +34,7 @@ describe("BUS API", () => {
                     "totalSeats": "35"
                 }).then(response=>{
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error=>{
                     console.error(error);
                 })
@@ -43,6 +45,7 @@ describe("BUS API", () => {
             const response = await request.get('/')
                 .then(response=>{
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error=>{
                     console.error(error);
                 })
@@ -56,6 +59,7 @@ describe("BUS API", () => {
                 })
                 .then(response=>{
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error=>{
                     console.error(error);
                 })
@@ -69,6 +73,7 @@ describe("BUS API", () => {
                 })
                 .then(response=>{
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error=>{
                     console.error(error);
                 })
@@ -80,6 +85,7 @@ describe("BUS API", () => {
             .set('Cookie', 'aAuth =' + cookie)
             .then(response=>{
                 console.log(response.statusCode);
+                expect(response.statusCode).to.be.equal(200)
             }).catch(error=>{
                 console.error(error);
             })

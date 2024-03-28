@@ -8,6 +8,7 @@ import paypal from "paypal-rest-sdk"
 import path from "path"
 import winston from "winston"
 import cors from "cors"
+import loggerPrint from "./utils/printLogger.js"
 dotenv.config();
 
 paypal.configure({
@@ -21,11 +22,11 @@ const app = express();
 app.use(express.json())
 // app.use(bodyParser.json())
 app.use(morgan("dev"))
+app.use(loggerPrint)
 app.use(cors())
 app.use(cookieParser())
-
 // app.use('/', express.static(path.join('public'))); 
-
+// app.use(morgan('[:date[clf]] :method :url :status :response-time ms - :res[content-length]', { stream: accessLogStream }))
 //connectDB
 import connectDb from "./config/db.js"
 connectDb()
@@ -39,6 +40,7 @@ connectDb()
 
 //routes
 import Routes from "./routes/index.js"
+// import logger from "./utils/logger.js"
 
 app.use("/api/v1", Routes)
 

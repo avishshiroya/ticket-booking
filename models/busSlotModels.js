@@ -14,7 +14,7 @@ const busSlotSchema = new Schema({
         type:String,
         required:true
     },
-    despatureTime:{
+    depatureTime:{
         type:String,
         required:true
     },
@@ -26,7 +26,7 @@ const busSlotSchema = new Schema({
         type:Date,
         required:true
     },
-    despatureDate:{
+    depatureDate:{
         type:Date,
         required:true
     },

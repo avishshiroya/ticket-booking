@@ -18,6 +18,7 @@ describe("THEATERSCREENS API",()=>{
             //                 })
             //                 .then(response=>{
             //                     console.log(response);
+            // expect(response.statusCode).to.be.equal(200)
             //                 })
             //                 .catch(error=>{
             //                     console.log(error);
@@ -30,6 +31,7 @@ describe("THEATERSCREENS API",()=>{
                             .set('Cookie','aAuth='+cookie)
                             .then(response=>{
                                 console.log(response.statusCode);
+                                expect(response.statusCode).to.be.equal(200)
                             })
                             .catch(error=>{
                                 console.log(error);
@@ -45,6 +47,7 @@ describe("THEATERSCREENS API",()=>{
                             })
                             .then(response=>{
                                 console.log(response.statusCode);
+                                expect(response.statusCode).to.be.equal(200)
                             })
                             .catch(error=>{
                                 console.log(error);
@@ -60,6 +63,7 @@ describe("THEATERSCREENS API",()=>{
                             })
                             .then(response=>{
                                 console.log(response.statusCode);
+                                expect(response.statusCode).to.be.equal(200)
                             })
                             .catch(error=>{
                                 console.log(error);
@@ -72,6 +76,7 @@ describe("THEATERSCREENS API",()=>{
             //                 .set('Cookie','aAuth='+cookie)
             //                 .then(response=>{
             //                     console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //                 })
             //                 .catch(error=>{
             //                     console.log(error);

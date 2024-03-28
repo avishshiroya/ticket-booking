@@ -23,6 +23,7 @@ describe("MOVIE API", () => {
                 })
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -38,6 +39,7 @@ describe("MOVIE API", () => {
                     })
                     .then(response => {
                         console.log(response.statusCode);
+                        expect(response.statusCode).to.be.equal(200)
                     })
                     .catch(error => {
                         console.error(error);
@@ -49,6 +51,7 @@ describe("MOVIE API", () => {
                 const response = await request.get("/")
                     .then(response => {
                         console.log(response.statusCode);
+                        expect(response.statusCode).to.be.equal(200)
                     })
                     .catch(error => {
                         console.error(error);
@@ -60,6 +63,7 @@ describe("MOVIE API", () => {
                 const response = await request.get('/genre/crime')
                 .then(response=>{
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error=>{
                     console.error(error);
@@ -71,6 +75,7 @@ describe("MOVIE API", () => {
                 const response = await request.get('/casts/Marlon Brando')
                 .then(response=>{
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error=>{
                     console.error(error);
@@ -83,6 +88,7 @@ describe("MOVIE API", () => {
                     .set('Cookie', 'aAuth=' + cookie)
                     .then(response=>{
                         console.log(response.statusCode);
+                        expect(response.statusCode).to.be.equal(200)
                     })
                     .catch(error=>{
                         console.error(error);

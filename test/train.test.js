@@ -25,6 +25,7 @@ describe("TRAIN API", () => {
             //     })
             //     .then(response => {
             //         console.log(response.body);
+            // expect(response.statusCode).to.be.equal(200)
             //     })
             //     .catch(error => {
             //         console.error(error);
@@ -40,6 +41,7 @@ describe("TRAIN API", () => {
                 })
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -52,6 +54,7 @@ describe("TRAIN API", () => {
                 .set('Cookie', 'aAuth=' + cookie)
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -67,6 +70,7 @@ describe("TRAIN API", () => {
                 })
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 })
                 .catch(error => {
                     console.error(error);
@@ -79,6 +83,7 @@ describe("TRAIN API", () => {
             //     .set('Cookie', 'aAuth=' + cookie)
             //     .then(response => {
             //         console.log(response.statusCode);
+            // expect(response.statusCode).to.be.equal(200)
             //     })
             //     .catch(error => {
             //         console.error(error);

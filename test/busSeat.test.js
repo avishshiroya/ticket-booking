@@ -20,6 +20,7 @@ describe("BUSSEAT API", () => {
                     "price": 800
                 }).then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })
@@ -33,6 +34,7 @@ describe("BUSSEAT API", () => {
                     "inMaintainance": true
                 }).then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })
@@ -43,6 +45,7 @@ describe("BUSSEAT API", () => {
             const response = await request.get("/65f0030b8799e189a6b8c032")
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })
@@ -54,6 +57,7 @@ describe("BUSSEAT API", () => {
                 .set('Cookie', 'aAuth=' + cookie)
                 .then(response => {
                     console.log(response.statusCode);
+                    expect(response.statusCode).to.be.equal(200)
                 }).catch(error => {
                     console.error(error);
                 })

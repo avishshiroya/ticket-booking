@@ -1,0 +1,16 @@
+{
+  message: 'Get Admin Detail Successfully',
+  level: 'info',
+  timestamp: '2024-03-28T06:18:27.386Z'
+}
+{
+  message: 'Get Admin Detail Successfully',
+  level: 'info',
+  timestamp: '2024-03-28T06:19:38.121Z'
+}
+{
+  message: 'Get Admin Detail Successfully',
+  level: 'info',
+  timestamp: '2024-03-28T06:19:39.029Z'
+}
+ [info] 2024-03-28T09:23:14.270Z  GET /api/v1/bus/ PostmanRuntime/7.37.0 200  Get All Buses

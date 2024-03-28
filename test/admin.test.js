@@ -17,6 +17,7 @@ describe('Admin API',()=>{
                 //     'password':"admin123"
                 // }).then(response=>{
                 //     console.log(response.statusCode);
+                // expect(response.statusCode).to.be.equal(200)
                 // }).catch(error=>{
                 //     console.error(error);
                 // })
@@ -34,6 +35,7 @@ describe('Admin API',()=>{
                             console.log(response.statusCode);
                             cookie ='Bearer '+ response.body.token
                             console.log(cookie);
+                            expect(response.statusCode).to.be.equal(200)
                         }).catch(error=>{
                             console.error(error);
                         })
@@ -46,6 +48,7 @@ describe('Admin API',()=>{
                             .set('Cookie','aAuth='+cookie)
                             .then(response=>{
                                 console.log(response.statusCode);
+                                expect(response.statusCode).to.be.equal(200)
                             }).catch(error=>{
                                 console.error(error);
                             })
@@ -61,6 +64,7 @@ describe('Admin API',()=>{
         //                         console.log(response.statusCode);;
         //                         cookie = ''
         //                         // console.log(cookie);
+        // expect(response.statusCode).to.be.equal(200)
         //                     }).catch(error=>{
         //                         console.error(error);
         //                     })

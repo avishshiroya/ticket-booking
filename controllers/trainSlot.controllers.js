@@ -8,7 +8,7 @@ import { addTrainSlotValidation, updateTrainSlotValidation } from "../validation
 
 export const addTrainSlotController = async (req, res) => {
     try {
-        const { trainId, routeId, viaStations, arrivalTime, despatureTime, arrivalDate, despatureDate, totalDistance, travellingHours } = req.body
+        const { trainId, routeId, viaStations, arrivalTime, depatureTime, arrivalDate, depatureDate, totalDistance, travellingHours } = req.body
         const checkDetails = addTrainSlotValidation.validate(req.body, {
             abortEarly: false
         })
@@ -49,7 +49,7 @@ export const addTrainSlotController = async (req, res) => {
             })
         }
         const addTrainSlot = new trainSlotModel({
-            trainId, routeId, viaStations, arrivalTime, despatureTime, arrivalDate, despatureDate, totalDistance, travellingHours, createdBy: req.admin._id
+            trainId, routeId, viaStations, arrivalTime, depatureTime, arrivalDate, depatureDate, totalDistance, travellingHours, createdBy: req.admin._id
         })
         //add slot
         await addTrainSlot.save();
@@ -72,7 +72,7 @@ export const addTrainSlotController = async (req, res) => {
 
 export const updateTrainSlotController = async (req, res) => {
     try {
-        const { trainId, routeId, viaStations, arrivalTime, despatureTime, arrivalDate, despatureDate, totalDistance, travellingHours } = req.body
+        const { trainId, routeId, viaStations, arrivalTime, depatureTime, arrivalDate, depatureDate, totalDistance, travellingHours } = req.body
         const checkDetails = updateTrainSlotValidation.validate(req.body, {
             abortEarly: false
         })
@@ -120,9 +120,9 @@ export const updateTrainSlotController = async (req, res) => {
         }
         if(viaStations)checktrainSlot.viaStations = viaStations
         if(arrivalTime)checktrainSlot.arrivalTime = arrivalTime
-        if(despatureTime)checktrainSlot.despatureTime = despatureTime
+        if(depatureTime)checktrainSlot.depatureTime = depatureTime
         if(arrivalDate)checktrainSlot.arrivalDate = arrivalDate
-        if(despatureDate)checktrainSlot.despatureDate = despatureDate
+        if(depatureDate)checktrainSlot.depatureDate = depatureDate
         if(totalDistance)checktrainSlot.totalDistance = totalDistance
         if(travellingHours)checktrainSlot.travellingHours = travellingHours
         if(req.admin._id)checktrainSlot.updatedBy = req.admin._id

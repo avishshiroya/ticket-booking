@@ -10,7 +10,7 @@ const trainSchema = new Schema({
         type: String,
         required: true
     },
-    uniqueId: {
+    license_plate: {
         type: String,
         required: true,
         unique: true
