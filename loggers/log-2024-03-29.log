@@ -1,0 +1,49 @@
+ [info] 2024-03-29T05:22:40.238Z  custom GET /api/v1/train/uniqueId PostmanRuntime/7.37.0 [object Object] 
+ [error] 2024-03-29T05:22:40.241Z  GET /api/v1/train/uniqueId 200 Admin unAuthenticated!!
+ [info] 2024-03-29T05:22:50.639Z  custom GET /api/v1/train/ PostmanRuntime/7.37.0 [object Object] 
+ [error] 2024-03-29T05:22:50.640Z  GET /api/v1/train/ 200 Admin unAuthenticated!!
+ [info] 2024-03-29T05:22:54.908Z  custom GET /api/v1/train/ PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:22:55.786Z  custom GET /api/v1/train/ PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:23:18.518Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:23:18.635Z  Get train seat by slot
+ [info] 2024-03-29T05:23:43.814Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:23:43.918Z  Get train seat by slot
+ [info] 2024-03-29T05:25:52.986Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:25:53.086Z  Get train seat by slot
+ [info] 2024-03-29T05:26:03.425Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:26:03.522Z  Get train seat by slot
+ [info] 2024-03-29T05:26:14.423Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:26:14.528Z  Get train seat by slot
+ [info] 2024-03-29T05:26:26.785Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:26:26.906Z  Get train seat by slot
+ [info] 2024-03-29T05:26:37.603Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:26:37.686Z  Get train seat by slot
+ [info] 2024-03-29T05:26:52.100Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:26:52.208Z  Get train seat by slot
+ [info] 2024-03-29T05:27:08.084Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:27:08.221Z  Get train seat by slot
+ [info] 2024-03-29T05:28:02.100Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:28:02.199Z  Get train seat by slot
+ [info] 2024-03-29T05:28:17.794Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:29:29.780Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:29:29.888Z  Get train seat by slot
+ [info] 2024-03-29T05:29:49.056Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:29:49.164Z  Get train seat by slot
+ [info] 2024-03-29T05:30:26.172Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:30:26.273Z  Get train seat by slot
+ [info] 2024-03-29T05:32:28.322Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:32:28.448Z  Get train seat by slot
+ [info] 2024-03-29T05:33:40.705Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:33:40.809Z  Get train seat by slot
+ [info] 2024-03-29T05:33:49.369Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:33:49.487Z  Get train seat by slot
+ [info] 2024-03-29T05:34:12.180Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:34:12.291Z  Get train seat by slot
+ [info] 2024-03-29T05:34:13.416Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:34:14.827Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 [object Object] 
+ [info] 2024-03-29T05:36:33.259Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-29T05:36:33.392Z  Get train seat by slot
+ [info] 2024-03-29T05:38:58.045Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 undefined 
+ [error] 2024-03-29T05:38:58.124Z  Error in getTrainseatbyslot
+ [info] 2024-03-29T05:39:59.572Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.0 undefined 
+ [info] 2024-03-29T05:39:59.658Z  Get train seat by slot
