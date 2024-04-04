@@ -1,0 +1,21 @@
+ [info] 2024-04-04T06:23:44.758Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [error] 2024-04-04T06:23:44.761Z  POST /api/v1/trainseat/ 200 Admin unAuthenticated!!
+ [info] 2024-04-04T06:24:12.250Z  custom POST /api/v1/admin/login PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:24:15.580Z  POST /api/v1/admin/login PostmanRuntime/7.37.0 200  Admin Login Successfully
+ [info] 2024-04-04T06:24:36.743Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:24:38.415Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:24:39.334Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:24:40.046Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:24:41.252Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:24:42.090Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:25:05.257Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:26:14.304Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:27:19.553Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:28:00.106Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [error] 2024-04-04T06:28:00.426Z  errror in trainseatadd
+ [info] 2024-04-04T06:28:58.234Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [error] 2024-04-04T06:28:58.606Z  errror in trainseatadd
+ [info] 2024-04-04T06:29:20.507Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [info] 2024-04-04T06:29:20.831Z  Train seat added successfully
+ [info] 2024-04-04T06:29:38.367Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
+ [error] 2024-04-04T06:29:38.771Z  errror in trainseatadd

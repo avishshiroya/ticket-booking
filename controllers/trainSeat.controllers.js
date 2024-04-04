@@ -3,8 +3,10 @@ import trainSeatModel from "../models/trainSeatModels.js";
 import trainSlotModel from "../models/trainSlotModels.js";
 import logger from "../utils/logger.js";
 import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
-
- export const addTrainSeatController = async(req,res)=>{
+import mongoose from "mongoose";
+export const addTrainSeatController = async(req,res)=>{
+     const session = await mongoose.startSession();
+    session.startTransaction();
     try {
         const {seatClass,seatStart,seatEnd,price,slotId} = req.body
         const checkDetails = addTrainSeatValidation.validate(req.body,{
@@ -44,17 +46,18 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
                 seatNo:i,
                 price
             })
-            await addSeat.save();
+            await addSeat.save({session});
         }
 
-         res.status(200).send({
+        res.send(200).send({
             status:"success",
             message:"Train seat added",
             data:null
         })
+        await session.commitTransaction();      
         logger.info("Train seat added successfully")
-
     } catch (error) {
+        await session.abortTransaction();
         console.log(error);
         logger.error("errror in trainseatadd")
         return res.status(500).json({
@@ -62,6 +65,8 @@ import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
             message:"internal Error",
             data:null
         })
+    }finally{
+        session.endSession();
     }
  }
 
