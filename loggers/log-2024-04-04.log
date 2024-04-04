@@ -19,3 +19,61 @@
  [info] 2024-04-04T06:29:20.831Z  Train seat added successfully
  [info] 2024-04-04T06:29:38.367Z  custom POST /api/v1/trainseat/ PostmanRuntime/7.37.0 undefined 
  [error] 2024-04-04T06:29:38.771Z  errror in trainseatadd
+ [info] 2024-04-04T11:05:13.004Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:05:13.079Z  Error in getTrainseatbyslot
+ [info] 2024-04-04T11:07:04.816Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:07:04.890Z  Get train seat by slot
+ [info] 2024-04-04T11:12:15.536Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:12:15.578Z  Error in getTrainseatbyslot
+ [info] 2024-04-04T11:12:40.722Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:12:40.971Z  Error in getTrainseatbyslot
+ [info] 2024-04-04T11:13:07.312Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:13:07.349Z  Error in getTrainseatbyslot
+ [info] 2024-04-04T11:16:19.935Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:16:19.994Z  seats not found   gettrainseatbyslotid
+ [info] 2024-04-04T11:16:38.976Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:16:39.043Z  seats not found   gettrainseatbyslotid
+ [info] 2024-04-04T11:16:39.859Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:17:06.063Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:17:06.925Z  Get train seat by slot
+ [info] 2024-04-04T11:18:29.605Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:18:29.668Z  seats not found   gettrainseatbyslotid
+ [info] 2024-04-04T11:20:22.932Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:20:22.997Z  seats not found   gettrainseatbyslotid
+ [info] 2024-04-04T11:20:33.968Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:20:34.388Z  Error in getTrainseatbyslot
+ [info] 2024-04-04T11:20:40.527Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:20:40.561Z  Error in getTrainseatbyslot
+ [info] 2024-04-04T11:20:48.982Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:20:49.545Z  Get train seat by slot
+ [info] 2024-04-04T11:21:33.497Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:21:33.570Z  Get train seat by slot
+ [info] 2024-04-04T11:22:37.208Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:22:37.355Z  Error in getTrainseatbyslot
+ [info] 2024-04-04T11:23:17.031Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [error] 2024-04-04T11:23:17.237Z  Error in getTrainseatbyslot
+ [info] 2024-04-04T11:26:55.858Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:26:55.935Z  Get train seat by slot
+ [info] 2024-04-04T11:27:54.597Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:27:59.861Z  Get train seat by slot
+ [info] 2024-04-04T11:40:22.888Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:23.124Z  Get train seat by slot
+ [info] 2024-04-04T11:40:25.598Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:36.647Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:36.858Z  Get train seat by slot
+ [info] 2024-04-04T11:40:38.329Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:40.180Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:41.278Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:41.755Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:42.266Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:42.772Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:43.306Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:43.786Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:44.219Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:44.866Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:47.756Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:48.689Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:54.817Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:40:55.726Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:41:28.193Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-04T11:41:34.814Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 

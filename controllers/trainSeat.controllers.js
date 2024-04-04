@@ -2,6 +2,8 @@ import trainModel from "../models/trainModels.js";
 import trainSeatModel from "../models/trainSeatModels.js";
 import trainSlotModel from "../models/trainSlotModels.js";
 import logger from "../utils/logger.js";
+import successResponse from "../middleware/successResponse.js"
+import errorResponse from "../middleware/errorResponse.js"
 import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
 import mongoose from "mongoose";
 export const addTrainSeatController = async(req,res)=>{
@@ -126,26 +128,29 @@ export const addTrainSeatController = async(req,res)=>{
         const getSeats = await trainSeatModel.find({slotId:req.params.id});
         if(!getSeats[0]){
             logger.error("seats not found   gettrainseatbyslotid")
-            return res.status(404).json({
-                status:"error",
-                message:"Seats Not Found",
-                data:null
-            })
+            // return res.status(404).json({
+            //     status:"error",
+            //     message:"Seats Not Found",
+            //     data:null
+            // })
+            errorResponse(res,{statusCode:404,message:"Seats Not Found"})
         }
-        res.status(200).json({
-            status:"success",
-            message:"train seats",
-            data:getSeats
-        })
+        // res.status(200).json({
+        //     status:"success",
+        //     message:"train seats",
+        //     data:getSeats
+        // })
+        successResponse(res,{statusCode:200,data:getSeats,message:"trainSeats",header:{"X-name":"avish shiroya","X-newOne":"abc"}})
         logger.info("Get train seat by slot")
     } catch (error) {
         console.log(error);
         logger.error("Error in getTrainseatbyslot")
-        return res.status(500).json({
-            status:"error",
-            message:"Internal Error",
-            data:null
-        })
+        // return res.status(500).json({
+        //     status:"error",
+        //     message:"Internal Error",
+        //     data:null
+        // })
+        errorResponse(res,{statusCode:500,message:"Internal Server Error"})
     }
  }
 
