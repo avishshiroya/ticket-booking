@@ -2,7 +2,6 @@ import winston from "winston"
 import 'winston-daily-rotate-file'
 const { combine, timestamp, json, prettyPrint,printf } = winston.format
 
-const todayDate = new Date();
 
 const fileRotateTransport = new winston.transports.DailyRotateFile({
     filename: 'loggers/log-%DATE%.log',
@@ -10,15 +9,15 @@ const fileRotateTransport = new winston.transports.DailyRotateFile({
   });
 
   
-const myFormat = printf(({level,message,timestamp})=>
+const myFormat = printf(({res,level,message,timestamp})=>
 {
     // const reqIP =getIp(req);
-    return ` [${level}] ${timestamp}  ${message}`
+    return ` ${timestamp} [${level}] ${message}`
 })
 
 const logger = winston.createLogger({
     level: 'http',
-    format: combine(timestamp(),myFormat),
+    format: combine(timestamp({format : new Date().toLocaleString()}),myFormat),
     transports: [
         fileRotateTransport        
         // new winston.transports.File({ filename: `loggers/log-${todayDate.getFullYear()}-${todayDate.getMonth()}-${todayDate.getDate()}.log` })

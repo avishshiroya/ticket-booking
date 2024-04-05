@@ -6,6 +6,7 @@ import successResponse from "../middleware/successResponse.js"
 import errorResponse from "../middleware/errorResponse.js"
 import { addTrainSeatValidation } from "../validation/trainSeat.validation.js";
 import mongoose from "mongoose";
+import loggerPrint from "../utils/printLogger.js";
 export const addTrainSeatController = async(req,res)=>{
      const session = await mongoose.startSession();
     session.startTransaction();
@@ -140,16 +141,19 @@ export const addTrainSeatController = async(req,res)=>{
         //     message:"train seats",
         //     data:getSeats
         // })
-        successResponse(res,{statusCode:200,data:getSeats,message:"trainSeats",header:{"X-name":"avish shiroya","X-newOne":"abc"}})
-        logger.info("Get train seat by slot")
+        loggerPrint(req,res,"GetTrain Seat By Slot")
+        successResponse(res,{statusCode:200,data:[getSeats],message:"trainSeats",header:{"X-name":"avish shiroya","X-newOne":"abc"}})
+        // logger.info("Get train seat by slot")
     } catch (error) {
         console.log(error);
-        logger.error("Error in getTrainseatbyslot")
+        // logger.error("Error in getTrainseatbyslot")
         // return res.status(500).json({
         //     status:"error",
         //     message:"Internal Error",
         //     data:null
         // })
+        loggerPrint(req,res,"Internal Server error")
+
         errorResponse(res,{statusCode:500,message:"Internal Server Error"})
     }
  }

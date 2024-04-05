@@ -1,0 +1,723 @@
+ [info] 2024-04-05T03:38:21.642Z  custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 undefined 
+ [info] 2024-04-05T03:38:21.725Z  Get train seat by slot
+ [info] 2024-04-05T03:49:14.384Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 [object Object] 
+ [info] 2024-04-05T03:49:14.464Z   Get train seat by slot
+ [info] 2024-04-05T03:49:44.173Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 [object Object] 
+ [info] 2024-04-05T03:49:44.251Z   Get train seat by slot
+ [error] 2024-04-05T03:52:29.877Z   Error in getTrainseatbyslot
+ [error] 2024-04-05T03:52:45.843Z   Error in getTrainseatbyslot
+ [error] 2024-04-05T03:53:20.030Z   Error in getTrainseatbyslot
+ [info] 2024-04-05T03:53:28.140Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 [object Object] 
+ [error] 2024-04-05T03:53:28.143Z   Error in getTrainseatbyslot
+ [info] 2024-04-05T03:53:57.782Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 function next(err) {
+    var layerError = err === 'route'
+      ? null
+      : err;
+
+    // remove added slash
+    if (slashAdded) {
+      req.url = req.url.slice(1)
+      slashAdded = false;
+    }
+
+    // restore altered req.url
+    if (removed.length !== 0) {
+      req.baseUrl = parentUrl;
+      req.url = protohost + removed + req.url.slice(protohost.length)
+      removed = '';
+    }
+
+    // signal to exit router
+    if (layerError === 'router') {
+      setImmediate(done, null)
+      return
+    }
+
+    // no more matching layers
+    if (idx >= stack.length) {
+      setImmediate(done, layerError);
+      return;
+    }
+
+    // max sync stack
+    if (++sync > 100) {
+      return setImmediate(next, err)
+    }
+
+    // get pathname of request
+    var path = getPathname(req);
+
+    if (path == null) {
+      return done(layerError);
+    }
+
+    // find next matching layer
+    var layer;
+    var match;
+    var route;
+
+    while (match !== true && idx < stack.length) {
+      layer = stack[idx++];
+      match = matchLayer(layer, path);
+      route = layer.route;
+
+      if (typeof match !== 'boolean') {
+        // hold on to layerError
+        layerError = layerError || match;
+      }
+
+      if (match !== true) {
+        continue;
+      }
+
+      if (!route) {
+        // process non-route handlers normally
+        continue;
+      }
+
+      if (layerError) {
+        // routes do not match with a pending error
+        match = false;
+        continue;
+      }
+
+      var method = req.method;
+      var has_method = route._handles_method(method);
+
+      // build up automatic options response
+      if (!has_method && method === 'OPTIONS') {
+        appendMethods(options, route._options());
+      }
+
+      // don't even bother matching route
+      if (!has_method && method !== 'HEAD') {
+        match = false;
+      }
+    }
+
+    // no match
+    if (match !== true) {
+      return done(layerError);
+    }
+
+    // store route for dispatch on change
+    if (route) {
+      req.route = route;
+    }
+
+    // Capture one-time layer values
+    req.params = self.mergeParams
+      ? mergeParams(layer.params, parentParams)
+      : layer.params;
+    var layerPath = layer.path;
+
+    // this should be done for the layer
+    self.process_params(layer, paramcalled, req, res, function (err) {
+      if (err) {
+        next(layerError || err)
+      } else if (route) {
+        layer.handle_request(req, res, next)
+      } else {
+        trim_prefix(layer, layerError, layerPath, path)
+      }
+
+      sync = 0
+    });
+  } 
+ [info] 2024-04-05T03:54:28.126Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 function next(err) {
+    var layerError = err === 'route'
+      ? null
+      : err;
+
+    // remove added slash
+    if (slashAdded) {
+      req.url = req.url.slice(1)
+      slashAdded = false;
+    }
+
+    // restore altered req.url
+    if (removed.length !== 0) {
+      req.baseUrl = parentUrl;
+      req.url = protohost + removed + req.url.slice(protohost.length)
+      removed = '';
+    }
+
+    // signal to exit router
+    if (layerError === 'router') {
+      setImmediate(done, null)
+      return
+    }
+
+    // no more matching layers
+    if (idx >= stack.length) {
+      setImmediate(done, layerError);
+      return;
+    }
+
+    // max sync stack
+    if (++sync > 100) {
+      return setImmediate(next, err)
+    }
+
+    // get pathname of request
+    var path = getPathname(req);
+
+    if (path == null) {
+      return done(layerError);
+    }
+
+    // find next matching layer
+    var layer;
+    var match;
+    var route;
+
+    while (match !== true && idx < stack.length) {
+      layer = stack[idx++];
+      match = matchLayer(layer, path);
+      route = layer.route;
+
+      if (typeof match !== 'boolean') {
+        // hold on to layerError
+        layerError = layerError || match;
+      }
+
+      if (match !== true) {
+        continue;
+      }
+
+      if (!route) {
+        // process non-route handlers normally
+        continue;
+      }
+
+      if (layerError) {
+        // routes do not match with a pending error
+        match = false;
+        continue;
+      }
+
+      var method = req.method;
+      var has_method = route._handles_method(method);
+
+      // build up automatic options response
+      if (!has_method && method === 'OPTIONS') {
+        appendMethods(options, route._options());
+      }
+
+      // don't even bother matching route
+      if (!has_method && method !== 'HEAD') {
+        match = false;
+      }
+    }
+
+    // no match
+    if (match !== true) {
+      return done(layerError);
+    }
+
+    // store route for dispatch on change
+    if (route) {
+      req.route = route;
+    }
+
+    // Capture one-time layer values
+    req.params = self.mergeParams
+      ? mergeParams(layer.params, parentParams)
+      : layer.params;
+    var layerPath = layer.path;
+
+    // this should be done for the layer
+    self.process_params(layer, paramcalled, req, res, function (err) {
+      if (err) {
+        next(layerError || err)
+      } else if (route) {
+        layer.handle_request(req, res, next)
+      } else {
+        trim_prefix(layer, layerError, layerPath, path)
+      }
+
+      sync = 0
+    });
+  } 
+ [info] 2024-04-05T03:55:04.282Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 function next(err) {
+    var layerError = err === 'route'
+      ? null
+      : err;
+
+    // remove added slash
+    if (slashAdded) {
+      req.url = req.url.slice(1)
+      slashAdded = false;
+    }
+
+    // restore altered req.url
+    if (removed.length !== 0) {
+      req.baseUrl = parentUrl;
+      req.url = protohost + removed + req.url.slice(protohost.length)
+      removed = '';
+    }
+
+    // signal to exit router
+    if (layerError === 'router') {
+      setImmediate(done, null)
+      return
+    }
+
+    // no more matching layers
+    if (idx >= stack.length) {
+      setImmediate(done, layerError);
+      return;
+    }
+
+    // max sync stack
+    if (++sync > 100) {
+      return setImmediate(next, err)
+    }
+
+    // get pathname of request
+    var path = getPathname(req);
+
+    if (path == null) {
+      return done(layerError);
+    }
+
+    // find next matching layer
+    var layer;
+    var match;
+    var route;
+
+    while (match !== true && idx < stack.length) {
+      layer = stack[idx++];
+      match = matchLayer(layer, path);
+      route = layer.route;
+
+      if (typeof match !== 'boolean') {
+        // hold on to layerError
+        layerError = layerError || match;
+      }
+
+      if (match !== true) {
+        continue;
+      }
+
+      if (!route) {
+        // process non-route handlers normally
+        continue;
+      }
+
+      if (layerError) {
+        // routes do not match with a pending error
+        match = false;
+        continue;
+      }
+
+      var method = req.method;
+      var has_method = route._handles_method(method);
+
+      // build up automatic options response
+      if (!has_method && method === 'OPTIONS') {
+        appendMethods(options, route._options());
+      }
+
+      // don't even bother matching route
+      if (!has_method && method !== 'HEAD') {
+        match = false;
+      }
+    }
+
+    // no match
+    if (match !== true) {
+      return done(layerError);
+    }
+
+    // store route for dispatch on change
+    if (route) {
+      req.route = route;
+    }
+
+    // Capture one-time layer values
+    req.params = self.mergeParams
+      ? mergeParams(layer.params, parentParams)
+      : layer.params;
+    var layerPath = layer.path;
+
+    // this should be done for the layer
+    self.process_params(layer, paramcalled, req, res, function (err) {
+      if (err) {
+        next(layerError || err)
+      } else if (route) {
+        layer.handle_request(req, res, next)
+      } else {
+        trim_prefix(layer, layerError, layerPath, path)
+      }
+
+      sync = 0
+    });
+  } 
+ [info] 2024-04-05T03:55:19.361Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 function next(err) {
+    var layerError = err === 'route'
+      ? null
+      : err;
+
+    // remove added slash
+    if (slashAdded) {
+      req.url = req.url.slice(1)
+      slashAdded = false;
+    }
+
+    // restore altered req.url
+    if (removed.length !== 0) {
+      req.baseUrl = parentUrl;
+      req.url = protohost + removed + req.url.slice(protohost.length)
+      removed = '';
+    }
+
+    // signal to exit router
+    if (layerError === 'router') {
+      setImmediate(done, null)
+      return
+    }
+
+    // no more matching layers
+    if (idx >= stack.length) {
+      setImmediate(done, layerError);
+      return;
+    }
+
+    // max sync stack
+    if (++sync > 100) {
+      return setImmediate(next, err)
+    }
+
+    // get pathname of request
+    var path = getPathname(req);
+
+    if (path == null) {
+      return done(layerError);
+    }
+
+    // find next matching layer
+    var layer;
+    var match;
+    var route;
+
+    while (match !== true && idx < stack.length) {
+      layer = stack[idx++];
+      match = matchLayer(layer, path);
+      route = layer.route;
+
+      if (typeof match !== 'boolean') {
+        // hold on to layerError
+        layerError = layerError || match;
+      }
+
+      if (match !== true) {
+        continue;
+      }
+
+      if (!route) {
+        // process non-route handlers normally
+        continue;
+      }
+
+      if (layerError) {
+        // routes do not match with a pending error
+        match = false;
+        continue;
+      }
+
+      var method = req.method;
+      var has_method = route._handles_method(method);
+
+      // build up automatic options response
+      if (!has_method && method === 'OPTIONS') {
+        appendMethods(options, route._options());
+      }
+
+      // don't even bother matching route
+      if (!has_method && method !== 'HEAD') {
+        match = false;
+      }
+    }
+
+    // no match
+    if (match !== true) {
+      return done(layerError);
+    }
+
+    // store route for dispatch on change
+    if (route) {
+      req.route = route;
+    }
+
+    // Capture one-time layer values
+    req.params = self.mergeParams
+      ? mergeParams(layer.params, parentParams)
+      : layer.params;
+    var layerPath = layer.path;
+
+    // this should be done for the layer
+    self.process_params(layer, paramcalled, req, res, function (err) {
+      if (err) {
+        next(layerError || err)
+      } else if (route) {
+        layer.handle_request(req, res, next)
+      } else {
+        trim_prefix(layer, layerError, layerPath, path)
+      }
+
+      sync = 0
+    });
+  } 
+ [info] 2024-04-05T03:55:29.790Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 function next(err) {
+    var layerError = err === 'route'
+      ? null
+      : err;
+
+    // remove added slash
+    if (slashAdded) {
+      req.url = req.url.slice(1)
+      slashAdded = false;
+    }
+
+    // restore altered req.url
+    if (removed.length !== 0) {
+      req.baseUrl = parentUrl;
+      req.url = protohost + removed + req.url.slice(protohost.length)
+      removed = '';
+    }
+
+    // signal to exit router
+    if (layerError === 'router') {
+      setImmediate(done, null)
+      return
+    }
+
+    // no more matching layers
+    if (idx >= stack.length) {
+      setImmediate(done, layerError);
+      return;
+    }
+
+    // max sync stack
+    if (++sync > 100) {
+      return setImmediate(next, err)
+    }
+
+    // get pathname of request
+    var path = getPathname(req);
+
+    if (path == null) {
+      return done(layerError);
+    }
+
+    // find next matching layer
+    var layer;
+    var match;
+    var route;
+
+    while (match !== true && idx < stack.length) {
+      layer = stack[idx++];
+      match = matchLayer(layer, path);
+      route = layer.route;
+
+      if (typeof match !== 'boolean') {
+        // hold on to layerError
+        layerError = layerError || match;
+      }
+
+      if (match !== true) {
+        continue;
+      }
+
+      if (!route) {
+        // process non-route handlers normally
+        continue;
+      }
+
+      if (layerError) {
+        // routes do not match with a pending error
+        match = false;
+        continue;
+      }
+
+      var method = req.method;
+      var has_method = route._handles_method(method);
+
+      // build up automatic options response
+      if (!has_method && method === 'OPTIONS') {
+        appendMethods(options, route._options());
+      }
+
+      // don't even bother matching route
+      if (!has_method && method !== 'HEAD') {
+        match = false;
+      }
+    }
+
+    // no match
+    if (match !== true) {
+      return done(layerError);
+    }
+
+    // store route for dispatch on change
+    if (route) {
+      req.route = route;
+    }
+
+    // Capture one-time layer values
+    req.params = self.mergeParams
+      ? mergeParams(layer.params, parentParams)
+      : layer.params;
+    var layerPath = layer.path;
+
+    // this should be done for the layer
+    self.process_params(layer, paramcalled, req, res, function (err) {
+      if (err) {
+        next(layerError || err)
+      } else if (route) {
+        layer.handle_request(req, res, next)
+      } else {
+        trim_prefix(layer, layerError, layerPath, path)
+      }
+
+      sync = 0
+    });
+  } 
+ [info] 2024-04-05T03:56:16.368Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 function next(err) {
+    var layerError = err === 'route'
+      ? null
+      : err;
+
+    // remove added slash
+    if (slashAdded) {
+      req.url = req.url.slice(1)
+      slashAdded = false;
+    }
+
+    // restore altered req.url
+    if (removed.length !== 0) {
+      req.baseUrl = parentUrl;
+      req.url = protohost + removed + req.url.slice(protohost.length)
+      removed = '';
+    }
+
+    // signal to exit router
+    if (layerError === 'router') {
+      setImmediate(done, null)
+      return
+    }
+
+    // no more matching layers
+    if (idx >= stack.length) {
+      setImmediate(done, layerError);
+      return;
+    }
+
+    // max sync stack
+    if (++sync > 100) {
+      return setImmediate(next, err)
+    }
+
+    // get pathname of request
+    var path = getPathname(req);
+
+    if (path == null) {
+      return done(layerError);
+    }
+
+    // find next matching layer
+    var layer;
+    var match;
+    var route;
+
+    while (match !== true && idx < stack.length) {
+      layer = stack[idx++];
+      match = matchLayer(layer, path);
+      route = layer.route;
+
+      if (typeof match !== 'boolean') {
+        // hold on to layerError
+        layerError = layerError || match;
+      }
+
+      if (match !== true) {
+        continue;
+      }
+
+      if (!route) {
+        // process non-route handlers normally
+        continue;
+      }
+
+      if (layerError) {
+        // routes do not match with a pending error
+        match = false;
+        continue;
+      }
+
+      var method = req.method;
+      var has_method = route._handles_method(method);
+
+      // build up automatic options response
+      if (!has_method && method === 'OPTIONS') {
+        appendMethods(options, route._options());
+      }
+
+      // don't even bother matching route
+      if (!has_method && method !== 'HEAD') {
+        match = false;
+      }
+    }
+
+    // no match
+    if (match !== true) {
+      return done(layerError);
+    }
+
+    // store route for dispatch on change
+    if (route) {
+      req.route = route;
+    }
+
+    // Capture one-time layer values
+    req.params = self.mergeParams
+      ? mergeParams(layer.params, parentParams)
+      : layer.params;
+    var layerPath = layer.path;
+
+    // this should be done for the layer
+    self.process_params(layer, paramcalled, req, res, function (err) {
+      if (err) {
+        next(layerError || err)
+      } else if (route) {
+        layer.handle_request(req, res, next)
+      } else {
+        trim_prefix(layer, layerError, layerPath, path)
+      }
+
+      sync = 0
+    });
+  } 
+ [info] 2024-04-05T03:56:39.641Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ [error] 2024-04-05T03:56:39.645Z   Error in getTrainseatbyslot
+ [info] 2024-04-05T03:57:35.807Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ [error] 2024-04-05T03:57:35.811Z   Error in getTrainseatbyslot
+ [info] 2024-04-05T03:57:52.015Z   custom GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ [info] 2024-04-05T03:57:52.025Z   Get train seat by slot
+ [info] 2024-04-05T03:58:21.601Z    GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ [info] 2024-04-05T04:00:36.310Z    GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ [error] 2024-04-05T04:00:45.646Z   Error in getTrainseatbyslot
+ [info] 2024-04-05T04:08:51.713Z    GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ [info] 2024-04-05T04:10:49.587Z    GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ [info] 2024-04-05T04:10:58.624Z    GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ 2024-04-05T04:24:39.109Z [info]  GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ 4/5/2024 [info]  GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ 4/5/2024, 9:57:48 AM4 [info]  GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ 4/5/2024, 9:57:48 AM4 [info]  GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ 4/5/2024, 9:58:20 AM4 [info]  GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072c PostmanRuntime/7.37.3 GetTrain Seat By Slot 
+ 4/5/2024, 10:00:11 AM4 [info]  GET /api/v1/trainseat/slot/65ee7ea6da21723a4609072 PostmanRuntime/7.37.3 Internal Server error 
+ 4/5/2024, 3:55:22 P4 [info] POST /api/v1/admin/login PostmanRuntime/7.37.3 200  Admin Login Successfully
+ 4/5/2024, 4:42:26 P4 [error] Email and Mobile Number used Once
+ 4/5/2024, 4:47:55 P4 [info] User Register SuccessFully
+ 4/5/2024, 4:47:55 P4 [error] Email and Mobile Number used Once

@@ -4,7 +4,17 @@ import logger from "../utils/logger.js";
 import passwordHash from "../services/passwordHash.js";
 import loggerPrint from "../utils/printLogger.js";
 import NodeCache from "node-cache";
+import userModel from "../models/userModel.js";
 const cache = new NodeCache();
+import  Queue  from "bull";
+
+const notificationQueue = new Queue('email-queue',{
+    redis:{
+        port:6379,
+        host:'127.0.0.1'
+
+    }
+});
 export const registerAdminController = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -175,3 +185,21 @@ export const adminLogoutController = async (req, res) => {
     });
   }
 };
+
+export const SendMAilToAllUsers = async (req,res)=>{
+  try {
+    const users = await userModel.find({},{email:1});
+    users.forEach((user,index)=>{
+      notificationQueue.add({user:user.email}).then(()=>{
+        if(index+1 === users.length){
+          res.json({
+            status:'success',
+            message:"Notification Sent To all Users"
+          })
+        }
+      })
+    })
+  } catch (error) {
+console.log(error);
+  }
+}

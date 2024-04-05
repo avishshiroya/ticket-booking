@@ -8,18 +8,26 @@ import os from "os";
 import connectDb from "./config/db.js";
 import Routes from "./routes/index.js";
 import middlewares from "./middleware/middlewares.js";
+import( './mq/producer.js')
+// import( "./mq/worker.js");
+
+
+
+
+// import { createClient } from "redis";
+
 // import logger from "./utils/logger.js"
-const totalCPUs = os.cpus().length;
-console.log(totalCPUs);
+// const totalCPUs = os.cpus().length;
+// console.log(totalCPUs);
 const app = express();
 
-if (cluster.isPrimary) {
-  console.log(`Primary ${process.pid} is running`);
+// if (cluster.isPrimary) {
+  // console.log(`Primary ${process.pid} is running`);
 
-  for (let i = 0; i < totalCPUs; i++) {
-    cluster.fork();
-  }
-} else {
+  // for (let i = 0; i < totalCPUs; i++) {
+  //   cluster.fork();
+  // }
+// } else {
   paypal.configure({
     mode: process.env.PAYPAL_MODE,
     client_id: process.env.PAYPAL_CLIENT_ID,
@@ -57,5 +65,5 @@ if (cluster.isPrimary) {
       console.log(`Port ${PORT} run successfully ${process.pid}`);
     }
   });
-}
+// }
 export default app;
