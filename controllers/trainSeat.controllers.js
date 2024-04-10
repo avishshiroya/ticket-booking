@@ -142,6 +142,7 @@ export const addTrainSeatController = async(req,res)=>{
         //     data:getSeats
         // })
         loggerPrint(req,res,"GetTrain Seat By Slot")
+        logger.info(`${req.method} ${req.originalUrl} ${req.headers["user-agent"]} GetTrain Seat By Slot`)
         successResponse(res,{statusCode:200,data:[getSeats],message:"trainSeats",header:{"X-name":"avish shiroya","X-newOne":"abc"}})
         // logger.info("Get train seat by slot")
     } catch (error) {
@@ -152,6 +153,7 @@ export const addTrainSeatController = async(req,res)=>{
         //     message:"Internal Error",
         //     data:null
         // })
+        logger.error(`${req.method} ${req.originalUrl} ${req.headers["user-agent"]} Internal Server Error`)
         loggerPrint(req,res,"Internal Server error")
 
         errorResponse(res,{statusCode:500,message:"Internal Server Error"})

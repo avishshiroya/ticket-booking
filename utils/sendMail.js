@@ -1,24 +1,35 @@
-import nodemailer from "nodemailer"
+import nodemailer from "nodemailer";
+import logger from "./logger.js";
 
+export const sendMailOtp = async (mail, otp, req, res) => {
+  const testAccount = await nodemailer.createTestAccount();
 
-export const sendMailOtp = async(mail,otp,req,res)=>{
-    const testAccount= await nodemailer.createTestAccount();
+  const transport = nodemailer.createTransport({
+    // host: process.env.SMTP_HOST,
+    // port: process.env.SMTP_PORT,
+    // auth: {
+    //   user: process.env.SMTP_USER,
+    //   pass: process.env.SMTP_PASS
+    // },
+    // connectionTimeout: 5 * 60 * 1000, 
+ 
+      host:'smtp.ethereal.email',
+      port: 587,
+      auth: {
+        user: "mikayla.heidenreich2@ethereal.email",
+        pass: "uVfs68J888UrpNK1vC"
+      },
+      // connectionTimeout: 5 * 60 * 1000, 
+  
+      
+  });
+  const subject = "OTP Verification From Ticket Booking";
 
-    const transport = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS
-        }
-      });
-      const subject = "OTP Verification From Ticket Booking";
-
-      var mailOption = {
-        from :process.env.SMTP_EMAIL_FROM,
-        to:mail,
-        subect:"OTP FROM THE TICKET BOOKING",
-        html:`<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+  var mailOption = {
+    from: process.env.SMTP_EMAIL_FROM,
+    to: mail,
+    subect: "OTP FROM THE TICKET BOOKING",
+    html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
         <div style="margin:50px auto;width:70%;padding:20px 0">
           <div style="border-bottom:1px solid #eee">
             <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Ticket Booking</a>
@@ -31,15 +42,16 @@ export const sendMailOtp = async(mail,otp,req,res)=>{
           <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">            
           </div>
         </div>
-      </div>`
-      }
-      transport.sendMail(mailOption,function(error,info){
-        if(error){
-            console.log("error in mail send"+error)
-        }
-        else{
-          console.log("mail send")
-        }
-      })
-      console.log(`email send to ${mail}`)
-}
+      </div>`,
+  };
+  await transport.sendMail(mailOption, function (error, info) {
+    if (error) {
+      // console.log("error in mail send" + error);
+      logger.info("Error Send MAil " + error.message)
+    } else {
+      logger.info("Mail Sended Of " + mail)
+      console.log("mail send");
+    }
+  });
+  // console.log(`email send to ${mail}`);
+};

@@ -2,6 +2,7 @@ import  Queue  from "bull";
 import emailQueueProcessor from "./worker.js";
 import logger from "../utils/logger.js";
 import loggerPrint from "../utils/printLogger.js";
+// console.log("COnnection of redis");
 
 const notificationQueue = new Queue('email-queue',{
     redis:{
@@ -17,4 +18,5 @@ notificationQueue.process((job)=>{
 
 notificationQueue.on('completed',()=>{
     console.log(`complete ${job.id}`)
+    notificationQueue.removeJobs();
 })

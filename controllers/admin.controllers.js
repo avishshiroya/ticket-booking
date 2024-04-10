@@ -6,14 +6,15 @@ import loggerPrint from "../utils/printLogger.js";
 import NodeCache from "node-cache";
 import userModel from "../models/userModel.js";
 const cache = new NodeCache();
-import  Queue  from "bull";
+import Queue from "bull";
+import { tryCatch } from "bullmq";
+import MailModel from "../models/mailsModel.js";
 
-const notificationQueue = new Queue('email-queue',{
-    redis:{
-        port:6379,
-        host:'127.0.0.1'
-
-    }
+const notificationQueue = new Queue("email-queue", {
+  redis: {
+    port: 6379,
+    host: "127.0.0.1",
+  },
 });
 export const registerAdminController = async (req, res) => {
   try {
@@ -116,7 +117,7 @@ export const getAdminDetails = async (req, res) => {
       logger.info(
         `${req.method} ${req.originalUrl} 200 Get Admin Detail Successfully`
       );
-      return  res.status(200).send({
+      return res.status(200).send({
         status: "success",
         message: "Admin Details",
         data: cache.get("adminDetail"),
@@ -169,7 +170,7 @@ export const adminLogoutController = async (req, res) => {
         message: "Admin unauthorized",
       });
     }
-    cache.del('adminDetail')
+    cache.del("adminDetail");
     res.status(200).clearCookie("aAuth").json({
       status: "success",
       message: "Admin Logout",
@@ -186,20 +187,56 @@ export const adminLogoutController = async (req, res) => {
   }
 };
 
-export const SendMAilToAllUsers = async (req,res)=>{
+export const AddMails = async (req, res) => {
   try {
-    const users = await userModel.find({},{email:1});
-    users.forEach((user,index)=>{
-      notificationQueue.add({user:user.email}).then(()=>{
-        if(index+1 === users.length){
-          res.json({
-            status:'success',
-            message:"Notification Sent To all Users"
-          })
-        }
-      })
-    })
+    const { start, end } = req.body;
+    for (let i = start; i <= end; i++) {
+      const mailAdd = new MailModel({
+        email: "avish" + i + "@yopmail.com",
+      });
+      await mailAdd.save();
+    }
+    return res.json("100 Mail Saved");
   } catch (error) {
-console.log(error);
+    console.log(error);
   }
-}
+};
+
+export const SendMAilToAllUsers = async (req, res) => {
+  try {
+    // ---------- send the single mail to all ----------
+    // const users = await MailModel.find({},{email:1});
+    // // console.log("1");
+    // // console.log(users);
+    // users.forEach((user,index)=>{
+    //   notificationQueue.add({user:user.email}).then(()=>{
+    //     // console.log(index +1);
+    //     if(index+1 === users.length){
+    //       res.json({
+    //         status:'success',
+    //         message:"Notification Sent To all Users"
+    //       })
+    //     }
+    //   })
+    // })
+
+    //--------send email to all the user at a one time using multiple email ------------
+    const users = await MailModel.find({}, { email: 1 ,_id:0});
+    let emails = [];
+    console.log(users);
+    users.forEach((user, index) => {
+      emails.push(user.email);
+    });
+    await notificationQueue.add(emails).then(() => {
+      // console.log(index +1);
+      // if(index+1 === users.length){
+      res.json({
+        status: "success",
+        message: "Notification Sent To all Users",
+      });
+      // }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

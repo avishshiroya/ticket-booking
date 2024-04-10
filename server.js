@@ -22,11 +22,11 @@ import( './mq/producer.js')
 const app = express();
 
 // if (cluster.isPrimary) {
-  // console.log(`Primary ${process.pid} is running`);
+//   console.log(`Primary ${process.pid} is running`);
 
-  // for (let i = 0; i < totalCPUs; i++) {
-  //   cluster.fork();
-  // }
+//   for (let i = 0; i < totalCPUs; i++) {
+//     cluster.fork();
+//   }
 // } else {
   paypal.configure({
     mode: process.env.PAYPAL_MODE,

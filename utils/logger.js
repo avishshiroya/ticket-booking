@@ -4,7 +4,7 @@ const { combine, timestamp, json, prettyPrint,printf } = winston.format
 
 
 const fileRotateTransport = new winston.transports.DailyRotateFile({
-    filename: 'loggers/log-%DATE%.log',
+    filename: 'loggers/logs-%DATE%.log',
     datePattern: 'YYYY-MM-DD',
   });
 
