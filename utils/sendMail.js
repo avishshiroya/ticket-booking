@@ -5,20 +5,20 @@ export const sendMailOtp = async (mail, otp, req, res) => {
   const testAccount = await nodemailer.createTestAccount();
 
   const transport = nodemailer.createTransport({
-    // host: process.env.SMTP_HOST,
-    // port: process.env.SMTP_PORT,
-    // auth: {
-    //   user: process.env.SMTP_USER,
-    //   pass: process.env.SMTP_PASS
-    // },
-    // connectionTimeout: 5 * 60 * 1000, 
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    },
+    connectionTimeout: 5 * 60 * 1000, 
  
-      host:'smtp.ethereal.email',
-      port: 587,
-      auth: {
-        user: "mikayla.heidenreich2@ethereal.email",
-        pass: "uVfs68J888UrpNK1vC"
-      },
+      // host:'smtp.ethereal.email',
+      // port: 587,
+      // auth: {
+      //   user: "mikayla.heidenreich2@ethereal.email",
+      //   pass: "uVfs68J888UrpNK1vC"
+      // },
       // connectionTimeout: 5 * 60 * 1000, 
   
       

@@ -15,7 +15,7 @@ export const addBusSlotValidation = joi.object({
         "any.required":"Arrival Time Must Be Rquired",
         "string.empty":'Arrival Time Cannot Be Empty'
     }),
-    despatureTime:joi.string().required().trim().messages({
+    depatureTime:joi.string().required().trim().messages({
         "any.required":"Despature Time Must Be Rquired",
         "string.empty":'Despature Time Cannot Be Empty'
     }),
@@ -27,7 +27,7 @@ export const addBusSlotValidation = joi.object({
         "any.required":"ArrivalDate must Be Required",
         "date.greater":"arrival Date Is greater Than Today Date"
     }),
-    despatureDate:joi.date().greater('now').required().messages({
+    depatureDate:joi.date().greater('now').required().messages({
         "any.required":"despature Date must Be Required",
         "date.greater":"despature Date Is greater Than Today Date"
     }),

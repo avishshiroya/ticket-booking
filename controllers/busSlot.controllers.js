@@ -72,7 +72,11 @@ export const busSlotAddController = async (req, res) => {
 
 export const getBusSlotController = async (req, res) => {
     try {
-        const getAllBusSlot = await busSlotModel.find({});
+        const pageno = req.query.page || 1;
+        const limit = 10;
+        const skip = limit * (pageno-1);
+        
+        const getAllBusSlot = await busSlotModel.find({}).limit(limit).skip(skip);
         if (!getAllBusSlot[0]) {
             logger.error("Busslot not found getBusSlot")
             return res.status(404).json(

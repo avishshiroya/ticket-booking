@@ -223,7 +223,7 @@ export const SendMAilToAllUsers = async (req, res) => {
     //--------send email to all the user at a one time using multiple email ------------
     const users = await MailModel.find({}, { email: 1 ,_id:0});
     let emails = [];
-    console.log(users);
+    // console.log(users);
     users.forEach((user, index) => {
       emails.push(user.email);
     });

@@ -17,7 +17,7 @@ const myFormat = printf(({res,level,message,timestamp})=>
 
 const logger = winston.createLogger({
     level: 'http',
-    format: combine(timestamp({format : new Date().toLocaleString()}),myFormat),
+    format: combine(timestamp(),myFormat),
     transports: [
         fileRotateTransport        
         // new winston.transports.File({ filename: `loggers/log-${todayDate.getFullYear()}-${todayDate.getMonth()}-${todayDate.getDate()}.log` })

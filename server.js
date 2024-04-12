@@ -10,7 +10,7 @@ import Routes from "./routes/index.js";
 import middlewares from "./middleware/middlewares.js";
 import( './mq/producer.js')
 // import( "./mq/worker.js");
-
+import("./cron.js")
 
 
 
