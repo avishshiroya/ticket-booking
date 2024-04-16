@@ -36,7 +36,7 @@ export const addTrainController = async(req,res)=>{
             })
         }
         const train = new trainModel({
-            categoryId:checkCategory._id,name,license_plate,sourceStn,destinationStn,viaStations,totalDistance,classes,capacity,createdBy:req.admin._id
+            categoryId:checkCategory._id,name,license_plate,sourceStn,destinationStn,viaStations,totalDistance,classes,capacity,//createdBy:req.admin._id
         })
         //save train
         await train.save();
@@ -44,7 +44,7 @@ export const addTrainController = async(req,res)=>{
         res.status(200).json({
             status:"success",
             message:'Train added Successfully',
-            data:null
+            data:[]
         })
         logger.info("train added successfully")
     } catch (error) {

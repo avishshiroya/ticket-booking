@@ -9,10 +9,10 @@ export const addTrainValidation = joi.object({
         "any.required":"name must be required",
         "string.empty":"Train Name Cannot be empty"
     }),
-    uniqueId:joi.string().required().length(8).trim().messages({
-        "any.required":"train UniqueId Required",
-        "string.empty":"Train's uniqueid cannot be empty",
-        "string.length":"train UniqueId have Must be 8 Character"
+    license_plate:joi.string().required().length(8).trim().messages({
+        "any.required":"train license_plate Required",
+        "string.empty":"Train's license_plate cannot be empty",
+        "string.length":"train license_plate have Must be 8 Character"
     }),
     sourceStn:joi.string().required().trim().messages({
         "any.required":"SourceStn must be required",
@@ -37,6 +37,9 @@ export const addTrainValidation = joi.object({
     capacity:joi.number().required().messages({
         "any.required":"Total Distance Must Be Required",
         "string.empty":'Total Distance of route cannot be empty'
+    }),
+    aAuth:joi.string().messages({
+        "string.empty":'authentication token cannot be empty'
     }),
 })
 export const updateTrainValidation = joi.object({
@@ -67,5 +70,8 @@ export const updateTrainValidation = joi.object({
     }),
     capacity:joi.number().messages({
         "string.empty":'Total Distance of route cannot be empty'
+    }),
+    aAuth:joi.string().messages({
+        "string.empty":'authentication token cannot be empty'
     }),
 })

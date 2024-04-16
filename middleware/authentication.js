@@ -44,8 +44,8 @@ export const isAuth = async(req,res,next)=>{
 
  export const adminIsAuth = async (req,res,next)=>{
     try {
-        const {aAuth} = req.cookies;
-        // console.log('123' + aAuth);
+        const aAuth = req.cookies.aAuth || req.headers.aAuth || req.body.aAuth;
+        console.log('123' + aAuth);
         if(!aAuth){
         logger.error( `${req.method} ${req.originalUrl} ${res.statusCode} Admin unAuthenticated!!`)
             return res.status(401).send({
