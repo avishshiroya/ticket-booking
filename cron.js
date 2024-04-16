@@ -5,7 +5,7 @@ import axios from "axios";
 import loggerPrint from "./utils/printLogger.js";
 import io from "./server.js";
 import { runApi } from "./services/axios.js";
-let RUN_TIME = " */10 * * * * *";
+let RUN_TIME = " 0 5 0 * * *";
 scheduleJob(RUN_TIME,async(fireDate)=>{
     try {
         console.log("Cron Run" + fireDate);
