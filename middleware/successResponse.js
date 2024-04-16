@@ -1,5 +1,6 @@
  const successResponse = (res, response) => {
   const { statusCode, data, message, header } = response;
+  console.log(response);
   if(header){
       res.set(header);
   }

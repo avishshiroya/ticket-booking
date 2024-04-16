@@ -19,6 +19,7 @@ import trainSeatRoutes from "./trainSeatRoutes.js"
 import trainRoutes from "./trainRoutes.js"
 import trainSlotRoutes from "./trainSlotRoutes.js"
 import busTrainSeatBookRoutes from "./busTrainSeatBookRoutes.js"
+import notificationRoutes from "./notificationRoutes.js"
 
 router.use('/user',userRoutes)
 router.use('/admin',adminRoutes)
@@ -39,6 +40,7 @@ router.use('/trainSlot',trainSlotRoutes)
 router.use('/busSeat',busSeatRoutes)
 router.use('/seatBooking',busTrainSeatBookRoutes)
 router.use('/trainSeat',trainSeatRoutes)
+router.use('/notification',notificationRoutes)
 
 
 export default router

@@ -3,12 +3,14 @@ import paypal from "paypal-rest-sdk";
 import path from "path";
 import winston from "winston";
 // import loggerPrint from "./utils/printLogger.js";
+import http from 'http'
 import cluster from "cluster";
 import os from "os";
 import connectDb from "./config/db.js";
 import Routes from "./routes/index.js";
 import middlewares from "./middleware/middlewares.js";
 import( './mq/producer.js')
+import { Server } from "socket.io";
 // import( "./mq/worker.js");
 import("./cron.js")
 
@@ -21,6 +23,9 @@ import("./cron.js")
 // console.log(totalCPUs);
 const app = express();
 
+const server = http.createServer(app);
+const io = new Server(server)
+
 // if (cluster.isPrimary) {
 //   console.log(`Primary ${process.pid} is running`);
 
@@ -28,6 +33,16 @@ const app = express();
 //     cluster.fork();
 //   }
 // } else {
+  io.on('connection',socket=>{
+    console.log(socket.id);
+    socket.on('sendMessage',(data)=>{
+      console.log(data);
+      socket.broadcast.emit('sendMessage',data)
+    })
+    socket.on('disconnect',()=>{
+      console.log(`disconnect user ${socket.id}`);
+    })
+  })
   paypal.configure({
     mode: process.env.PAYPAL_MODE,
     client_id: process.env.PAYPAL_CLIENT_ID,
@@ -58,7 +73,7 @@ const app = express();
   });
 
   const PORT = process.env.PORT || 4040;
-  app.listen(PORT, (err, res) => {
+  server.listen(PORT, (err, res) => {
     if (err) {
       console.log(err);
     } else {
@@ -66,4 +81,4 @@ const app = express();
     }
   });
 // }
-export default app;
+export default io;

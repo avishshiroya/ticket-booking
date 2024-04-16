@@ -9,7 +9,7 @@ const fileRotateTransport = new winston.transports.DailyRotateFile({
   });
 
   
-const myFormat = printf(({res,level,message,timestamp})=>
+const myFormat = printf(({level,message,timestamp})=>
 {
     // const reqIP =getIp(req);
     return ` ${timestamp} [${level}] ${message}`
