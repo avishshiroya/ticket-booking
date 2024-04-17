@@ -5,11 +5,16 @@ import dotenv from "dotenv";
 import cors from "cors";
 import loggerPrint from "../utils/printLogger.js";
 // import apicache from "apicache";
-import express from 'express'
+import express from "express";
+
+
 export default (app) => {
   dotenv.config();
   // const cache = apicache.middleware;
   app.use(express.json());
+  app.use(express.static("public"));
+  
+
   // app.use(bodyParser.json())
   app.use(morgan("dev"));
   // app.use(loggerPrint);

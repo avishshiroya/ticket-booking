@@ -15,7 +15,7 @@ const PATH = {
     * @acceess private
 
 */
-router.post(PATH.ADD,adminIsAuth,notifications.addNotificationController)
+router.post(PATH.ADD,notifications.addNotificationController)
 
 
 export default router

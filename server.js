@@ -1,6 +1,6 @@
 import express from "express";
 import paypal from "paypal-rest-sdk";
-import path from "path";
+import path, { dirname } from "path";
 import winston from "winston";
 // import loggerPrint from "./utils/printLogger.js";
 import http from 'http'
@@ -11,6 +11,8 @@ import Routes from "./routes/index.js";
 import middlewares from "./middleware/middlewares.js";
 import( './mq/producer.js')
 import { Server } from "socket.io";
+import { fileURLToPath } from "url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
 // import( "./mq/worker.js");
 import("./cron.js")
 
@@ -26,6 +28,10 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server)
 
+
+// View Engine Setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 // if (cluster.isPrimary) {
 //   console.log(`Primary ${process.pid} is running`);
 
@@ -33,7 +39,7 @@ const io = new Server(server)
 //     cluster.fork();
 //   }
 // } else {
-  io.on('connection',socket=>{
+  io.on('connection',(socket)=>{
     console.log(socket.id);
     socket.on('sendMessage',(data)=>{
       console.log(data);
@@ -64,11 +70,8 @@ const io = new Server(server)
 
   app.use("/api/v1", Routes);
 
-  app.get("/", async (req, res) => {
-    res.status(200).json({
-      success: true,
-      message: "First Routes 214 214  " + process.pid,
-    });
+  app.get("/api/v1", async (req, res) => {
+    res.render('Home',{message:"123"})
     // res.redirect('./public/index.html');
   });
 
