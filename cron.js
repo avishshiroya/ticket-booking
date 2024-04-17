@@ -5,7 +5,7 @@ import axios from "axios";
 import loggerPrint from "./utils/printLogger.js";
 import io from "./server.js";
 import { runApi } from "./services/axios.js";
-let RUN_TIME = " 0 5 0 * * *";
+let RUN_TIME = " 0 0 */1 * * *";
 scheduleJob(RUN_TIME,async(fireDate)=>{
     try {
         console.log("Cron Run" + fireDate);
@@ -17,18 +17,18 @@ scheduleJob(RUN_TIME,async(fireDate)=>{
         // const youtube = await runApi('get','http://localhost:4040/api/v1/trainseat/slot/65ee7ea6da21723a4609072c',{})
 
         //POST IN AXIOS
-        const youtube = await runApi('post','http://localhost:4040/api/v1/train/',{
-            "category":"train",
-            "name":"abc express",
-            "license_plate":"ab453as2",
-            "sourceStn":"abc",
-            "destinationStn":"xyz",
-            "viaStations":["def","ghi","lmn"],
-            "totalDistance":550,
-            "classes":["FC","CC","SL"],
-            "capacity":250,
-            "aAuth":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUxNTY5MGUyNTg2YzE4N2U1ZGJlOTkiLCJpYXQiOjE3MTMyNjAwMDIsImV4cCI6MTcxMzg2NDgwMn0.7a6n13YmbsKiKtmxJxsoxY4wuApy3AJu44sRhDnTP9s"
-        })
+        // const youtube = await runApi('post','http://localhost:4040/api/v1/train/',{
+        //     "category":"train",
+        //     "name":"abc express",
+        //     "license_plate":"ab453as2",
+        //     "sourceStn":"abc",
+        //     "destinationStn":"xyz",
+        //     "viaStations":["def","ghi","lmn"],
+        //     "totalDistance":550,
+        //     "classes":["FC","CC","SL"],
+        //     "capacity":250,
+        //     "aAuth":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUxNTY5MGUyNTg2YzE4N2U1ZGJlOTkiLCJpYXQiOjE3MTMyNjAwMDIsImV4cCI6MTcxMzg2NDgwMn0.7a6n13YmbsKiKtmxJxsoxY4wuApy3AJu44sRhDnTP9s"
+        // })
 
         //PUT IN AXIOS
 
@@ -48,7 +48,7 @@ scheduleJob(RUN_TIME,async(fireDate)=>{
         //     }
         // })
 
-        console.log(youtube);
+        // console.log(youtube);
         // const youtube = await axios.get("https://www.youtube.com/watch?v=2df8PMfajDQ");
         // logger.info(youtube.data)
         // console.log(youtube);
