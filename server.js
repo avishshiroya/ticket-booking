@@ -43,7 +43,7 @@ app.set("view engine", "ejs");
     console.log(socket.id);
     socket.on('sendMessage',(data)=>{
       console.log(data);
-      socket.broadcast.emit('sendMessage',data)
+      socket.emit('sendMessage',data)
     })
     socket.on('disconnect',()=>{
       console.log(`disconnect user ${socket.id}`);
