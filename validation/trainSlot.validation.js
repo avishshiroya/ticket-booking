@@ -17,7 +17,7 @@ export const addTrainSlotValidation=joi.object({
         "any.required":"arrivalTime Must Be Required",
         "string.empty":"arrivalTime Cannot Be empty"
     }),
-    despatureTime:joi.string().trim().required().messages({
+    depatureTime:joi.string().trim().required().messages({
         "any.required":"despatureTime Must Be Required",
         "string.empty":"despatureTime Cannot Be empty"
     }),
@@ -25,7 +25,7 @@ export const addTrainSlotValidation=joi.object({
         "any.required":"arrivalDate Must Be Required",
         "string.empty":"arrivalDate Cannot be Empty"
     }),
-    despatureDate:joi.date().greater('now').required().messages({
+    depatureDate:joi.date().greater('now').required().messages({
         "any.required":"depstureDate Must Be Required",
         "string.empty":"depstureDate Cannot be Empty"
     }),

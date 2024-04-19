@@ -6,15 +6,25 @@ import cors from "cors";
 import loggerPrint from "../utils/printLogger.js";
 // import apicache from "apicache";
 import express from "express";
-
+import errorHandler from "./errorHandler.js";
 
 export default (app) => {
   dotenv.config();
   // const cache = apicache.middleware;
   app.use(express.json());
   app.use(express.static("public"));
-  
 
+  // app.use((error, req, res, next) => {
+  //   console.log(error + "  1");
+  //   // if (error) {
+  //     const errorStatus = error.status || 500;
+  //      res.status(errorStatus).json({
+  //       status: "error",
+  //       message: error.message,
+  //       data: [],
+  //     });
+  //   // }
+  // });
   // app.use(bodyParser.json())
   app.use(morgan("dev"));
   // app.use(loggerPrint);

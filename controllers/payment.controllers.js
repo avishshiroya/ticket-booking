@@ -264,7 +264,7 @@ export const busTrainpaymentCheckOut = async (req, res) => {
             message: "Ticket Book successfully",
             data:null
         })
-        lopgger.info("Payment checkout successfully")
+        logger.info("Payment checkout successfully")
         return true
     } catch (error) {
         console.log(error)
